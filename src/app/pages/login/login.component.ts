@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-
+  flipCard() {
+    const flipCard = document.querySelector('.flip-card');
+    flipCard?.classList.toggle('flipped');
+  }
 }
