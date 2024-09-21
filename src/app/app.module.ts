@@ -24,6 +24,12 @@ import { WalletComponent } from './pages/wallet/wallet.component';
 import { PartenaireComponent } from './pages/partenaire/partenaire.component';
 import { ModalPaiementComponent } from './pages/modal-paiement/modal-paiement.component';
 import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from '../environments';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,13 +53,22 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MatCardModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // Durée des notifications
+      positionClass: 'toast-top-right', // Position
+      preventDuplicates: true, // Empêcher les doublons
+    }),
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Initialiser Firebase
+    AngularFireAuthModule // Importer le module d'authentification
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

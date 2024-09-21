@@ -34,11 +34,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             <div class="bg-gray-700 p-4 rounded-lg text-center animate-fade-in-up animate-delay-400">
                 <p class="text-lg font-semibold">Achats</p>
-                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.purchases">0</p>
+                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.purchases">{{user.purchases}}</p>
             </div>
             <div class="bg-gray-700 p-4 rounded-lg text-center animate-fade-in-up animate-delay-500">
                 <p class="text-lg font-semibold">Solde</p>
-                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.balance">0</p>
+                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.balance">{{user.balance | currency: 'EUR'}}</p>
             </div>
         </div>
 
@@ -61,12 +61,12 @@
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-400">Pseudo</label>
-                    <input type="text" [value]="user.name"
+                    <input type="text" [(ngModel)]="user.name"
                         class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-400">Email</label>
-                    <input type="email" [value]="user.email"
+                    <input type="email" [(ngModel)]="user.email"
                         class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="flex justify-end space-x-3">
@@ -90,18 +90,13 @@
             <h2 class="text-2xl font-bold mb-4 text-blue-400">Changer le mot de passe</h2>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400">Ancien mot de passe</label>
-                    <input type="password"
-                        class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
-                </div>
-                <div>
                     <label class="block text-sm font-medium text-gray-400">Nouveau mot de passe</label>
-                    <input type="password"
+                    <input [(ngModel)]="newPw" type="password"
                         class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-400">Confirmer le nouveau mot de passe</label>
-                    <input type="password"
+                    <input [(ngModel)]="newPwConfirm" type="password"
                         class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class="flex justify-end space-x-3">
@@ -109,7 +104,7 @@
                         class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
                         Annuler
                     </button>
-                    <button (click)="changePassword('oldPassword', 'newPassword')"
+                    <button (click)="changePassword(newPw)"
                         class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
                         Changer
                     </button>

@@ -19,7 +19,6 @@
         </div>
     </div>
 
-    <app-modal-paiement *ngIf="showPaymentModal && selectedProduct" [product]="selectedProduct"
-        [walletBalance]="walletBalance" (close)="closePaymentModal()" (purchase)="purchaseProduct()">
+    <app-modal-paiement *ngIf="showPaymentModal && selectedProduct" [product]="selectedProduct" (close)="closePaymentModal()" (purchase)="purchaseProduct()">
     </app-modal-paiement>
 </div>

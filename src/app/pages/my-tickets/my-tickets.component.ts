@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { TicketService } from '../../services/ticket.service';
 
 interface Ticket {
-  id: number;
+  id: string;
   title: string;
   status: 'open' | 'in_progress' | 'closed';
   createdAt: Date;
@@ -13,14 +15,22 @@ interface Ticket {
   templateUrl: './my-tickets.component.html',
   styleUrl: './my-tickets.component.scss'
 })
-export class MyTicketsComponent {
-  tickets: Ticket[] = [
-    { id: 1, title: 'Problème de connexion', status: 'open', createdAt: new Date('2024-03-18'), updatedAt: new Date('2024-03-18') },
-    { id: 2, title: 'Erreur de paiement', status: 'in_progress', createdAt: new Date('2024-03-15'), updatedAt: new Date('2024-03-17') },
-    { id: 3, title: 'Demande de remboursement', status: 'closed', createdAt: new Date('2024-03-10'), updatedAt: new Date('2024-03-12') },
-  ];
+export class MyTicketsComponent implements OnInit {
+  private userId?: string;
+  tickets: Ticket[] = [];
 
   showCreateTicketModal = false;
+
+  constructor(private authService: AuthService, private ticketSrv: TicketService) { }
+
+  ngOnInit(): void {
+    this.authService.getUserId().subscribe(async userId => {
+      if (userId) {
+        this.userId = userId;
+        this.tickets = await this.ticketSrv.getMyTickets(userId);
+      }
+    });
+  }
 
   openCreateTicketModal() {
     this.showCreateTicketModal = true;
@@ -30,18 +40,22 @@ export class MyTicketsComponent {
     this.showCreateTicketModal = false;
   }
 
-  createTicket(title: string, description: string) {
+  async createTicket(title: string, description: string) {
     // Ici, vous implémenteriez la logique pour créer un nouveau ticket
     console.log(`Creating ticket: ${title}`);
     this.closeCreateTicketModal();
-    // Après création, vous ajouteriez le nouveau ticket à la liste
-    this.tickets.unshift({
-      id: this.tickets.length + 1,
-      title,
-      status: 'open',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    });
+    if (this.userId) {
+      const result = await this.ticketSrv.createTicket(title, description, this.userId)
+      if (result) {
+        this.tickets.unshift({
+          id: result,
+          title,
+          status: 'open',
+          createdAt: new Date(),
+          updatedAt: new Date()
+        });
+      }
+    }
   }
 
   getStatusColor(status: string): string {

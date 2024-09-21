@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { PaiementService } from '../../services/paiement.service';
+import { ToastrService } from 'ngx-toastr';
+import { WalletService } from '../../services/wallet.service';
 
 interface Product {
   id: number;
@@ -17,9 +21,9 @@ interface CouponMessage {
   templateUrl: './modal-paiement.component.html',
   styleUrl: './modal-paiement.component.scss'
 })
-export class ModalPaiementComponent {
+export class ModalPaiementComponent implements OnInit {
   @Input() product!: Product;
-  @Input() walletBalance!: number;
+  walletBalance: number = 0;
   @Output() close = new EventEmitter<void>();
   @Output() purchase = new EventEmitter<number>();
 
@@ -27,12 +31,32 @@ export class ModalPaiementComponent {
   discountedPrice: number | null = null;
   couponMessage: CouponMessage | null = null;
 
+  constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService) {}
+
+  ngOnInit(): void {
+    this.authService.getUserId().subscribe(async userId => {
+      if(userId) {
+        this.walletBalance = await this.walletSrv.getMyWalletAmount(userId);
+      }
+    });
+  }
+
   closeModal() {
     this.close.emit();
   }
 
   confirmPurchase() {
     const finalPrice = this.discountedPrice !== null ? this.discountedPrice : this.product.price;
+    this.authService.getUserId().subscribe(async userId => {
+      if (userId) {
+        const result = await this.paiementSrv.buyProduct(finalPrice, this.product.title, userId);
+        if(result) {
+          this.toastr.success('Achat effectué avec succès !', 'Succès');
+        } else {
+          this.toastr.error('Erreur lors de l\'achat.', 'Erreur');
+        }
+      }
+    });
     this.purchase.emit(finalPrice);
   }
 

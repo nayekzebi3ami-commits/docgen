@@ -11,7 +11,7 @@
     <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8 hover:bg-gray-700 transform transition-all duration-300 animate-fade-in-up animate-delay-100"
         @fadeInOut>
         <h2 class="text-xl font-semibold mb-2">Solde actuel</h2>
-        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">0</p>
+        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">{{balance | currency:'EUR'}}</p>
         <button (click)="openRechargeModal()"
             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
             Recharger
@@ -19,36 +19,50 @@
     </div>
 
     <h3 class="text-2xl font-semibold mb-4 animate-fade-in-left animate-delay-200">Dernières transactions</h3>
-    <ul class="space-y-4">
+    <ul class="space-y-4" *ngIf="transactions.length > 0; else noTransactions">
         <li *ngFor="let transaction of transactions; let i = index"
             class="bg-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-700 transition-all duration-300 animate-fade-in-right"
             [ngStyle]="{'animation-delay': 300 + i * 100 + 'ms'}" @fadeInOut>
             <div>
-                <h4 class="font-semibold">{{transaction.description}}</h4>
+                <h4 class="font-semibold">{{transaction.product}}</h4>
                 <p class="text-sm text-gray-400">{{transaction.date | date:'dd/MM/yyyy'}}</p>
             </div>
-            <span [ngClass]="{'text-blue-300': transaction.amount > 0, 'text-red-400': transaction.amount < 0}"
+            <span [ngClass]="{'text-blue-300': transaction.price > 0, 'text-red-400': transaction.price < 0}"
                 class="font-bold animate-scale-in">
-                {{transaction.amount | currency:'EUR'}}
+                {{transaction.price | currency:'EUR'}}
             </span>
         </li>
     </ul>
+    <ng-template #noTransactions>
+        <p class="text-gray-400 text-center animate-fade-in">Aucune transaction</p>
+    </ng-template>
 
     <div *ngIf="showRechargeModal"
         class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center animate-fade-in" @fadeInOut>
         <div class="bg-gray-800 p-6 rounded-lg text-center animate-zoom-in">
-            <h2 class="text-2xl font-bold mb-4">Recharger via PCS</h2>
+            <h2 class="text-2xl font-bold mb-4">Recharger via Paysafecard</h2>
             <p class="mb-4">Choisissez le montant à recharger :</p>
             <div class="flex justify-center space-x-4 mb-6">
-                <button (click)="rechargeWallet(20)"
+                <button (click)="selectAmount(10)"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
-                    style="animation-delay: 100ms">20€</button>
-                <button (click)="rechargeWallet(50)"
+                    style="animation-delay: 100ms">10€</button>
+                <button (click)="selectAmount(25)"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    style="animation-delay: 100ms">25€</button>
+                <button (click)="selectAmount(50)"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 200ms">50€</button>
-                <button (click)="rechargeWallet(100)"
+                <button (click)="selectAmount(100)"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 300ms">100€</button>
+            </div>
+            <div *ngIf="selectedAmount" class="mb-6 animate-fade-in">
+                <p class="mb-2">Montant sélectionné : {{selectedAmount}}€</p>
+                <input type="text" [(ngModel)]="paysafecardCode" placeholder="Entrez le code Paysafecard"
+                    class="bg-gray-700 text-white px-4 py-2 rounded-lg w-full mb-4">
+                <button (click)="rechargeWallet()"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110"
+                    [disabled]="!paysafecardCode">Valider</button>
             </div>
             <button (click)="closeRechargeModal()"
                 class="text-gray-400 hover:text-white transition-colors duration-300 animate-fade-in"

@@ -1,23 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { WalletService } from '../../services/wallet.service';
+import { ProfilService } from '../../services/profil.service';
+import { ToastrService } from 'ngx-toastr';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
   user = {
-    name: 'Petit Filou',
-    email: 'filou@example.com',
+    name: '',
+    email: '',
     avatar: '',
-    purchases: 15,
-    balance: 29600
+    purchases: 0,
+    balance: 0
   };
+
+  newPw: string = '';
+  newPwConfirm: string = '';
 
   showEditProfileModal = false;
   showChangePasswordModal = false;
   showConfirmModal = false;
   editField: 'name' | 'email' | null = null;
+
+  constructor(private afAuth: AngularFireAuth, private walletSrv: WalletService, private authService: AuthService, private profilSrv: ProfilService, private toastr: ToastrService) {}
+
+  ngOnInit(): void {
+    this.authService.getUserId().subscribe(async userId => {
+      if (userId) {
+        this.user.balance = await this.walletSrv.getMyWalletAmount(userId);
+        const profile = await this.profilSrv.getMyInfo(userId);
+        this.user.name = profile.pseudo;
+        this.user.email = profile.email;
+        this.user.avatar = profile.photo;
+      }
+    });
+  }
 
   openEditProfileModal() {
     this.showEditProfileModal = true;
@@ -51,23 +74,76 @@ export class ProfileComponent {
     this.closeEditProfileModal();
   }
 
-  changePassword(oldPassword: string, newPassword: string) {
-    // Ici, vous implémenteriez la logique pour changer le mot de passe
-    console.log('Changing password');
-    this.closeChangePasswordModal();
+  async changePassword(newPassword: string) {
+    const user = await this.afAuth.currentUser;
+    
+    if (user) {
+      try {
+        await user.updatePassword(newPassword);
+        this.toastr.success('Mot de passe mis à jour avec succès');
+        this.closeChangePasswordModal();
+      } catch (error: any) {
+        let errorMessage = 'Une erreur est survenue lors de la mise à jour du mot de passe';
+
+        switch (error.code) {
+          case 'auth/weak-password':
+            errorMessage = 'Le mot de passe est trop faible. Veuillez choisir un mot de passe plus fort.';
+            break;
+          case 'auth/requires-recent-login':
+            errorMessage = 'Pour des raisons de sécurité, veuillez vous reconnecter avant de changer votre mot de passe.';
+            break;
+          case 'auth/user-token-expired':
+            errorMessage = 'Votre session a expiré. Veuillez vous reconnecter.';
+            break;
+          case 'auth/user-not-found':
+            errorMessage = 'Utilisateur non trouvé. Veuillez vous reconnecter.';
+            break;
+          case 'auth/too-many-requests':
+            errorMessage = 'Trop de tentatives. Veuillez réessayer plus tard.';
+            break;
+        }
+
+        this.toastr.error(errorMessage);
+        throw error;
+      }
+    } else {
+      this.toastr.error('Veuillez vous connecter pour changer votre mot de passe');
+    }
   }
 
   confirmEdit(password: string) {
-    // Ici, vous implémenteriez la logique pour confirmer l'édition avec le mot de passe
-    console.log(`Confirming edit of ${this.editField} with password`);
-    this.closeConfirmModal();
+    this.authService.getUserId().subscribe(async userId => {
+      if(userId) {
+        const result = await this.profilSrv.changeProfileData(password, this.user.name, this.user.email, userId);
+        if(result) {
+          this.toastr.success('Profil modifié avec succès.', 'Succès');
+          this.closeConfirmModal();
+          this.closeEditProfileModal();
+        } else {
+          this.toastr.error('Erreur lors de la modification du profil.', 'Erreur');
+        }
+      }
+    });
   }
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      // Ici, vous implémenteriez la logique pour télécharger et mettre à jour l'avatar
-      console.log('Uploading new avatar');
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const base64String = e.target.result;
+        this.authService.getUserId().subscribe(async userId => {
+          if(userId) {
+            const result = await this.profilSrv.changeProfilePicture(base64String, userId);
+            if(result) {
+              this.toastr.success('Photo de profil modifiée avec succès.', 'Succès');
+            } else {
+              this.toastr.error('Erreur lors de la modification de la photo de profil.', 'Erreur');
+            }
+          }
+        });
+      };
+      reader.readAsDataURL(file);
     }
   }
 }

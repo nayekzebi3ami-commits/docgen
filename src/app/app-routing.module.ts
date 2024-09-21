@@ -14,21 +14,22 @@ import { AutresComponent } from './pages/autres/autres.component';
 import { AssuranceComponent } from './pages/assurance/assurance.component';
 import { PartenaireComponent } from './pages/partenaire/partenaire.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'wallet', component: WalletComponent },
-  { path: 'laboratoire', component: LaboratoireComponent },
-  { path: 'assurance', component: AssuranceComponent },
-  { path: 'autres', component: AutresComponent },
-  { path: 'avis-imposition', component: AvisImpositionComponent },
-  { path: 'diplome', component: DiplomeComponent },
-  { path: 'partenaire', component: PartenaireComponent },
-  { path: 'gouvernement', component: GouvernementComponent },
-  { path: 'logement', component: LogementComponent },
-  { path: 'support', component: MyTicketsComponent },
-  { path: 'plus', component: MorePageComponent },
-  { path: 'profil', component: ProfileComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
+  { path: 'laboratoire', component: LaboratoireComponent, canActivate: [AuthGuard] },
+  { path: 'assurance', component: AssuranceComponent, canActivate: [AuthGuard] },
+  { path: 'autres', component: AutresComponent, canActivate: [AuthGuard] },
+  { path: 'avis-imposition', component: AvisImpositionComponent, canActivate: [AuthGuard] },
+  { path: 'diplome', component: DiplomeComponent, canActivate: [AuthGuard] },
+  { path: 'partenaire', component: PartenaireComponent, canActivate: [AuthGuard] },
+  { path: 'gouvernement', component: GouvernementComponent, canActivate: [AuthGuard] },
+  { path: 'logement', component: LogementComponent, canActivate: [AuthGuard] },
+  { path: 'support', component: MyTicketsComponent, canActivate: [AuthGuard] },
+  { path: 'plus', component: MorePageComponent, canActivate: [AuthGuard] },
+  { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' }
 ];

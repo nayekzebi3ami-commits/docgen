@@ -1,4 +1,4 @@
 <app-nav></app-nav>
-<div class="pt-16 pb-16">
+<div [ngClass]="{'pt-16 pb-16': isLoggedIn}">
     <router-outlet></router-outlet>
 </div>

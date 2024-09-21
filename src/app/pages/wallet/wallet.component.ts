@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { WalletService } from '../../services/wallet.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-wallet',
@@ -17,17 +19,21 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class WalletComponent implements OnInit {
-  balance: number = 29600;
-  transactions: any[] = [
-    { date: '2024-03-20', description: 'Achat PCS', amount: -50 },
-    { date: '2024-03-18', description: 'Recharge', amount: 100 },
-    { date: '2024-03-15', description: 'Service premium', amount: -200 },
-  ];
+  balance: number = 0;
+  transactions: any[] = [];
 
   showRechargeModal: boolean = false;
 
+  constructor(private walletSrv: WalletService, private authService: AuthService) {}
+
   ngOnInit() {
-    this.animateValue('balance', 0, this.balance, 2000);
+    this.authService.getUserId().subscribe(async userId => {
+      if (userId) {
+        this.balance = await this.walletSrv.getMyWalletAmount(userId);
+        this.transactions = await this.walletSrv.getLastTransaction(userId);
+        this.animateValue('balance', 0, this.balance, 2000);
+      }
+    });
   }
 
   animateValue(id: string, start: number, end: number, duration: number) {
@@ -51,9 +57,24 @@ export class WalletComponent implements OnInit {
     this.showRechargeModal = false;
   }
 
-  rechargeWallet(amount: number) {
-    this.balance += amount;
-    this.transactions.unshift({ date: new Date().toISOString().split('T')[0], description: 'Recharge PCS', amount: amount });
-    this.closeRechargeModal();
+  selectedAmount: number | null = null;
+  paysafecardCode: string = '';
+
+  selectAmount(amount: number) {
+    this.selectedAmount = amount;
+  }
+
+  rechargeWallet() {
+    if (this.selectedAmount && this.paysafecardCode) {
+      this.balance += this.selectedAmount;
+      this.transactions.unshift({ 
+        date: new Date().toISOString().split('T')[0], 
+        product: 'Recharge Paysafecard', 
+        price: this.selectedAmount 
+      });
+      this.closeRechargeModal();
+      this.selectedAmount = null;
+      this.paysafecardCode = '';
+    }
   }
 }
