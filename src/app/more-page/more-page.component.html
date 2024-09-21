@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-gray-900 text-white p-6">
+    <div class="flex items-center justify-center mb-8 animate-fade-in-down">
+        <i class="fas fa-ellipsis-h text-3xl text-blue-400 mr-2 animate-pulse"></i>
+        <h1 class="text-4xl font-bold text-blue-400 animate-fade-in-up">Plus</h1>
+    </div>
+
+    <div class="max-w-md mx-auto">
+        <ng-container *ngFor="let category of ['services', 'menu', 'support', 'compte']; let categoryIndex = index">
+            <div *ngIf="getFilteredLinks(category) as categoryLinks" class="mb-6 animate-fade-in-up"
+                [ngStyle]="{'animation-delay': (categoryIndex * 100) + 'ms'}">
+                <h2 class="text-xl font-semibold mb-3 text-blue-400 capitalize">{{ category }}</h2>
+                <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <ul class="divide-y divide-gray-700">
+                        <li *ngFor="let link of categoryLinks; let i = index"
+                            class="hover:bg-gray-700 transition-all duration-300"
+                            [ngClass]="i % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'"
+                            [ngStyle]="{'animation-delay': ((categoryIndex * 100) + (i * 50)) + 'ms'}">
+                            <a [routerLink]="link.route" class="flex items-center px-6 py-4 space-x-4">
+                                <i class="fas fa-{{ link.icon }} text-blue-400 text-xl w-8"></i>
+                                <span class="flex-grow">{{ link.title }}</span>
+                                <i class="fas fa-chevron-right text-gray-500"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

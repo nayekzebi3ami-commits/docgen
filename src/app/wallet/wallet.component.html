@@ -1,0 +1,58 @@
+<div class="min-h-screen bg-gray-900 text-white p-6">
+    <div class="flex items-center justify-center mb-8 animate-fade-in-down">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400 mr-4 animate-bounce" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
+        <span class="text-4xl font-bold animate-pulse text-blue-400">Wallet</span>
+    </div>
+
+    <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8 hover:bg-gray-700 transform transition-all duration-300 animate-fade-in-up animate-delay-100"
+        @fadeInOut>
+        <h2 class="text-xl font-semibold mb-2">Solde actuel</h2>
+        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">0</p>
+        <button (click)="openRechargeModal()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
+            Recharger
+        </button>
+    </div>
+
+    <h3 class="text-2xl font-semibold mb-4 animate-fade-in-left animate-delay-200">Dernières transactions</h3>
+    <ul class="space-y-4">
+        <li *ngFor="let transaction of transactions; let i = index"
+            class="bg-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-700 transition-all duration-300 animate-fade-in-right"
+            [ngStyle]="{'animation-delay': 300 + i * 100 + 'ms'}" @fadeInOut>
+            <div>
+                <h4 class="font-semibold">{{transaction.description}}</h4>
+                <p class="text-sm text-gray-400">{{transaction.date | date:'dd/MM/yyyy'}}</p>
+            </div>
+            <span [ngClass]="{'text-blue-300': transaction.amount > 0, 'text-red-400': transaction.amount < 0}"
+                class="font-bold animate-scale-in">
+                {{transaction.amount | currency:'EUR'}}
+            </span>
+        </li>
+    </ul>
+
+    <div *ngIf="showRechargeModal"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center animate-fade-in" @fadeInOut>
+        <div class="bg-gray-800 p-6 rounded-lg text-center animate-zoom-in">
+            <h2 class="text-2xl font-bold mb-4">Recharger via PCS</h2>
+            <p class="mb-4">Choisissez le montant à recharger :</p>
+            <div class="flex justify-center space-x-4 mb-6">
+                <button (click)="rechargeWallet(20)"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    style="animation-delay: 100ms">20€</button>
+                <button (click)="rechargeWallet(50)"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    style="animation-delay: 200ms">50€</button>
+                <button (click)="rechargeWallet(100)"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    style="animation-delay: 300ms">100€</button>
+            </div>
+            <button (click)="closeRechargeModal()"
+                class="text-gray-400 hover:text-white transition-colors duration-300 animate-fade-in"
+                style="animation-delay: 400ms">Annuler</button>
+        </div>
+    </div>
+</div>

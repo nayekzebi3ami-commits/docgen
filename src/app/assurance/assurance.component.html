@@ -1,0 +1,25 @@
+<div class="min-h-screen bg-gray-900 text-white p-6">
+    <div class="flex items-center justify-center mb-8">
+        <i class="fas fa-shield-alt text-3xl text-blue-400 mr-2"></i>
+        <h1 class="text-4xl font-bold text-blue-400">Assurance</h1>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div *ngFor="let product of products"
+            class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <img [src]="product.image" [alt]="product.title" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
+                <p class="text-blue-400 text-2xl font-bold mb-4">{{ product.price | currency:'EUR' }}</p>
+                <button (click)="openPaymentModal(product)"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                    Acheter
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <app-modal-paiement *ngIf="showPaymentModal && selectedProduct" [product]="selectedProduct"
+        [walletBalance]="walletBalance" (close)="closePaymentModal()" (purchase)="purchaseProduct()">
+    </app-modal-paiement>
+</div>
