@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { WalletService } from '../../services/wallet.service';
 import { AuthService } from '../../services/auth.service';
+import { PaiementService } from '../../services/paiement.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wallet',
@@ -24,7 +26,7 @@ export class WalletComponent implements OnInit {
 
   showRechargeModal: boolean = false;
 
-  constructor(private walletSrv: WalletService, private authService: AuthService) {}
+  constructor(private walletSrv: WalletService, private paiementSrv: PaiementService, private authService: AuthService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.authService.getUserId().subscribe(async userId => {
@@ -57,7 +59,7 @@ export class WalletComponent implements OnInit {
     this.showRechargeModal = false;
   }
 
-  selectedAmount: number | null = null;
+  selectedAmount: number = 0;
   paysafecardCode: string = '';
 
   selectAmount(amount: number) {
@@ -66,15 +68,26 @@ export class WalletComponent implements OnInit {
 
   rechargeWallet() {
     if (this.selectedAmount && this.paysafecardCode) {
-      this.balance += this.selectedAmount;
-      this.transactions.unshift({ 
-        date: new Date().toISOString().split('T')[0], 
-        product: 'Recharge Paysafecard', 
-        price: this.selectedAmount 
+      this.authService.getUserId().subscribe(async userId => {
+        if(userId) {
+          const result = await this.paiementSrv.reloadAccount(this.paysafecardCode, userId, this.selectedAmount);
+          if(result) {
+            this.balance += this.selectedAmount;
+            this.transactions.unshift({ 
+              date: new Date().toISOString().split('T')[0], 
+              product: 'Recharge Paysafecard', 
+              price: this.selectedAmount 
+            });
+            this.closeRechargeModal();
+            this.selectedAmount = 0;
+            this.paysafecardCode = '';
+            this.toastr.success('Recharge réussie !');
+          } else {
+            this.toastr.error('Code Paysafecard invalide.');
+          }
+        }
       });
-      this.closeRechargeModal();
-      this.selectedAmount = null;
-      this.paysafecardCode = '';
+
     }
   }
 }

@@ -59,7 +59,7 @@
             <div *ngIf="selectedAmount" class="mb-6 animate-fade-in">
                 <p class="mb-2">Montant sélectionné : {{selectedAmount}}€</p>
                 <input type="text" [(ngModel)]="paysafecardCode" placeholder="Entrez le code Paysafecard"
-                    class="bg-gray-700 text-white px-4 py-2 rounded-lg w-full mb-4">
+                    class="bg-gray-700 text-white px-4 py-2 rounded-lg w-full mb-4 focus:outline-none">
                 <button (click)="rechargeWallet()"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110"
                     [disabled]="!paysafecardCode">Valider</button>

@@ -29,8 +29,8 @@ export class PaiementService {
     }
   }
 
-  async reloadAccount(paysafecardCode: string): Promise<boolean> {
-    const payload = { paysafecardCode };
+  async reloadAccount(paysafecardCode: string, userId: string, amount: number): Promise<boolean> {
+    const payload = { paysafecardCode, userId, amount };
     try {
       const response = await fetch(`${this.backendUrl}/Paiement-reloadAccount`, {
         method: 'POST',
