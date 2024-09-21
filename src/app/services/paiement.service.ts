@@ -9,8 +9,8 @@ export class PaiementService {
 
   constructor() { }
 
-  async buyProduct(price: number, product: string, userId: string): Promise<boolean> {
-    const payload = { price, product, userId };
+  async buyProduct(price: number, product: string, isSubscribed: boolean, userId: string): Promise<boolean> {
+    const payload = { price, product, isSubscribed, userId };
     try {
       const response = await fetch(`${this.backendUrl}/Paiement-buyProduct`, {
         method: 'POST',

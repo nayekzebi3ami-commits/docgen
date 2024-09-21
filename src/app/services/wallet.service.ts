@@ -68,4 +68,24 @@ export class WalletService {
       return undefined;
     }
   }
+
+  async isSubscribed(userId: string): Promise<boolean> {
+    try {
+      const payload = { userId };
+      const response = await fetch(`${this.backendUrl}/Wallet-isSubscribed`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return false;
+    }
+  }
 }

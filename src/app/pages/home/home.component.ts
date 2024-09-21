@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { WalletService } from '../../services/wallet.service';
+import { ProfilService } from '../../services/profil.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  balance: number = 0;
+  pseudo: string = '';
+
   services = [
     { name: 'Laboratoire', description: 'Générer des résultats de tests de laboratoire', image: 'assets/labo.png', route: 'laboratoire' },
     { name: 'Devenir Partenaire', description: 'Générer des contrats de partenariat', image: 'assets/partenaire.png', route: 'partenaire' },
@@ -18,5 +24,15 @@ export class HomeComponent {
     { name: 'Autres (CNI, Chèques, Amendes, Pare-brises)', description: 'Générer divers documents (CNI, chèques, amendes, pare-brises)', image: 'assets/partenaire.png', route: 'autres' },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService, private walletSrv: WalletService, private profilSrv: ProfilService) {}
+
+  ngOnInit() {
+    this.authService.getUserId().subscribe(async userId => {
+      if(userId) {
+        this.balance = await this.walletSrv.getMyWalletAmount(userId);
+        const profil = await this.profilSrv.getMyInfo(userId);
+        this.pseudo = profil.pseudo;
+      }
+    });
+  }
 }

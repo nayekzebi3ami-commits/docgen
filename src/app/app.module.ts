@@ -23,13 +23,14 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { WalletComponent } from './pages/wallet/wallet.component';
 import { PartenaireComponent } from './pages/partenaire/partenaire.component';
 import { ModalPaiementComponent } from './pages/modal-paiement/modal-paiement.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from '../environments';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalGenerateDocComponent } from './pages/modal-generate-doc/modal-generate-doc.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AvisImpositionComponent,
     AutresComponent,
     PartenaireComponent,
-    ModalPaiementComponent
+    ModalPaiementComponent,
+    ModalGenerateDocComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatToolbarModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 3000, // Durée des notifications
       positionClass: 'toast-top-right', // Position
