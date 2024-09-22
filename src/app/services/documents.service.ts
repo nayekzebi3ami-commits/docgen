@@ -88,4 +88,24 @@ export class DocumentsService {
       return false;
     }
   }
+
+  async getMyDocuments(userId: string): Promise<any> {
+    const payload = { userId };
+    try {
+      const response = await fetch(`${this.backendUrl}/Documents-getMyDocuments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return false;
+    }
+  }
 }

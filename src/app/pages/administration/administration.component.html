@@ -1,0 +1,89 @@
+<div class="bg-gray-900 min-h-screen p-4 text-white">
+    <h1 class="text-3xl font-bold mb-6">Tableau de bord d'administration</h1>
+
+    <div class="mb-4">
+        <button (click)="setView('tickets')"
+            [ngClass]="{'bg-blue-600': activeView === 'tickets', 'bg-gray-700': activeView !== 'tickets'}"
+            class="px-4 py-2 rounded-lg mr-2 transition-colors duration-200">
+            Tickets utilisateurs
+        </button>
+        <button (click)="setView('purchases')"
+            [ngClass]="{'bg-blue-600': activeView === 'purchases', 'bg-gray-700': activeView !== 'purchases'}"
+            class="px-4 py-2 rounded-lg transition-colors duration-200">
+            Achats récents
+        </button>
+    </div>
+
+    <div [@fadeInOut]="activeView" class="overflow-x-auto">
+        <!-- Vue des tickets -->
+        <div *ngIf="activeView === 'tickets' && !selectedTicket">
+            <h2 class="text-2xl font-semibold mb-4">Tickets utilisateurs</h2>
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-800 text-left">
+                        <th class="p-3">ID</th>
+                        <th class="p-3">Titre</th>
+                        <th class="p-3">Date</th>
+                        <th class="p-3">Statut</th>
+                        <th class="p-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ticket of tickets" class="border-b border-gray-700">
+                        <td class="p-3">{{ticket.id}}</td>
+                        <td class="p-3">{{ticket.title}}</td>
+                        <td class="p-3">{{ticket.createdAt | date:'dd/MM/yyyy HH:mm'}}</td>
+                        <td class="p-3">
+                            <span
+                                [class]="'px-2 inline-flex text-xs leading-5 font-semibold rounded-full ' + getStatusColor(ticket.status)">
+                                {{ticket.status}}
+                            </span>
+                        </td>
+                        <td class="p-3">
+                            <button (click)="selectTicket(ticket)"
+                                class="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg transition-colors duration-200">
+                                Voir détails
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Vue des détails d'un ticket -->
+        <div *ngIf="activeView === 'tickets' && selectedTicket">
+            <button (click)="selectedTicket = null"
+                class="mb-4 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-lg transition-colors duration-200">
+                Retour à la liste
+            </button>
+            <app-answer-ticket [admin]="true" [ticket]="selectedTicket"></app-answer-ticket>
+        </div>
+
+        <!-- Vue des transactions -->
+        <div *ngIf="activeView === 'purchases'">
+            <h2 class="text-2xl font-semibold mb-4">Achats récents</h2>
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-gray-800 text-left">
+                        <th class="p-3">ID</th>
+                        <th class="p-3">Utilisateur</th>
+                        <th class="p-3">Produit</th>
+                        <th class="p-3">Montant</th>
+                        <th class="p-3">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let purchase of purchases" class="border-b border-gray-700 hover:bg-gray-800 transition-colors duration-200">
+                        <td class="p-3">{{purchase.id}}</td>
+                        <td class="p-3">{{purchase.user}}</td>
+                        <td class="p-3">{{purchase.product}}</td>
+                        <td class="p-3" [ngClass]="{'text-green-500': purchase.price > 0, 'text-red-500': purchase.price < 0}">
+                            {{purchase.price | currency: 'EUR'}}
+                        </td>
+                        <td class="p-3">{{purchase.createdAt | date:'dd/MM/yyyy HH:mm'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

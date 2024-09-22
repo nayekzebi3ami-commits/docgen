@@ -9,8 +9,8 @@ export class ProfilService {
 
   constructor() { }
 
-  async changeProfilePicture(photo: string, userId: string): Promise<boolean> {
-    const payload = { photo, userId };
+  async changeProfilePicture(photo: string, userId: string, type: string): Promise<boolean> {
+    const payload = { photo, userId, type };
     try {
       const response = await fetch(`${this.backendUrl}/Profil-changeProfilePicture`, {
         method: 'POST',

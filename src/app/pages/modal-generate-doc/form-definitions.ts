@@ -71,7 +71,7 @@ export const FORM_DEFINITIONS = {
         },
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Lieu de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'lieuNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
         { name: 'dateSouhaitee', label: 'Date souhaitée', type: 'date', validators: [Validators.required] },
     ]

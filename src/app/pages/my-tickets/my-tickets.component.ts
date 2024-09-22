@@ -2,12 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TicketService } from '../../services/ticket.service';
 
+interface Message {
+  sender: 'requester' | 'admin';
+  message: string;
+  date: any;
+}
+
 interface Ticket {
   id: string;
   title: string;
+  desc: string;
+  messages: Message[];
   status: 'open' | 'in_progress' | 'closed';
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: any; // Modifie ce type pour accepter à la fois Timestamp et Date
+  updatedAt: any;
+  userId: string;
 }
 
 @Component({
@@ -18,6 +27,7 @@ interface Ticket {
 export class MyTicketsComponent implements OnInit {
   private userId?: string;
   tickets: Ticket[] = [];
+  selectedTicket: Ticket | null = null;
 
   showCreateTicketModal = false;
 
@@ -39,33 +49,56 @@ export class MyTicketsComponent implements OnInit {
   closeCreateTicketModal() {
     this.showCreateTicketModal = false;
   }
+  
 
   async createTicket(title: string, description: string) {
-    // Ici, vous implémenteriez la logique pour créer un nouveau ticket
     console.log(`Creating ticket: ${title}`);
     this.closeCreateTicketModal();
     if (this.userId) {
-      const result = await this.ticketSrv.createTicket(title, description, this.userId)
+      const result = await this.ticketSrv.createTicket(title, description, this.userId);
       if (result) {
         this.tickets.unshift({
           id: result,
           title,
+          desc: description,
           status: 'open',
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
+          userId: this.userId,
+          messages: []
         });
       }
+    }
+  }
+
+  openTicket(ticket: Ticket) {
+    this.selectedTicket = ticket;
+    console.log(this.selectedTicket)
+  }
+
+  async onReply(message: string) {
+    if (this.selectedTicket && this.userId) {
+      // Ajouter le nouveau message dans la conversation
+      const newMessage: Message = {
+        sender: 'requester',
+        message,
+        date: new Date().toISOString()
+      };
+      this.selectedTicket.messages.push(newMessage);
+
+      // Appeler le service pour envoyer le message au backend
+      // await this.ticketSrv.sendMessage(this.selectedTicket.id, newMessage);
     }
   }
 
   getStatusColor(status: string): string {
     switch (status) {
       case 'open':
-        return 'bg-yellow-500';
+        return 'bg-green-500';
       case 'in_progress':
         return 'bg-blue-500';
       case 'closed':
-        return 'bg-green-500';
+        return 'bg-red-500';
       default:
         return 'bg-gray-500';
     }

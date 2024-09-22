@@ -69,6 +69,26 @@ export class WalletService {
     }
   }
 
+  async getLastTransactionAdmin(userId: string): Promise<any> {
+    try {
+      const payload = { userId };
+      const response = await fetch(`${this.backendUrl}/Wallet-getLastTransactionAdmin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return undefined;
+    }
+  }
+
   async isSubscribed(userId: string): Promise<boolean> {
     try {
       const payload = { userId };

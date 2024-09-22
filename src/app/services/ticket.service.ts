@@ -49,10 +49,10 @@ export class TicketService {
     }
   }
 
-  async closeTicket(ticketId: string): Promise<boolean> {
-    const payload = { ticketId };
+  async getMyTicketsAdmin(userId: string): Promise<any[]> {
     try {
-      const response = await fetch(`${this.backendUrl}/Ticket-closeTicket`, {
+      const payload = { userId };
+      const response = await fetch(`${this.backendUrl}/Ticket-getMyTicketsAdmin`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,14 +65,34 @@ export class TicketService {
       return await response.json();
     } catch (error: unknown) {
       console.error(error);
-      return false;
+      return [];
     }
   }
-  
-  async updateTicket(ticketId: string, message: string): Promise<boolean> {
-    const payload = { ticketId, message };
+
+  async addMessageToTicket(ticketId: string, message: string, user: 'requester' | 'admin'): Promise<any[]> {
     try {
-      const response = await fetch(`${this.backendUrl}/Ticket-updateTicket`, {
+      const payload = { ticketId, message, user };
+      const response = await fetch(`${this.backendUrl}/Ticket-addMessageToTicket`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return [];
+    }
+  }
+
+  async closeTicket(ticketId: string): Promise<boolean> {
+    const payload = { ticketId };
+    try {
+      const response = await fetch(`${this.backendUrl}/Ticket-closeTicket`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

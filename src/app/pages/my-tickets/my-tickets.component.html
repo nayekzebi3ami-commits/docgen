@@ -32,9 +32,12 @@
                         <th
                             class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                             Mis à jour</th>
+                        <th
+                            class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                            Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-700 ">
+                <tbody class="divide-y divide-gray-700">
                     <tr *ngFor="let ticket of tickets; let i = index"
                         class="hover:bg-gray-700 transition-colors duration-200 animate-fade-in-right"
                         [ngStyle]="{'animation-delay': 300 + i * 100 + 'ms'}">
@@ -48,9 +51,20 @@
                         </td>
                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap">{{ticket.createdAt | date:'dd/MM/yyyy'}}</td>
                         <td class="px-4 sm:px-6 py-4 whitespace-nowrap">{{ticket.updatedAt | date:'dd/MM/yyyy'}}</td>
+                        <td class="px-4 sm:px-6 py-4">
+                            <button (click)="openTicket(ticket)"
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded transition-colors duration-300">
+                                Voir les messages
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- Affichage des messages du ticket sélectionné -->
+        <div *ngIf="selectedTicket" class="mt-8">
+            <app-answer-ticket [admin]="false" [ticket]="selectedTicket"></app-answer-ticket>
         </div>
     </div>
 

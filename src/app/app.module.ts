@@ -31,6 +31,9 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalGenerateDocComponent } from './pages/modal-generate-doc/modal-generate-doc.component';
+import { MesDocumentsComponent } from './pages/mes-documents/mes-documents.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
+import { AnswerTicketComponent } from './pages/answer-ticket/answer-ticket.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +54,10 @@ import { ModalGenerateDocComponent } from './pages/modal-generate-doc/modal-gene
     AutresComponent,
     PartenaireComponent,
     ModalPaiementComponent,
-    ModalGenerateDocComponent
+    ModalGenerateDocComponent,
+    MesDocumentsComponent,
+    AdministrationComponent,
+    AnswerTicketComponent
   ],
   imports: [
     BrowserModule,

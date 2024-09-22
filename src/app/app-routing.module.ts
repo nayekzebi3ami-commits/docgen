@@ -15,14 +15,18 @@ import { AssuranceComponent } from './pages/assurance/assurance.component';
 import { PartenaireComponent } from './pages/partenaire/partenaire.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
+import { MesDocumentsComponent } from './pages/mes-documents/mes-documents.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'wallet', component: WalletComponent, canActivate: [AuthGuard] },
   { path: 'laboratoire', component: LaboratoireComponent, canActivate: [AuthGuard] },
+  { path: 'administration', component: AdministrationComponent, canActivate: [AuthGuard] },
   { path: 'assurance', component: AssuranceComponent, canActivate: [AuthGuard] },
   { path: 'autres', component: AutresComponent, canActivate: [AuthGuard] },
   { path: 'avis-imposition', component: AvisImpositionComponent, canActivate: [AuthGuard] },
+  { path: 'mes-documents', component: MesDocumentsComponent, canActivate: [AuthGuard] },
   { path: 'diplome', component: DiplomeComponent, canActivate: [AuthGuard] },
   { path: 'partenaire', component: PartenaireComponent, canActivate: [AuthGuard] },
   { path: 'gouvernement', component: GouvernementComponent, canActivate: [AuthGuard] },

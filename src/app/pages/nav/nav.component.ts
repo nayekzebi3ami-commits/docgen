@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { ProfilService } from '../../services/profil.service';
 
 interface NavItem {
   id: string;
@@ -26,7 +28,7 @@ export class NavComponent implements OnInit {
     { id: 'more', icon: 'ellipsis-h', label: 'Plus', route: 'plus' }
   ];
 
-  constructor(private router: Router, private afAuth: AngularFireAuth) {}
+  constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService, private profilSrv: ProfilService) {}
 
   ngOnInit() {
     // Surveiller l'état de connexion de l'utilisateur
@@ -43,6 +45,22 @@ export class NavComponent implements OnInit {
 
     // Définir l'élément actif initial en fonction de la route actuelle
     this.setActiveItemByRoute(this.router.url);
+
+    this.authService.getUserId().subscribe(async userId => {
+      if(userId) {
+        const profil = await this.profilSrv.getMyInfo(userId);
+        if(profil && profil.admin === true) {
+          this.navItems = [
+            { id: 'home', icon: 'home', label: 'Accueil', route: '' },
+            { id: 'admin', icon: 'cog', label: 'Admin', route: 'administration' },
+            { id: 'wallet', icon: 'wallet', label: 'Wallet', route: 'wallet' },
+            { id: 'profile', icon: 'user', label: 'Profil', route: 'profil' },
+            { id: 'more', icon: 'ellipsis-h', label: 'Plus', route: 'plus' }
+          ];
+        }
+        this.setActiveItemByRoute(this.router.url);
+      }
+    });
   }
 
   setActiveItemByRoute(currentRoute: string) {

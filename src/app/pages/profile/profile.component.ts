@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   showConfirmModal = false;
   editField: 'name' | 'email' | null = null;
 
-  constructor(private afAuth: AngularFireAuth, private walletSrv: WalletService, private authService: AuthService, private profilSrv: ProfilService, private toastr: ToastrService) {}
+  constructor(private afAuth: AngularFireAuth, private walletSrv: WalletService, private authService: AuthService, private profilSrv: ProfilService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.authService.getUserId().subscribe(async userId => {
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
 
   async changePassword(newPassword: string) {
     const user = await this.afAuth.currentUser;
-    
+
     if (user) {
       try {
         await user.updatePassword(newPassword);
@@ -113,9 +113,9 @@ export class ProfileComponent implements OnInit {
 
   confirmEdit(password: string) {
     this.authService.getUserId().subscribe(async userId => {
-      if(userId) {
+      if (userId) {
         const result = await this.profilSrv.changeProfileData(password, this.user.name, this.user.email, userId);
-        if(result) {
+        if (result) {
           this.toastr.success('Profil modifié avec succès.', 'Succès');
           this.closeConfirmModal();
           this.closeEditProfileModal();
@@ -131,11 +131,12 @@ export class ProfileComponent implements OnInit {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        const base64String = e.target.result;
+        // Supprimer la partie 'data:image/png;base64,' pour ne garder que le base64 pur
+        const base64String = e.target.result.split(',')[1];  // Récupère uniquement les données base64 sans préfixe
         this.authService.getUserId().subscribe(async userId => {
-          if(userId) {
-            const result = await this.profilSrv.changeProfilePicture(base64String, userId);
-            if(result) {
+          if (userId) {
+            const result = await this.profilSrv.changeProfilePicture(base64String, userId, file.type);
+            if (result) {
               this.toastr.success('Photo de profil modifiée avec succès.', 'Succès');
             } else {
               this.toastr.error('Erreur lors de la modification de la photo de profil.', 'Erreur');
