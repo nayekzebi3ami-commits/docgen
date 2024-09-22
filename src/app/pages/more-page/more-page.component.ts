@@ -30,7 +30,7 @@ export class MorePageComponent implements OnInit {
     { title: 'Accueil', icon: 'home', route: '/', category: 'menu', admin: false },
     { title: 'Support', icon: 'headset', route: '/support', category: 'support', admin: false },
     { title: 'Wallet', icon: 'wallet', route: '/wallet', category: 'compte', admin: false },
-    { title: 'Profil', icon: 'user', route: '/profile', category: 'compte', admin: false }
+    { title: 'Profil', icon: 'user', route: '/profil', category: 'compte', admin: false }
   ];  
   protected admin: boolean = false;
 
