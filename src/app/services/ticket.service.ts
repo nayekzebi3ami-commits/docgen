@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
-  private backendUrl = 'https://filou-8e89ba3f6799.herokuapp.com';
+  private backendUrl = '';
 
-  constructor() { }
+  constructor(private restService: RestService) {
+    this.backendUrl = this.restService.backendUrl;
+  }
 
   async createTicket(title: string, message: string, userId: string): Promise<string | undefined> {
     const payload = { title, message, userId };

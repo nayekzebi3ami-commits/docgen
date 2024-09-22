@@ -5,9 +5,9 @@ import { environment } from '../../environments/environments';
   providedIn: 'root'
 })
 export class RestService {
-  private backendUrl: string;
+  public backendUrl: string;
 
   constructor() {
-    this.backendUrl = environment.production ? 'https://production-backend-url.com' : 'http://localhost:1338';
+    this.backendUrl = environment.production ? 'https://filou-8e89ba3f6799.herokuapp.com' : 'http://localhost:1338';
   }
 }
