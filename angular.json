@@ -58,7 +58,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environments.ts",
+                  "with": "src/environments/environments.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -77,11 +83,6 @@
             "development": {
               "buildTarget": "filou:build:development"
             }
-          },
-          "options": {
-            "ssl": true,
-            "sslKey": "certs/localhost.key",
-            "sslCert": "certs/localhost.crt"
           },
           "defaultConfiguration": "development"
         },

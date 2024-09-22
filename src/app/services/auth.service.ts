@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private backendUrl = 'https://filou-8e89ba3f6799.herokuapp.com';
+  private backendUrl = '';
   private userIdSubject = new BehaviorSubject<string | null>(null);
-
-  constructor(private afAuth: AngularFireAuth, private toastr: ToastrService) {
-    // Surveiller l'état de connexion de l'utilisateur
+  
+  constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private restService: RestService) {
+    this.backendUrl = this.restService.backendUrl;
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userIdSubject.next(user.uid); // Mettre à jour l'ID utilisateur

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { RestService } from './rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WalletService {
 
-  private backendUrl = 'https://filou-8e89ba3f6799.herokuapp.com';
+  private backendUrl = '';
 
-  constructor() { }
+  constructor(private restService: RestService) {
+    this.backendUrl = this.restService.backendUrl;
+  }
 
   async getMyWalletAmount(userId: string): Promise<number> {
     try {
