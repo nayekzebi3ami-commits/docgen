@@ -23,8 +23,8 @@ export const FORM_DEFINITIONS = {
     test_stup_urinaire: [
         {
             name: 'genre', label: 'Genre', type: 'select', options: [
-                { value: 'M', label: 'Monsieur' },
-                { value: 'Mme', label: 'Madame' }
+                { value: 'Monsieur', label: 'Monsieur' },
+                { value: 'Madame', label: 'Madame' }
             ], validators: [Validators.required]
         },
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
