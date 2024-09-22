@@ -41,6 +41,7 @@ export class ModalPaiementComponent implements OnInit {
   isLoading: boolean = true;
   showDataInputModal = false;
   formType: string = ''; // Nouvelle propriété pour identifier le formulaire
+  documentReady: boolean = false; // Nouveau flag pour indiquer que le document est prêt
 
   constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService) { }
 
@@ -87,12 +88,6 @@ export class ModalPaiementComponent implements OnInit {
     this.formType = formMapping ? formMapping.form : 'default';
   }
 
-  onDataInputModalClose() {
-    this.showDataInputModal = false;
-    this.purchase.emit(this.discountedPrice !== null ? this.discountedPrice : this.product.price);
-    this.closeModal();
-  }
-
   applyCoupon() {
     // Simulons une vérification de coupon
     if (this.couponCode.toLowerCase() === 'discount10') {
@@ -104,21 +99,27 @@ export class ModalPaiementComponent implements OnInit {
     }
   }
 
+  // Gestion de la fermeture du modal de saisie des données
   onModalClose() {
     this.showDataInputModal = false;
+    this.closeModal(); // Fermer la modal principale également
   }
 
-  // Nouvelle méthode pour gérer la soumission du formulaire de la modal de génération de document
+  // Méthode appelée lors de la soumission du formulaire dans ModalGenerateDocComponent
   onFormSubmit(formData: any) {
     console.log('Données du formulaire reçues:', formData);
-    // Ne faites rien ici, laissez ModalGenerateDocComponent gérer le processus
   }
 
+  // Méthode appelée quand le document a été généré
   onDocumentGenerated() {
-    // Cette méthode sera appelée une fois que le document aura été téléchargé
     this.toastr.success('Document généré avec succès!', 'Succès');
-    this.purchase.emit(this.discountedPrice !== null ? this.discountedPrice : this.product.price);
-    this.showDataInputModal = false;
-    this.closeModal();
+    this.documentReady = true; // Le document est prêt
+  }
+
+  // Méthode appelée quand l'utilisateur télécharge le fichier
+  onDownloadCompleted() {
+    this.toastr.success('Document téléchargé avec succès!', 'Succès');
+    this.showDataInputModal = false; // Fermer le modal de saisie de données
+    this.closeModal(); // Fermer le modal parent
   }
 }

@@ -29,7 +29,7 @@ export class ModalGenerateDocComponent implements OnInit {
   isLoading = false;
   fileReady = false;
   documentDownloaded = false;
-
+  documentUrl: string = '';
 
   constructor(private fb: FormBuilder, private authService: AuthService, private documentsService: DocumentsService) { }
 
@@ -64,19 +64,19 @@ export class ModalGenerateDocComponent implements OnInit {
       this.authService.getUserId().subscribe(async userId => {
         if(userId) {
           try {
-            let generatedDocument;
+            let generatedDocumentUrl: string;
             switch (this.formType) {
               case 'test_alcolemie':
-                generatedDocument = await this.documentsService.generateTestAlcolemie(formData, userId);
+                generatedDocumentUrl = await this.documentsService.generateTestAlcolemie(formData, userId);
                 break;
               case 'test_stup_urinaire':
-                generatedDocument = await this.documentsService.generateTestStupefiantUrinaire(formData, userId);
+                generatedDocumentUrl = await this.documentsService.generateTestStupefiantUrinaire(formData, userId);
                 break;
               case 'test_stup_sanguin':
-                generatedDocument = await this.documentsService.generateTestStupefiantSanguin(formData, userId);
+                generatedDocumentUrl = await this.documentsService.generateTestStupefiantSanguin(formData, userId);
                 break;
               case 'test_psycho':
-                generatedDocument = await this.documentsService.generateTestPsychotechnique(formData, userId);
+                generatedDocumentUrl = await this.documentsService.generateTestPsychotechnique(formData, userId);
                 break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);
@@ -84,7 +84,8 @@ export class ModalGenerateDocComponent implements OnInit {
                 return;
             }
   
-            if (generatedDocument) {
+            if (generatedDocumentUrl) {
+              this.documentUrl = generatedDocumentUrl;  // Stocker l'URL du document généré
               this.fileReady = true;
               this.documentGenerated.emit(); // Émettre un événement lorsque le document est prêt
             }
@@ -99,20 +100,25 @@ export class ModalGenerateDocComponent implements OnInit {
   }
 
   downloadFile() {
-    console.log('Téléchargement du fichier');
-    // Simuler un téléchargement
-    setTimeout(() => {
+    if (this.documentUrl) {
+      const link = document.createElement('a');
+      link.href = this.documentUrl;
+      link.target = '_blank';
+      link.download = 'generated_document.pdf';  // Nom du fichier téléchargé
+      link.click();
+
       this.documentDownloaded = true;
-      this.documentGenerated.emit();
-    }, 1000);
+      this.documentGenerated.emit();  // Émet l'événement indiquant que le document a été téléchargé
+    } else {
+      console.error('L\'URL du document est vide. Impossible de télécharger le fichier.');
+    }
   }
 
   closeModal() {
     if (this.documentDownloaded) {
-      this.close.emit();
+      this.close.emit();  // Émettre l'événement de fermeture
     } else {
       console.log('Veuillez d\'abord télécharger le document.');
-      // Optionnellement, affichez un message à l'utilisateur
     }
   }
 }

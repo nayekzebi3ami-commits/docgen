@@ -23,7 +23,8 @@
                 <h3 class="font-semibold">{{ product.title }}</h3>
                 <p class="text-blue-400 font-bold">
                     <span [class.line-through]="discountedPrice !== null">{{ product.price | currency:'EUR' }}</span>
-                    <span *ngIf="discountedPrice !== null" class="ml-2 text-green-400">{{ discountedPrice | currency:'EUR'
+                    <span *ngIf="discountedPrice !== null" class="ml-2 text-green-400">{{ discountedPrice |
+                        currency:'EUR'
                         }}</span>
                 </p>
             </div>
@@ -60,10 +61,7 @@
     </div>
 </div>
 
-<app-modal-generate-doc 
-    *ngIf="showDataInputModal"
-    [formType]="formType"
-    [formTitle]="product.title"
-    (formSubmit)="onFormSubmit($event)"
-    (documentGenerated)="onDocumentGenerated()">
+<app-modal-generate-doc *ngIf="showDataInputModal" [formType]="formType" [formTitle]="product.title"
+    (formSubmit)="onFormSubmit($event)" (documentGenerated)="onDocumentGenerated()" (close)="onModalClose()">
+    <!-- Capture de l'événement close -->
 </app-modal-generate-doc>
