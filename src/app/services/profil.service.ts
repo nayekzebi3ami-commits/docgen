@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ProfilService {
 
-  private backendUrl = 'https://localhost:1338';
+  private backendUrl = 'https://filou-8e89ba3f6799.herokuapp.com';
 
   constructor() { }
 

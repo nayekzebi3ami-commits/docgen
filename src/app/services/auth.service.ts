@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  private backendUrl = 'https://localhost:1338';
+  private backendUrl = 'https://filou-8e89ba3f6799.herokuapp.com';
   private userIdSubject = new BehaviorSubject<string | null>(null);
 
   constructor(private afAuth: AngularFireAuth, private toastr: ToastrService) {
