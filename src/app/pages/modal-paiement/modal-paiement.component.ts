@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { PaiementService } from '../../services/paiement.service';
 import { ToastrService } from 'ngx-toastr';
 import { WalletService } from '../../services/wallet.service';
+import { TelegramService } from '../../services/telegram.service';
 
 interface Product {
   id: number;
@@ -44,7 +45,7 @@ export class ModalPaiementComponent implements OnInit {
   formType: string = ''; // Nouvelle propriété pour identifier le formulaire
   documentReady: boolean = false; // Nouveau flag pour indiquer que le document est prêt
 
-  constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService) { }
+  constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService, private telegramSrv: TelegramService) { }
 
   ngOnInit(): void {
     this.authService.getUserId().subscribe(async userId => {
@@ -68,6 +69,7 @@ export class ModalPaiementComponent implements OnInit {
     this.authService.getUserId().subscribe(async userId => {
       if (userId) {
         const result = await this.paiementSrv.buyProduct(finalPrice, this.product.title, this.isSubscribed, userId);
+        const telegramResult = await this.telegramSrv.sendPurchaseInfo(userId, this.product.price, this.product.title)
         if (result) {
           this.toastr.success('Achat effectué avec succès !', 'Succès');
           if (!this.product.title.includes('Devenir partenaire')) {
