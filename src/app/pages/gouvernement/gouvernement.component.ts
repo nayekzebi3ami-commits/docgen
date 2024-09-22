@@ -14,10 +14,10 @@ interface Product {
 })
 export class GouvernementComponent {
   products: Product[] = [
-    { id: 1, title: 'Produit Premium', price: 99.99, image: 'assets/product.jpg' },
-    { id: 2, title: 'Service VIP', price: 149.99, image: 'assets/product.jpg' },
-    { id: 3, title: 'Pack Exclusif', price: 199.99, image: 'assets/product.jpg' },
-    { id: 4, title: 'Abonnement Elite', price: 79.99, image: 'assets/product.jpg' },
+    { id: 1, title: 'Journée d\'appel ', price: 100, image: 'assets/product.jpg' },
+    { id: 2, title: 'ASSR 2', price: 100, image: 'assets/product.jpg' },
+    { id: 3, title: 'ASSR 1 X', price: 100, image: 'assets/product.jpg' },
+    { id: 4, title: 'Attestation de recensement X', price: 100, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

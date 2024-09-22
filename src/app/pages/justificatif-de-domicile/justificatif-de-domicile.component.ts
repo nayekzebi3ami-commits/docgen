@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 interface Product {
   id: number;
   title: string;
@@ -8,17 +9,16 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-avis-imposition',
-  templateUrl: './avis-imposition.component.html',
-  styleUrl: './avis-imposition.component.scss'
+  selector: 'app-justificatif-de-domicile',
+  templateUrl: './justificatif-de-domicile.component.html',
+  styleUrl: './justificatif-de-domicile.component.scss'
 })
-export class AvisImpositionComponent {
+export class JustificatifDeDomicileComponent {
   products: Product[] = [
-    { id: 1, title: 'Avis d\'imposition', price: 100, image: 'assets/product.jpg' },
-    { id: 2, title: 'Justificatif d\'absence (Acte de décès)', price: 100, image: 'assets/product.jpg' },
-    { id: 3, title: 'Justificatif d\'absence (Acte de mariage)', price: 100, image: 'assets/product.jpg' },
-    { id: 4, title: 'Justificatif d\'absence (Convocation police)', price: 100, image: 'assets/product.jpg' },
-
+    { id: 1, title: 'Facture EDF', price: 100, image: 'assets/product.jpg' },
+    { id: 2, title: 'Facture SFR', price: 100, image: 'assets/product.jpg' },
+    { id: 3, title: 'Facture ORANGE', price: 100, image: 'assets/product.jpg' },
+    { id: 4, title: 'Quittance de loyer', price: 100, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

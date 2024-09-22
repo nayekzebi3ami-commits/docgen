@@ -14,10 +14,9 @@ interface Product {
 })
 export class DiplomeComponent {
   products: Product[] = [
-    { id: 1, title: 'Produit Premium', price: 99.99, image: 'assets/product.jpg' },
-    { id: 2, title: 'Service VIP', price: 149.99, image: 'assets/product.jpg' },
-    { id: 3, title: 'Pack Exclusif', price: 199.99, image: 'assets/product.jpg' },
-    { id: 4, title: 'Abonnement Elite', price: 79.99, image: 'assets/product.jpg' },
+    { id: 1, title: 'Baccalauréat général', price: 100, image: 'assets/product.jpg' },
+    { id: 2, title: 'Baccalauréat professionnel', price: 100, image: 'assets/product.jpg' },
+    { id: 3, title: 'Licence', price: 100, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

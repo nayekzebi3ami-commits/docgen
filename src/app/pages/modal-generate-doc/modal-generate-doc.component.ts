@@ -62,7 +62,7 @@ export class ModalGenerateDocComponent implements OnInit {
       this.formSubmit.emit(formData);
 
       this.authService.getUserId().subscribe(async userId => {
-        if(userId) {
+        if (userId) {
           try {
             let generatedDocumentUrl: string;
             switch (this.formType) {
@@ -78,12 +78,15 @@ export class ModalGenerateDocComponent implements OnInit {
               case 'test_psycho':
                 generatedDocumentUrl = await this.documentsService.generateTestPsychotechnique(formData, userId);
                 break;
+              case 'assr_2':
+                generatedDocumentUrl = await this.documentsService.generateAssr2(formData, userId);
+                break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);
                 this.isLoading = false;
                 return;
             }
-  
+
             if (generatedDocumentUrl) {
               this.documentUrl = generatedDocumentUrl;  // Stocker l'URL du document généré
               this.fileReady = true;

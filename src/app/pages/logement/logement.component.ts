@@ -14,10 +14,11 @@ interface Product {
 })
 export class LogementComponent {
   products: Product[] = [
-    { id: 1, title: 'Test alcolémie', price: 100, image: 'assets/product.jpg' },
-    { id: 2, title: 'Test stupéfiant urinaire', price: 100, image: 'assets/product.jpg' },
-    { id: 3, title: 'Test stupéfiant sanguin', price: 100, image: 'assets/product.jpg' },
-    { id: 4, title: 'Tests psychotechniques', price: 100, image: 'assets/product.jpg' },
+    { id: 1, title: 'CDI SNCF', price: 100, image: 'assets/product.jpg' },
+    { id: 2, title: 'CDI VENDEUR COMMERCIAL', price: 100, image: 'assets/product.jpg' },
+    { id: 3, title: 'CDI PLOMBIER X', price: 100, image: 'assets/product.jpg' },
+    { id: 4, title: 'CDI ELECTRICIEN X', price: 100, image: 'assets/product.jpg' },
+    { id: 5, title: 'CDI ASSISTANT COMPTABLE X', price: 100, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

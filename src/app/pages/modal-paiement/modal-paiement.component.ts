@@ -32,6 +32,7 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Test stupéfiant urinaire', form: 'test_stup_urinaire' },
     { title: 'Test stupéfiant sanguin', form: 'test_stup_sanguin' },
     { title: 'Tests psychotechniques', form: 'test_psycho' },
+    { title: 'ASSR 2', form: 'assr_2' },
   ];
 
   couponCode: string = '';

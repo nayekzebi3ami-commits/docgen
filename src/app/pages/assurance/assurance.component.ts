@@ -14,10 +14,11 @@ interface Product {
 })
 export class AssuranceComponent {
   products: Product[] = [
-    { id: 1, title: 'Produit Premium', price: 99.99, image: 'assets/product.jpg' },
-    { id: 2, title: 'Service VIP', price: 149.99, image: 'assets/product.jpg' },
-    { id: 3, title: 'Pack Exclusif', price: 199.99, image: 'assets/product.jpg' },
-    { id: 4, title: 'Abonnement Elite', price: 79.99, image: 'assets/product.jpg' },
+    { id: 1, title: 'Attestation d\'assurance provisoire', price: 100, image: 'assets/product.jpg' },
+    { id: 2, title: 'Relevé d\'assurance ASSU 2000 X ', price: 100, image: 'assets/product.jpg' },
+    { id: 3, title: 'Relevé d\'assurance ACTIVE ASSU', price: 100, image: 'assets/product.jpg' },
+    { id: 4, title: 'Relevé d\'assurance EURO ASSU', price: 100, image: 'assets/product.jpg' },
+    { id: 5, title: 'Relevé d\'assurance MOTO', price: 100, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

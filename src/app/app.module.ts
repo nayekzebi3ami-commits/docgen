@@ -34,6 +34,7 @@ import { ModalGenerateDocComponent } from './pages/modal-generate-doc/modal-gene
 import { MesDocumentsComponent } from './pages/mes-documents/mes-documents.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { AnswerTicketComponent } from './pages/answer-ticket/answer-ticket.component';
+import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicile/justificatif-de-domicile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,8 @@ import { AnswerTicketComponent } from './pages/answer-ticket/answer-ticket.compo
     ModalGenerateDocComponent,
     MesDocumentsComponent,
     AdministrationComponent,
-    AnswerTicketComponent
+    AnswerTicketComponent,
+    JustificatifDeDomicileComponent
   ],
   imports: [
     BrowserModule,
