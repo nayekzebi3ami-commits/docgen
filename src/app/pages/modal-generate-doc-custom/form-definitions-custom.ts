@@ -567,10 +567,10 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'nomRuePostale', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
         { name: 'codePostalPostale', label: 'Code postal', type: 'text', validators: [Validators.required] },
         { name: 'villePostale', label: 'Ville', type: 'text', validators: [Validators.required] },
-        { name: 'numeroPermis', label: 'Numéro de permis', type: 'text', validators: [Validators.required] },
+        { name: 'numeroPermis', label: 'Numéro de votre permis de conduire', type: 'text', validators: [Validators.required] },
         { name: 'numeroContravention', label: 'Numéro de contravention', type: 'text', validators: [Validators.required] },
-        { name: 'nomPrenomContravention', label: 'Nom prénom contravention', type: 'text', validators: [Validators.required] },
-        { name: 'dateContravention', label: 'Date contravention', type: 'date', validators: [Validators.required] },
+        { name: 'nomPrenomContravention', label: 'Nom et prénom présent sur la contravention', type: 'text', validators: [Validators.required] },
+        { name: 'dateContravention', label: 'Date de la contravention', type: 'date', validators: [Validators.required] },
     ],
     pare_brise: [
         {
