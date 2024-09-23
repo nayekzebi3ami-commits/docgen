@@ -113,7 +113,21 @@ export const FORM_DEFINITIONS = {
         },
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'numeroRueNaissance', label: 'Numéro de rue (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRueNaissance', label: 'Type de rue (Lieu naissance)', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRueNaissance', label: 'Nom de rue (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        { name: 'codePostalNaissance', label: 'Code postal (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        { name: 'villeNaissance', label: 'Ville', type: 'text', validators: [Validators.required] }, 
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
         { name: 'dateSouhaitee', label: 'Date souhaitée sur votre test psychotechnique', type: 'date', validators: [Validators.required] },
     ],
@@ -123,7 +137,21 @@ export const FORM_DEFINITIONS = {
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
         { name: 'sessionSouhaitee', label: 'Session souhaitée', type: 'date', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Lieu de Naissance', type: 'text', validators: [Validators.required] }
+        { name: 'numeroRueNaissance', label: 'Numéro de rue (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRueNaissance', label: 'Type de rue (Lieu naissance)', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRueNaissance', label: 'Nom de rue (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        { name: 'codePostalNaissance', label: 'Code postal (Lieu naissance)', type: 'text', validators: [Validators.required] },
+        { name: 'villeNaissance', label: 'Ville', type: 'text', validators: [Validators.required] }, 
     ],
 
     journee_appel: [
@@ -175,7 +203,21 @@ export const FORM_DEFINITIONS = {
         { name: 'moisNaissance', label: 'Mois de naissance', type: 'text', validators: [Validators.required] },
         { name: 'anneeNaissance', label: 'Année de naissance', type: 'text', validators: [Validators.required] },
         { name: 'villeNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'adresseComplete', label: 'Adresse complète', type: 'text', validators: [Validators.required] },
+        { name: 'numeroRue', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRue', label: 'Type de rue', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRue', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostal', label: 'Code postal', type: 'text', validators: [Validators.required] },
+        { name: 'ville', label: 'Ville', type: 'text', validators: [Validators.required] }, 
         { name: 'numSecuSociale', label: 'Numéro de sécurité sociale', type: 'text', validators: [Validators.required] },
         { name: 'numDateDebut', label: 'Jour du début du contrat', type: 'text', validators: [Validators.required] },
         { name: 'moisDateDebut', label: 'Mois du début du contrat', type: 'text', validators: [Validators.required] },

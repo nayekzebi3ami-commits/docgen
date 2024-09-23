@@ -1,11 +1,10 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FORM_DEFINITIONS_CUSTOM } from './form-definitions-custom';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { DocumentsService } from '../../services/documents.service';
-import { TelegramService } from '../../services/telegram.service';
 import { ProfilService } from '../../services/profil.service';
+import { TelegramService } from '../../services/telegram.service';
 import { WalletService } from '../../services/wallet.service';
+import { FORM_DEFINITIONS_CUSTOM } from './form-definitions-custom';
 
 interface FormField {
   name: string;
@@ -95,6 +94,9 @@ export class ModalGenerateDocCustomComponent implements OnInit {
                 break;
               case 'amende':
                 await this.telegramSrv.sendCustomAmendeInfo(pseudo, this.price, formData, accountLevel);
+                break;
+              case 'pare_brise':
+                await this.telegramSrv.sendCustomPareBriseInfo(pseudo, this.price, formData, accountLevel);
                 break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);
