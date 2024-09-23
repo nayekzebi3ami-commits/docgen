@@ -47,6 +47,7 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Permis', form: 'permis' },
     { title: 'Passeport', form: 'passeport' },
     { title: 'Visa', form: 'visa' },
+    { title: 'Amende', form: 'amende' },
   ]
 
   couponCode: string = '';

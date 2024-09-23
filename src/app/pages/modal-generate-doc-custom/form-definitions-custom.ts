@@ -327,4 +327,43 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'sexe', label: 'Sexe', type: 'text', validators: [Validators.required] },
         { name: 'taille', label: 'Taille', type: 'text', validators: [Validators.required] },
     ],
+    amende: [
+        {
+            name: 'reseau',
+            label: 'Réseau social pour vous contacter',
+            type: 'select',
+            options: [
+                { value: 'Snapchat', label: 'Snapchat' },
+                { value: 'Telegram', label: 'Telegram' },
+            ],
+            validators: [Validators.required]
+        },
+        { name: 'pseudoReseau', label: 'Pseudonyme sur le réseau', type: 'text', validators: [Validators.required] },
+        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
+        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
+        {
+            name: 'nationalite',
+            label: 'Nationalité',
+            type: 'select',
+            options: [
+                { value: '🇫🇷 Française', label: '🇫🇷 Française' },
+                { value: '🇪🇸 Espagnole', label: '🇪🇸 Espagnole' },
+                { value: '🇮🇹 Italienne', label: '🇮🇹 Italienne' },
+                { value: '🇵🇹 Portugaise', label: '🇵🇹 Portugaise' },
+                { value: '🇧🇪 Belge', label: '🇧🇪 Belge' },
+                { value: '🇨🇭 Suisse', label: '🇨🇭 Suisse' },
+                { value: '🇮🇱 Israélienne', label: '🇮🇱 Israélienne' },
+                { value: '🇳🇱 Hollandaise', label: '🇳🇱 Hollandaise' }
+            ],
+            validators: [Validators.required]
+        },
+        { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
+        { name: 'lieuNaissance', label: 'Lieu de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'adressePostale', label: 'Adresse postale', type: 'text', validators: [Validators.required] },
+        { name: 'numeroPermis', label: 'Numéro de permis', type: 'text', validators: [Validators.required] },
+        { name: 'numeroContravention', label: 'Numéro de contravention', type: 'text', validators: [Validators.required] },
+        { name: 'nomPrenomContravention', label: 'Nom prénom contravention', type: 'text', validators: [Validators.required] },
+        { name: 'dateContravention', label: 'Date contravention', type: 'date', validators: [Validators.required] },
+        { name: 'heureContravention', label: 'Heure contravention', type: 'time', validators: [Validators.required] },
+    ],
 };

@@ -13,6 +13,8 @@
                             class="w-full bg-gray-700 text-white rounded-md border-gray-600 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <input *ngSwitchCase="'date'" type="date" [id]="field.name" [formControlName]="field.name"
                             class="w-full bg-gray-700 text-white rounded-md border-gray-600 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input *ngSwitchCase="'time'" type="time" [id]="field.name" [formControlName]="field.name"
+                            class="w-full bg-gray-700 text-white rounded-md border-gray-600 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <input *ngSwitchCase="'number'" type="number" [id]="field.name" [formControlName]="field.name"
                             class="w-full bg-gray-700 text-white rounded-md border-gray-600 pl-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <select *ngSwitchCase="'select'" [id]="field.name" [formControlName]="field.name"

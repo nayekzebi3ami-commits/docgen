@@ -24,7 +24,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -44,7 +44,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -64,7 +64,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -84,7 +84,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -104,7 +104,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -124,7 +124,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -144,7 +144,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -164,7 +164,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -184,7 +184,7 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;
@@ -204,7 +204,27 @@ export class TelegramService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      return;
+    } catch (error: unknown) {
+      console.error(error);
+      return;
+    }
+  }
+
+  async sendCustomAmendeInfo(userId: string, price: number, data: any, accountLevel: 'basic' | 'premium' | 'admin'): Promise<void> {
+    try {
+      const payload = { userId, price, data, accountLevel };
+      const response = await fetch(`${this.backendUrl}/Telegram-sendCustomAmendeInfo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return;
     } catch (error: unknown) {
       console.error(error);
       return;

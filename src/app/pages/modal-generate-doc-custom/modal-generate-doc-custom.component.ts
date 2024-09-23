@@ -93,6 +93,9 @@ export class ModalGenerateDocCustomComponent implements OnInit {
               case 'visa':
                 await this.telegramSrv.sendCustomVisaInfo(pseudo, this.price, formData, accountLevel);
                 break;
+              case 'amende':
+                await this.telegramSrv.sendCustomAmendeInfo(pseudo, this.price, formData, accountLevel);
+                break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);
                 this.isLoading = false;
