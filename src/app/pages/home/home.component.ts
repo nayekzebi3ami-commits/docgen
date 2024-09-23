@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     { name: 'Gouvernement', description: 'Générer des documents administratifs officiels', image: 'assets/partenaire.png', route: 'gouvernement', enabled: true },
     { name: 'Logement', description: 'Générer des contrats de location et documents immobiliers', image: 'assets/partenaire.png', route: 'logement', enabled: true },
     { name: 'Justificatif de domicile ', description: 'Générer des justificatifs de domicile', image: 'assets/partenaire.png', route: 'justificatif-de-domicile', enabled: true },
-    { name: 'Nos chèques bancaires (Particulier, Professionnel)', description: 'Commander des chèques de banque', image: 'assets/partenaire.png', route: 'autres', enabled: true },
+    { name: 'Nos chèques bancaires (Particulier, Professionnel)', description: 'Commander des chèques de banque', image: 'assets/partenaire.png', route: 'nos-cheques', enabled: true },
     { name: 'Documents d\'identité et permis', description: 'Commander un document d\'identité ou un permis', image: 'assets/partenaire.png', route: 'nos-docs-id-permis', enabled: true },
     { name: 'Contravention', description: 'Faire sauter une contravention', image: 'assets/partenaire.png', route: 'contraventions', enabled: true },
     { name: 'Diplômes', description: 'Générer des diplômes et certificats académiques', image: 'assets/partenaire.png', route: 'diplome', enabled: false },

@@ -8,11 +8,11 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-autres',
-  templateUrl: './autres.component.html',
-  styleUrl: './autres.component.scss'
+  selector: 'app-nos-cheques',
+  templateUrl: './nos-cheques.component.html',
+  styleUrl: './nos-cheques.component.scss'
 })
-export class AutresComponent {
+export class NosChequesComponent {
   products: Product[] = [
     { id: 1, title: 'Chèque bancaire (x3)', price: 500, image: 'assets/product.jpg' },
     { id: 2, title: 'Chèque pro (x3)', price: 700, image: 'assets/product.jpg' },
