@@ -18,6 +18,7 @@ interface NavItem {
   styleUrl: './nav.component.scss'
 })
 export class NavComponent implements OnInit {
+
   activeItem = 'home';
   isLoggedIn: boolean = false;
   navItems: NavItem[] = [
@@ -28,7 +29,7 @@ export class NavComponent implements OnInit {
     { id: 'more', icon: 'ellipsis-h', label: 'Plus', route: 'plus' }
   ];
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService, private profilSrv: ProfilService) {}
+  constructor(private router: Router, private afAuth: AngularFireAuth, private authService: AuthService, private profilSrv: ProfilService) { }
 
   ngOnInit() {
     // Surveiller l'état de connexion de l'utilisateur
@@ -47,9 +48,9 @@ export class NavComponent implements OnInit {
     this.setActiveItemByRoute(this.router.url);
 
     this.authService.getUserId().subscribe(async userId => {
-      if(userId) {
+      if (userId) {
         const profil = await this.profilSrv.getMyInfo(userId);
-        if(profil && profil.admin === true) {
+        if (profil && profil.admin === true) {
           this.navItems = [
             { id: 'home', icon: 'home', label: 'Accueil', route: '' },
             { id: 'admin', icon: 'cog', label: 'Admin', route: 'administration' },
@@ -60,6 +61,17 @@ export class NavComponent implements OnInit {
         }
         this.setActiveItemByRoute(this.router.url);
       }
+    });
+  }
+
+  goBack() {
+    this.router.navigate([], {
+      relativeTo: this.router.routerState.root,
+      queryParams: { },
+      queryParamsHandling: 'merge',
+      skipLocationChange: true
+    }).then(() => {
+      window.history.back();
     });
   }
 
@@ -81,7 +93,7 @@ export class NavComponent implements OnInit {
     this.activeItem = id;
   }
 
-  
+
   logout() {
     this.afAuth.signOut().then(() => {
       console.log('User logged out');
