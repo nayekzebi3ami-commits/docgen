@@ -18,6 +18,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { MesDocumentsComponent } from './pages/mes-documents/mes-documents.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicile/justificatif-de-domicile.component';
+import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
+import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -34,6 +36,8 @@ const routes: Routes = [
   { path: 'logement', component: LogementComponent, canActivate: [AuthGuard] },
   { path: 'support', component: MyTicketsComponent, canActivate: [AuthGuard] },
   { path: 'plus', component: MorePageComponent, canActivate: [AuthGuard] },
+  { path: 'acceptzeguffyugzefyugze', component: AcceptCodeComponent },
+  { path: 'refusefzbhyugzeufygzuefg', component: RefuseCodeComponent },
   { path: 'Justificatif de domicile', component: JustificatifDeDomicileComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },

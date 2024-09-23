@@ -31,10 +31,13 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalGenerateDocComponent } from './pages/modal-generate-doc/modal-generate-doc.component';
+import { ModalGenerateDocCustomComponent } from './pages/modal-generate-doc-custom/modal-generate-doc-custom.component';
 import { MesDocumentsComponent } from './pages/mes-documents/mes-documents.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { AnswerTicketComponent } from './pages/answer-ticket/answer-ticket.component';
 import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicile/justificatif-de-domicile.component';
+import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
+import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,10 +59,13 @@ import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicil
     PartenaireComponent,
     ModalPaiementComponent,
     ModalGenerateDocComponent,
+    ModalGenerateDocCustomComponent,
     MesDocumentsComponent,
     AdministrationComponent,
     AnswerTicketComponent,
-    JustificatifDeDomicileComponent
+    JustificatifDeDomicileComponent,
+    AcceptCodeComponent,
+    RefuseCodeComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,26 @@ export class WalletService {
     }
   }
 
+  async getAccountLevel(userId: string): Promise<'basic' | 'premium' | 'admin'> {
+    try {
+      const payload = { userId };
+      const response = await fetch(`${this.backendUrl}/Wallet-getAccountLevel`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return 'basic';
+    }
+  }
+
   async getMyTotalOrders(userId: string): Promise<number> {
     try {
       const payload = { userId };

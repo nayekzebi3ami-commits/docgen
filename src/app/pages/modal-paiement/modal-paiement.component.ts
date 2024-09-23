@@ -4,6 +4,7 @@ import { PaiementService } from '../../services/paiement.service';
 import { ToastrService } from 'ngx-toastr';
 import { WalletService } from '../../services/wallet.service';
 import { TelegramService } from '../../services/telegram.service';
+import { ProfilService } from '../../services/profil.service';
 
 interface Product {
   id: number;
@@ -36,16 +37,28 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'ASSR 2', form: 'assr_2' },
   ];
 
+  customTitles: any[] = [
+    { title: 'Chèque bancaire (x3)', form: 'cheque_bancaire' },
+    { title: 'Chèque pro (x3)', form: 'cheque_pro' },
+    { title: 'Chèque super pro (x1)', form: 'cheque_super_pro' },
+    { title: 'Chèque de banque (x1)', form: 'cheque_de_banque' },
+    { title: 'Carte d\'identité', form: 'carte_identite' },
+    { title: 'Permis', form: 'permis' },
+    { title: 'Passeport', form: 'passeport' },
+    { title: 'Visa', form: 'visa' },
+  ]
+
   couponCode: string = '';
   discountedPrice: number | null = null;
   couponMessage: CouponMessage | null = null;
   protected isSubscribed: boolean = false;
   isLoading: boolean = true;
   showDataInputModal = false;
+  showDataInputCustomModal = false;
   formType: string = ''; // Nouvelle propriété pour identifier le formulaire
   documentReady: boolean = false; // Nouveau flag pour indiquer que le document est prêt
 
-  constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService, private telegramSrv: TelegramService) { }
+  constructor(private authService: AuthService, private paiementSrv: PaiementService, private toastr: ToastrService, private walletSrv: WalletService, private telegramSrv: TelegramService, private profilSrv: ProfilService) { }
 
   ngOnInit(): void {
     this.authService.getUserId().subscribe(async userId => {
@@ -69,12 +82,18 @@ export class ModalPaiementComponent implements OnInit {
     this.authService.getUserId().subscribe(async userId => {
       if (userId) {
         const result = await this.paiementSrv.buyProduct(finalPrice, this.product.title, this.isSubscribed, userId);
-        const telegramResult = await this.telegramSrv.sendPurchaseInfo(userId, this.product.price, this.product.title)
+        const clientPseudo = await this.profilSrv.getUserPseudo(userId);
+        const accountLevel = await this.walletSrv.getAccountLevel(userId);
         if (result) {
           this.toastr.success('Achat effectué avec succès !', 'Succès');
+          const telegramResult = await this.telegramSrv.sendPurchaseInfo(clientPseudo, this.product.price, this.product.title, accountLevel)
           if (!this.product.title.includes('Devenir partenaire')) {
-            this.setFormType(); // Définir le type de formulaire
-            this.showDataInputModal = true;
+            const formType =this.setFormType();
+            if(formType == 0) {
+              this.showDataInputModal = true;
+            } else {
+              this.showDataInputCustomModal = true;
+            }
           } else {
             this.purchase.emit(finalPrice);
             this.closeModal();
@@ -87,8 +106,19 @@ export class ModalPaiementComponent implements OnInit {
   }
 
   setFormType() {
-    const formMapping = this.titles.find(item => item.title === this.product.title);
-    this.formType = formMapping ? formMapping.form : 'default';
+    const formMappingTitles = this.titles.find(item => item.title === this.product.title);
+    const formMappingCustomTitles = this.customTitles.find(item => item.title === this.product.title);
+    
+    if (formMappingTitles) {
+      this.formType = formMappingTitles.form;
+      return 0;
+    } else if (formMappingCustomTitles) {
+      this.formType = formMappingCustomTitles.form;
+      return 1;
+    } else {
+      this.formType = 'default';
+      return -1;
+    }
   }
 
   applyCoupon() {

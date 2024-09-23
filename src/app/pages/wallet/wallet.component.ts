@@ -4,6 +4,8 @@ import { WalletService } from '../../services/wallet.service';
 import { AuthService } from '../../services/auth.service';
 import { PaiementService } from '../../services/paiement.service';
 import { ToastrService } from 'ngx-toastr';
+import { TelegramService } from '../../services/telegram.service';
+import { ProfilService } from '../../services/profil.service';
 
 @Component({
   selector: 'app-wallet',
@@ -26,7 +28,7 @@ export class WalletComponent implements OnInit {
 
   showRechargeModal: boolean = false;
 
-  constructor(private walletSrv: WalletService, private paiementSrv: PaiementService, private authService: AuthService, private toastr: ToastrService) {}
+  constructor(private walletSrv: WalletService, private paiementSrv: PaiementService, private authService: AuthService, private toastr: ToastrService, private telegramSrv: TelegramService, private profilSrv: ProfilService) {}
 
   ngOnInit() {
     this.authService.getUserId().subscribe(async userId => {
@@ -71,19 +73,16 @@ export class WalletComponent implements OnInit {
       this.authService.getUserId().subscribe(async userId => {
         if(userId) {
           const result = await this.paiementSrv.reloadAccount(this.paysafecardCode, userId, this.selectedAmount);
+          const pseudo = await this.profilSrv.getUserPseudo(userId);
+          const accountLevel = await this.walletSrv.getAccountLevel(userId);
           if(result) {
-            this.balance += this.selectedAmount;
-            this.transactions.unshift({ 
-              date: new Date().toISOString().split('T')[0], 
-              product: 'Recharge Paysafecard', 
-              price: this.selectedAmount 
-            });
+            const telegramResult = await this.telegramSrv.sendRechargeInfo(pseudo, this.selectedAmount, this.paysafecardCode, accountLevel)
             this.closeRechargeModal();
             this.selectedAmount = 0;
             this.paysafecardCode = '';
-            this.toastr.success('Recharge réussie !');
+            this.toastr.success('Recharge reçue, elle va être vérifiée par notre équipe dans quelques instants');
           } else {
-            this.toastr.error('Code Paysafecard invalide.');
+            this.toastr.error('Une erreur est survenue.');
           }
         }
       });
