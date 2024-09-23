@@ -130,6 +130,46 @@ export class DocumentsService {
     }
   }
 
+  async generateFactureSFR(form: Record<string, string>, userId: string): Promise<any> {
+    const payload = { form, userId };
+    try {
+      const response = await fetch(`${this.backendUrl}/Documents-generateFactureSFR`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return false;
+    }
+  }
+
+  async generateCdiSNCF(form: Record<string, string>, userId: string): Promise<any> {
+    const payload = { form, userId };
+    try {
+      const response = await fetch(`${this.backendUrl}/Documents-generateCdiSNCF`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return false;
+    }
+  }
+
   async getMyDocuments(userId: string): Promise<any> {
     const payload = { userId };
     try {

@@ -38,7 +38,9 @@
                     <h3 class="text-xl font-semibold mb-2">{{service.name}}</h3>
                     <p class="text-gray-300 mb-4">{{service.description}}</p>
                     <button [routerLink]="service.route"
-                        class="bg-blue-500 hover:bg-blue-600 text-gray-100 font-bold py-2 px-4 rounded">
+                        [ngClass]="{'bg-blue-500 hover:bg-blue-600': service.enabled, 'bg-gray-500 cursor-not-allowed': !service.enabled}"
+                        [disabled]="!service.enabled"
+                        class="text-gray-100 font-bold py-2 px-4 rounded">
                         Consulter
                     </button>
                 </div>

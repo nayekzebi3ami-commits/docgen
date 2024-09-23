@@ -93,12 +93,51 @@ export const FORM_DEFINITIONS = {
         },
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
-        { name: 'jourNaissance', label: 'Date de naissance', type: 'number', validators: [Validators.required] },
+        { name: 'jourNaissance', label: 'Jour de naissance', type: 'text', validators: [Validators.required] },
         { name: 'moisNaissance', label: 'Mois de Naissance', type: 'text', validators: [Validators.required] },
         { name: 'villeNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'departemenNaissance', label: 'Département de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'jourSouhaite', label: 'Jour d\'examen souhaité', type: 'date', validators: [Validators.required] },
-        { name: 'moisSouhaite', label: 'Mois d\'examen souhaité', type: 'date', validators: [Validators.required] },
-        { name: 'anneeSouhaitee', label: 'Année d\'examen souhaitée', type: 'date', validators: [Validators.required] },
+        { name: 'departementNaissance', label: 'Département de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'jourSouhaite', label: 'Jour d\'examen souhaité', type: 'text', validators: [Validators.required] },
+        { name: 'moisSouhaite', label: 'Mois d\'examen souhaité', type: 'text', validators: [Validators.required] },
+        { name: 'anneeSouhaitee', label: 'Année d\'examen souhaitée', type: 'text', validators: [Validators.required] },
+    ],
+
+    facture_sfr: [
+        {
+            name: 'genre', label: 'Genre', type: 'select', options: [
+                { value: 'MR', label: 'Monsieur' },
+                { value: 'MME', label: 'Madame' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
+        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
+        { name: 'numeroLigne', label: 'Numéro de ligne', type: 'text', validators: [Validators.required] },
+        { name: 'email', label: 'Adresse mail', type: 'text', validators: [Validators.required] },
+        { name: 'dateFacture', label: 'Date de la facture', type: 'date', validators: [Validators.required] },
+        { name: 'rueNum', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        { name: 'rue', label: 'Nom de la rue', type: 'text', validators: [Validators.required] },
+        { name: 'departement', label: 'Numéro du département', type: 'text', validators: [Validators.required] },
+        { name: 'ville', label: 'Ville', type: 'text', validators: [Validators.required] },
+
+    ],
+    cdi_sncf: [
+        {
+            name: 'genre', label: 'Genre', type: 'select', options: [
+                { value: 'Monsieur', label: 'Monsieur' },
+                { value: 'Madame', label: 'Madame' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
+        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
+        { name: 'jourNaissance', label: 'Jour de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'moisNaissance', label: 'Mois de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'anneeNaissance', label: 'Année de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'villeNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
+        { name: 'adresseComplete', label: 'Adresse complète', type: 'text', validators: [Validators.required] },
+        { name: 'numSecuSociale', label: 'Numéro de sécurité sociale', type: 'text', validators: [Validators.required] },
+        { name: 'numDateDebut', label: 'Jour du début du contrat', type: 'text', validators: [Validators.required] },
+        { name: 'moisDateDebut', label: 'Mois du début du contrat', type: 'text', validators: [Validators.required] },
+        { name: 'anneeDateDebut', label: 'Année du début du contrat', type: 'text', validators: [Validators.required] },
+        { name: 'salaire', label: 'Salaire', type: 'text', validators: [Validators.required] },
     ],
 };

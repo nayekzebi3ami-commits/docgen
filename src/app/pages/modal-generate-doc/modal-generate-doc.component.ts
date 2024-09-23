@@ -7,7 +7,7 @@ import { DocumentsService } from '../../services/documents.service';
 interface FormField {
   name: string;
   label: string;
-  type: 'text' | 'date' | 'select' | 'textarea';
+  type: 'text' | 'date' | 'select' | 'textarea' | 'number';
   options?: { value: string; label: string }[];
   validators: any[];
 }
@@ -83,6 +83,12 @@ export class ModalGenerateDocComponent implements OnInit {
                 break;
               case 'journee_appel':
                 generatedDocumentUrl = await this.documentsService.generateJourneeAppel(formData, userId);
+                break;
+              case 'facture_sfr':
+                generatedDocumentUrl = await this.documentsService.generateFactureSFR(formData, userId);
+                break;
+              case 'cdi_sncf':
+                generatedDocumentUrl = await this.documentsService.generateCdiSNCF(formData, userId);
                 break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);

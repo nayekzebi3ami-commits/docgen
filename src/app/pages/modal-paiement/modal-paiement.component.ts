@@ -35,6 +35,8 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Tests psychotechniques', form: 'test_psycho' },
     { title: 'ASSR 2', form: 'assr_2' },
     { title: 'Journée d\'appel', form: 'journee_appel' },
+    { title: 'Facture SFR', form: 'facture_sfr' },
+    { title: 'CDI SNCF', form: 'cdi_sncf' },
   ];
 
   couponCode: string = '';

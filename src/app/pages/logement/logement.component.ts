@@ -5,6 +5,7 @@ interface Product {
   title: string;
   price: number;
   image: string;
+  enabled: boolean;
 }
 
 @Component({
@@ -14,11 +15,11 @@ interface Product {
 })
 export class LogementComponent {
   products: Product[] = [
-    { id: 1, title: 'CDI SNCF', price: 100, image: 'assets/product.jpg' },
-    { id: 2, title: 'CDI VENDEUR COMMERCIAL', price: 100, image: 'assets/product.jpg' },
-    { id: 3, title: 'CDI PLOMBIER X', price: 100, image: 'assets/product.jpg' },
-    { id: 4, title: 'CDI ELECTRICIEN X', price: 100, image: 'assets/product.jpg' },
-    { id: 5, title: 'CDI ASSISTANT COMPTABLE X', price: 100, image: 'assets/product.jpg' },
+    { id: 1, title: 'CDI SNCF', price: 100, image: 'assets/product.jpg', enabled: true },
+    { id: 2, title: 'CDI VENDEUR COMMERCIAL', price: 100, image: 'assets/product.jpg', enabled: false },
+    { id: 3, title: 'CDI PLOMBIER', price: 100, image: 'assets/product.jpg', enabled: false },
+    { id: 4, title: 'CDI ELECTRICIEN', price: 100, image: 'assets/product.jpg', enabled: false },
+    { id: 5, title: 'CDI ASSISTANT COMPTABLE', price: 100, image: 'assets/product.jpg', enabled: false },
   ];
 
   selectedProduct: Product | null = null;
