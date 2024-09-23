@@ -20,6 +20,8 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicile/justificatif-de-domicile.component';
 import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
 import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
+import { NosDocsIdPermisComponent } from './pages/nos-docs-id-permis/nos-docs-id-permis.component';
+import { ContraventionsComponent } from './pages/contraventions/contraventions.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -38,7 +40,9 @@ const routes: Routes = [
   { path: 'plus', component: MorePageComponent, canActivate: [AuthGuard] },
   { path: 'acceptzeguffyugzefyugze', component: AcceptCodeComponent },
   { path: 'refusefzbhyugzeufygzuefg', component: RefuseCodeComponent },
-  { path: 'Justificatif de domicile', component: JustificatifDeDomicileComponent, canActivate: [AuthGuard] },
+  { path: 'justificatif-de-domicile', component: JustificatifDeDomicileComponent, canActivate: [AuthGuard] },
+  { path: 'nos-docs-id-permis', component: NosDocsIdPermisComponent, canActivate: [AuthGuard] },
+  { path: 'contraventions', component: ContraventionsComponent, canActivate: [AuthGuard] },
   { path: 'profil', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' }

@@ -49,7 +49,7 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Permis', form: 'permis' },
     { title: 'Passeport', form: 'passeport' },
     { title: 'Visa', form: 'visa' },
-    { title: 'Amende', form: 'amende' },
+    { title: 'Contravention', form: 'amende' },
   ]
 
   couponCode: string = '';
@@ -92,8 +92,8 @@ export class ModalPaiementComponent implements OnInit {
           this.toastr.success('Achat effectué avec succès !', 'Succès');
           const telegramResult = await this.telegramSrv.sendPurchaseInfo(clientPseudo, this.product.price, this.product.title, accountLevel)
           if (!this.product.title.includes('Devenir partenaire')) {
-            const formType =this.setFormType();
-            if(formType == 0) {
+            const formType = this.setFormType();
+            if (formType == 0) {
               this.showDataInputModal = true;
             } else {
               this.showDataInputCustomModal = true;
@@ -112,7 +112,7 @@ export class ModalPaiementComponent implements OnInit {
   setFormType() {
     const formMappingTitles = this.titles.find(item => item.title === this.product.title);
     const formMappingCustomTitles = this.customTitles.find(item => item.title === this.product.title);
-    
+
     if (formMappingTitles) {
       this.formType = formMappingTitles.form;
       return 0;

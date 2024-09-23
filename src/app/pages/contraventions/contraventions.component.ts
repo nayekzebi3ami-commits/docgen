@@ -8,16 +8,14 @@ interface Product {
 }
 
 @Component({
-  selector: 'app-autres',
-  templateUrl: './autres.component.html',
-  styleUrl: './autres.component.scss'
+  selector: 'app-contraventions',
+  templateUrl: './contraventions.component.html',
+  styleUrl: './contraventions.component.scss'
 })
-export class AutresComponent {
+export class ContraventionsComponent {
+
   products: Product[] = [
-    { id: 1, title: 'Chèque bancaire (x3)', price: 500, image: 'assets/product.jpg' },
-    { id: 2, title: 'Chèque pro (x3)', price: 700, image: 'assets/product.jpg' },
-    { id: 3, title: 'Chèque super pro (x1)', price: 800, image: 'assets/product.jpg' },
-    { id: 4, title: 'Chèque de banque (x1)', price: 1000, image: 'assets/product.jpg' },
+    { id: 1, title: 'Contravention', price: 50, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;
