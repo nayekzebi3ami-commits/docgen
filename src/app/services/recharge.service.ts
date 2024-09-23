@@ -34,7 +34,7 @@ export class RechargeService {
   async refuseCode(code: string): Promise<boolean> {
     try {
       const payload = { code };
-      const response = await fetch(`${this.backendUrl}/Recharge-acceptCode`, {
+      const response = await fetch(`${this.backendUrl}/Recharge-refuseCode`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
