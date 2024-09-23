@@ -14,10 +14,15 @@ interface Product {
 })
 export class AutresComponent {
   products: Product[] = [
-    { id: 1, title: 'Produit Premium', price: 99.99, image: 'assets/product.jpg' },
-    { id: 2, title: 'Service VIP', price: 149.99, image: 'assets/product.jpg' },
-    { id: 3, title: 'Pack Exclusif', price: 199.99, image: 'assets/product.jpg' },
-    { id: 4, title: 'Abonnement Elite', price: 79.99, image: 'assets/product.jpg' },
+    { id: 1, title: 'Chèque bancaire (x3)', price: 500, image: 'assets/product.jpg' },
+    { id: 2, title: 'Chèque pro (x3)', price: 700, image: 'assets/product.jpg' },
+    { id: 3, title: 'Chèque super pro (x1)', price: 800, image: 'assets/product.jpg' },
+    { id: 4, title: 'Chèque de banque (x1)', price: 1000, image: 'assets/product.jpg' },
+    { id: 5, title: 'Carte d\'identité', price: 1500, image: 'assets/product.jpg' },
+    { id: 6, title: 'Permis', price: 1500, image: 'assets/product.jpg' },
+    { id: 7, title: 'Passeport', price: 3500, image: 'assets/product.jpg' },
+    { id: 8, title: 'Visa', price: 3500, image: 'assets/product.jpg' },
+    { id: 9, title: 'Amende', price: 50, image: 'assets/product.jpg' },
   ];
 
   selectedProduct: Product | null = null;

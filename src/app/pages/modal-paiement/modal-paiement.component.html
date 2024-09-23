@@ -65,3 +65,8 @@
     (formSubmit)="onFormSubmit($event)" (documentGenerated)="onDocumentGenerated()" (close)="onModalClose()">
     <!-- Capture de l'événement close -->
 </app-modal-generate-doc>
+
+<app-modal-generate-doc-custom *ngIf="showDataInputCustomModal" [formType]="formType" [formTitle]="product.title"
+    (formSubmit)="onFormSubmit($event)" (documentGenerated)="onDocumentGenerated()" [price]="product.price" (close)="onModalClose()">
+    <!-- Capture de l'événement close -->
+</app-modal-generate-doc-custom>

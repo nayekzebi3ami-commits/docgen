@@ -32,6 +32,26 @@ export class ProfilService {
     }
   }
 
+  async getUserPseudo(userId: string): Promise<string> {
+    const payload = { userId };
+    try {
+      const response = await fetch(`${this.backendUrl}/Profil-getUserPseudo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return await response.json();
+    } catch (error: unknown) {
+      console.error(error);
+      return '';
+    }
+  }
+
   async changeProfileData(password: string, username: string, email: string, userId: string): Promise<boolean> {
     const payload = { password, username, email, userId };
     try {
