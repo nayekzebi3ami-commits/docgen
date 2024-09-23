@@ -1,4 +1,5 @@
-<nav *ngIf="isLoggedIn" class="fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 flex items-center justify-between">
+<nav *ngIf="isLoggedIn"
+    class="fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 flex items-center justify-between">
     <div class="flex items-center">
         <img src="assets/logo.png" alt="Logo" class="w-10 h-10 rounded-full mr-3">
         <div class="title-container">
@@ -10,13 +11,13 @@
         </div>
     </div>
     <div class="flex items-center">
-        <a href="https://snapchat.com/add/petitfilou" target="_blank" class="text-yellow-400 hover:text-yellow-300 mx-2">
+        <a href="snapchat://add/petitfilou" (click)="openExternalLink('https://snapchat.com/add/petitfilou')" class="text-yellow-400 hover:text-yellow-300 mx-2">
             <i class="fab fa-snapchat-ghost text-2xl"></i>
         </a>
-        <a href="https://wa.me/+33615727216" target="_blank" class="text-green-400 hover:text-green-300 mx-2">
+        <a href="whatsapp://send?phone=33615727216" (click)="openExternalLink('https://wa.me/+33615727216')" class="text-green-400 hover:text-green-300 mx-2">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
-        <a href="https://t.me/petitfilou13" target="_blank" class="text-blue-400 hover:text-blue-300 mx-2">
+        <a href="tg://resolve?domain=petitfilou13" (click)="openExternalLink('https://t.me/petitfilou13')" class="text-blue-400 hover:text-blue-300 mx-2">
             <i class="fab fa-telegram text-2xl"></i>
         </a>
         <button (click)="logout()" class="text-gray-300 hover:text-white focus:outline-none transition duration-150 ease-in-out ml-4">
@@ -27,6 +28,14 @@
         </button>
     </div>
 </nav>
+
+<button (click)="goBack()"
+    class="fixed left-0 top-[90px] bg-gray-200 bg-opacity-50 text-gray-600 rounded-r-full p-2 shadow-sm hover:bg-opacity-100 focus:bg-opacity-100 hover:shadow-md focus:shadow-md focus:outline-none transition duration-300 ease-in-out z-40 flex items-center">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+    <span>Retour</span>
+</button>
 
 <nav *ngIf="isLoggedIn" class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white z-50">
     <ul class="flex justify-around items-center h-16 max-w-screen-lg mx-auto">
