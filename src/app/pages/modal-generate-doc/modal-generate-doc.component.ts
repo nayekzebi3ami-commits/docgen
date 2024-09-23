@@ -81,6 +81,9 @@ export class ModalGenerateDocComponent implements OnInit {
               case 'assr_2':
                 generatedDocumentUrl = await this.documentsService.generateAssr2(formData, userId);
                 break;
+              case 'journee_appel':
+                generatedDocumentUrl = await this.documentsService.generateJourneeAppel(formData, userId);
+                break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);
                 this.isLoading = false;
