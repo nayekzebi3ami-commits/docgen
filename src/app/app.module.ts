@@ -38,6 +38,7 @@ import { AnswerTicketComponent } from './pages/answer-ticket/answer-ticket.compo
 import { JustificatifDeDomicileComponent } from './pages/justificatif-de-domicile/justificatif-de-domicile.component';
 import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
 import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
+import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
     AnswerTicketComponent,
     JustificatifDeDomicileComponent,
     AcceptCodeComponent,
-    RefuseCodeComponent
+    RefuseCodeComponent,
+    PareBriseComponent
   ],
   imports: [
     BrowserModule,

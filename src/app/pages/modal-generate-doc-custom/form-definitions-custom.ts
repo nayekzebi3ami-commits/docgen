@@ -383,18 +383,10 @@ export const FORM_DEFINITIONS_CUSTOM = {
             ], validators: [Validators.required]
         },
         { name: 'taille', label: 'Taille (en cm)', type: 'text', validators: [Validators.required] },
-        {
-            name: 'prefectureSouhaitee', label: 'Préfecture souhaitée', type: 'select', options: [
-                { value: 'Préfecture de Toulon', label: 'Préfecture de Toulon' },
-                { value: 'Préfecture de Draguignan', label: 'Préfecture de Draguignan' },
-                { value: 'Préfecture de Marseille', label: 'Préfecture de Marseille' },
-                { value: 'Préfecture de Nice', label: 'Préfecture de Nice' },
-                { value: 'Préfecture de Paris', label: 'Préfecture de Paris' },
-            ], validators: [Validators.required]
-        },
+        { name: 'prefectureSouhaitee', label: 'Préfecture de délivrance du permis souhaité', type: 'text', validators: [Validators.required] },
         {
             name: 'permisSouhaite',
-            label: 'Permis souhaité',
+            label: 'Catégorie du permis souhaité',
             type: 'select',
             options: [
                 { value: 'AM', label: 'AM' },
@@ -432,7 +424,7 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         {
             name: 'nationalite',
-            label: 'Nationalité',
+            label: 'Nationalité du passeport souhaité',
             type: 'select',
             options: [
                 { value: '🇫🇷 Française', label: '🇫🇷 Française' },
