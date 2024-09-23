@@ -67,12 +67,16 @@ export class NavComponent implements OnInit {
   goBack() {
     this.router.navigate([], {
       relativeTo: this.router.routerState.root,
-      queryParams: { },
+      queryParams: {},
       queryParamsHandling: 'merge',
       skipLocationChange: true
     }).then(() => {
       window.history.back();
     });
+  }
+
+  openExternalLink(url: string) {
+    window.open(url, '_blank');
   }
 
   setActiveItemByRoute(currentRoute: string) {

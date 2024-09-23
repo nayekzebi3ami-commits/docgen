@@ -11,13 +11,13 @@
         </div>
     </div>
     <div class="flex items-center">
-        <a href="https://snapchat.com/add/petitfilou" target="_blank" class="text-yellow-400 hover:text-yellow-300 mx-2">
+        <a href="snapchat://add/petitfilou" (click)="openExternalLink('https://snapchat.com/add/petitfilou')" class="text-yellow-400 hover:text-yellow-300 mx-2">
             <i class="fab fa-snapchat-ghost text-2xl"></i>
         </a>
-        <a href="https://wa.me/+33615727216" target="_blank" class="text-green-400 hover:text-green-300 mx-2">
+        <a href="whatsapp://send?phone=33615727216" (click)="openExternalLink('https://wa.me/+33615727216')" class="text-green-400 hover:text-green-300 mx-2">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
-        <a href="https://t.me/petitfilou13" target="_blank" class="text-blue-400 hover:text-blue-300 mx-2">
+        <a href="tg://resolve?domain=petitfilou13" (click)="openExternalLink('https://t.me/petitfilou13')" class="text-blue-400 hover:text-blue-300 mx-2">
             <i class="fab fa-telegram text-2xl"></i>
         </a>
         <button (click)="logout()" class="text-gray-300 hover:text-white focus:outline-none transition duration-150 ease-in-out ml-4">
