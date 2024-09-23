@@ -7,7 +7,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AssuranceComponent } from './pages/assurance/assurance.component';
-import { AutresComponent } from './pages/autres/autres.component';
+import { NosChequesComponent } from './pages/nos-cheques/nos-cheques.component';
 import { AvisImpositionComponent } from './pages/avis-imposition/avis-imposition.component';
 import { DiplomeComponent } from './pages/diplome/diplome.component';
 import { GouvernementComponent } from './pages/gouvernement/gouvernement.component';
@@ -58,7 +58,7 @@ import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
     AssuranceComponent,
     DiplomeComponent,
     AvisImpositionComponent,
-    AutresComponent,
+    NosChequesComponent,
     PartenaireComponent,
     ModalPaiementComponent,
     ModalGenerateDocComponent,

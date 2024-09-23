@@ -10,7 +10,7 @@ import { LogementComponent } from './pages/logement/logement.component';
 import { GouvernementComponent } from './pages/gouvernement/gouvernement.component';
 import { AvisImpositionComponent } from './pages/avis-imposition/avis-imposition.component';
 import { DiplomeComponent } from './pages/diplome/diplome.component';
-import { AutresComponent } from './pages/autres/autres.component';
+import { NosChequesComponent } from './pages/nos-cheques/nos-cheques.component';
 import { AssuranceComponent } from './pages/assurance/assurance.component';
 import { PartenaireComponent } from './pages/partenaire/partenaire.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'laboratoire', component: LaboratoireComponent, canActivate: [AuthGuard] },
   { path: 'administration', component: AdministrationComponent, canActivate: [AuthGuard] },
   { path: 'assurance', component: AssuranceComponent, canActivate: [AuthGuard] },
-  { path: 'autres', component: AutresComponent, canActivate: [AuthGuard] },
+  { path: 'nos-cheques', component: NosChequesComponent, canActivate: [AuthGuard] },
   { path: 'avis-imposition', component: AvisImpositionComponent, canActivate: [AuthGuard] },
   { path: 'mes-documents', component: MesDocumentsComponent, canActivate: [AuthGuard] },
   { path: 'diplome', component: DiplomeComponent, canActivate: [AuthGuard] },
