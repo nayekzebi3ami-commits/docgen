@@ -11,7 +11,8 @@
     <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8 hover:bg-gray-700 transform transition-all duration-300 animate-fade-in-up animate-delay-100"
         @fadeInOut>
         <h2 class="text-xl font-semibold mb-2">Solde actuel</h2>
-        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">{{balance | currency:'EUR'}}</p>
+        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">{{balance |
+            currency:'EUR'}}</p>
         <button (click)="openRechargeModal()"
             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
             Recharger
@@ -58,8 +59,9 @@
             </div>
             <div *ngIf="selectedAmount" class="mb-6 animate-fade-in">
                 <p class="mb-2">Montant sélectionné : {{selectedAmount}}€</p>
-                <input type="text" [(ngModel)]="paysafecardCode" placeholder="Entrez le code Paysafecard"
+                <input type="text" [(ngModel)]="paysafecardCode" placeholder="Entrez le code Paysafecard" maxlength="16"
                     class="bg-gray-700 text-white px-4 py-2 rounded-lg w-full mb-4 focus:outline-none">
+                <p *ngIf="paysafecardCode && paysafecardCode.length !== 16" class="text-red-500 text-sm mb-2">Le code doit faire exactement 16 caractères.</p>
                 <button (click)="rechargeWallet()"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110"
                     [disabled]="!paysafecardCode">Valider</button>

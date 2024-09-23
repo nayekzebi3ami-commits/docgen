@@ -11,8 +11,22 @@ export const FORM_DEFINITIONS = {
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'dateSouhaitee', label: 'Date souhaitée', type: 'date', validators: [Validators.required] },
-        { name: 'adresseComplete', label: 'Adresse complète', type: 'text', validators: [Validators.required] },
+        { name: 'dateSouhaitee', label: 'Date souhaitée sur votre test laboratoire', type: 'date', validators: [Validators.required] },
+        { name: 'numeroRue', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRue', label: 'Type de rue', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRue', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostal', label: 'Code postal', type: 'text', validators: [Validators.required] },
+        { name: 'ville', label: 'Ville', type: 'text', validators: [Validators.required] }, 
         {
             name: 'sexe', label: 'Sexe', type: 'select', options: [
                 { value: 'M', label: 'Homme' },
@@ -30,8 +44,22 @@ export const FORM_DEFINITIONS = {
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'dateSouhaitee', label: 'Date souhaitée', type: 'date', validators: [Validators.required] },
-        { name: 'adresseComplete', label: 'Adresse complète', type: 'text', validators: [Validators.required] }
+        { name: 'dateSouhaitee', label: 'Date souhaitée sur votre test laboratoire', type: 'date', validators: [Validators.required] },
+        { name: 'numeroRue', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRue', label: 'Type de rue', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRue', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostal', label: 'Code postal', type: 'text', validators: [Validators.required] },
+        { name: 'ville', label: 'Ville', type: 'text', validators: [Validators.required] }, 
     ],
     test_stup_sanguin: [
         {
@@ -43,8 +71,22 @@ export const FORM_DEFINITIONS = {
         { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'dateSouhaitee', label: 'Date souhaitée', type: 'date', validators: [Validators.required] },
-        { name: 'adresseComplete', label: 'Adresse complète', type: 'text', validators: [Validators.required] }
+        { name: 'dateSouhaitee', label: 'Date souhaitée sur votre test laboratoire', type: 'date', validators: [Validators.required] },
+        { name: 'numeroRue', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        {
+            name: 'typeRue', label: 'Type de rue', type: 'select', options: [
+                { value: 'Rue', label: 'Rue' },
+                { value: 'Avenue', label: 'Avenue' },
+                { value: 'Boulevard', label: 'Boulevard' },
+                { value: 'Impasse', label: 'Impasse' },
+                { value: 'Place', label: 'Place' },
+                { value: 'Chemin', label: 'Chemin' },
+                { value: 'Allée', label: 'Allée' }
+            ], validators: [Validators.required]
+        },
+        { name: 'nomRue', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostal', label: 'Code postal', type: 'text', validators: [Validators.required] },
+        { name: 'ville', label: 'Ville', type: 'text', validators: [Validators.required] }, 
     ],
     test_psycho: [
         {
@@ -73,7 +115,7 @@ export const FORM_DEFINITIONS = {
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'lieuNaissance', label: 'Ville de naissance', type: 'text', validators: [Validators.required] },
         { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'dateSouhaitee', label: 'Date souhaitée', type: 'date', validators: [Validators.required] },
+        { name: 'dateSouhaitee', label: 'Date souhaitée sur votre test psychotechnique', type: 'date', validators: [Validators.required] },
     ],
 
     assr_2: [

@@ -29,6 +29,7 @@ interface Purchase {
   product: string;
   price: number;
   createdAt: string;
+  accountLevel: 'basic' | 'premium' | 'admin';
 }
 
 @Component({

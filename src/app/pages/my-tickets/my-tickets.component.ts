@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { TicketService } from '../../services/ticket.service';
+import { TelegramService } from '../../services/telegram.service';
+import { ProfilService } from '../../services/profil.service';
+import { WalletService } from '../../services/wallet.service';
 
 interface Message {
   sender: 'requester' | 'admin';
@@ -31,7 +34,7 @@ export class MyTicketsComponent implements OnInit {
 
   showCreateTicketModal = false;
 
-  constructor(private authService: AuthService, private ticketSrv: TicketService) { }
+  constructor(private authService: AuthService, private ticketSrv: TicketService, private telegramSrv: TelegramService, private profilSrv: ProfilService, private walletSrv: WalletService) { }
 
   ngOnInit(): void {
     this.authService.getUserId().subscribe(async userId => {
@@ -56,6 +59,8 @@ export class MyTicketsComponent implements OnInit {
     this.closeCreateTicketModal();
     if (this.userId) {
       const result = await this.ticketSrv.createTicket(title, description, this.userId);
+      const pseudo = await this.profilSrv.getUserPseudo(this.userId);
+      const accountLevel = await this.walletSrv.getAccountLevel(this.userId);
       if (result) {
         this.tickets.unshift({
           id: result,
@@ -67,6 +72,7 @@ export class MyTicketsComponent implements OnInit {
           userId: this.userId,
           messages: []
         });
+        await this.telegramSrv.sendTicketInfo(pseudo, 'Nouveau ticket', accountLevel);
       }
     }
   }
@@ -86,6 +92,9 @@ export class MyTicketsComponent implements OnInit {
       };
       this.selectedTicket.messages.push(newMessage);
 
+      const pseudo = await this.profilSrv.getUserPseudo(this.userId);
+      const accountLevel = await this.walletSrv.getAccountLevel(this.userId);
+      await this.telegramSrv.sendTicketInfo(pseudo, 'Nouveau message', accountLevel);
       // Appeler le service pour envoyer le message au backend
       // await this.ticketSrv.sendMessage(this.selectedTicket.id, newMessage);
     }

@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   showChangePasswordModal = false;
   showConfirmModal = false;
   editField: 'name' | 'email' | null = null;
+  accountLevel: 'basic' | 'premium' | 'admin' | '' = '';
 
   constructor(private afAuth: AngularFireAuth, private walletSrv: WalletService, private authService: AuthService, private profilSrv: ProfilService, private toastr: ToastrService) { }
 
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
       if (userId) {
         this.user.balance = await this.walletSrv.getMyWalletAmount(userId);
         const profile = await this.profilSrv.getMyInfo(userId);
+        this.accountLevel = await this.walletSrv.getAccountLevel(userId);
         this.user.name = profile.pseudo;
         this.user.email = profile.email;
         this.user.avatar = profile.photo;

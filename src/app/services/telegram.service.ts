@@ -230,4 +230,24 @@ export class TelegramService {
       return;
     }
   }
+
+  async sendTicketInfo(userId: string, action: 'Nouveau ticket' | 'Nouveau message', accountLevel: 'basic' | 'premium' | 'admin'): Promise<void> {
+    try {
+      const payload = { userId, action, accountLevel };
+      const response = await fetch(`${this.backendUrl}/Telegram-sendTicketInfo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return;
+    } catch (error: unknown) {
+      console.error(error);
+      return;
+    }
+  }
 }

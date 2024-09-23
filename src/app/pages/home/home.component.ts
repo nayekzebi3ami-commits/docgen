@@ -12,7 +12,7 @@ import { ProfilService } from '../../services/profil.service';
 export class HomeComponent implements OnInit {
   balance: number = 0;
   pseudo: string = '';
-
+  accountLevel: 'basic' | 'premium' | 'admin' | '' = '';
   services = [
     { name: 'Laboratoire', description: 'Générer des résultats de tests de laboratoire', image: 'assets/labo.png', route: 'laboratoire', enabled: true },
     { name: 'Devenir Partenaire', description: 'Générer des contrats de partenariat', image: 'assets/partenaire.png', route: 'partenaire', enabled: true },
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     this.authService.getUserId().subscribe(async userId => {
       if (userId) {
         this.balance = await this.walletSrv.getMyWalletAmount(userId);
+        this.accountLevel = await this.walletSrv.getAccountLevel(userId);
         const profil = await this.profilSrv.getMyInfo(userId);
         this.pseudo = profil.pseudo;
       }

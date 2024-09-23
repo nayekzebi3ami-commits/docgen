@@ -9,6 +9,15 @@
     </div>
 
     <div class="max-w-2xl mx-auto bg-gray-800 rounded-lg shadow-xl p-8 animate-fade-in-up animate-delay-100">
+        <div class="flex justify-center mb-4 animate-fade-in-down">
+            <span class="px-3 py-1 text-sm font-semibold rounded-full" [ngClass]="{
+                'bg-gray-600 text-gray-200': accountLevel === 'basic',
+                'bg-purple-600 text-purple-100': accountLevel === 'premium',
+                'bg-red-600 text-red-100': accountLevel === 'admin'
+            }">
+                {{accountLevel | titlecase}}
+            </span>
+        </div>
         <div class="flex flex-col md:flex-row items-center md:space-x-8 mb-8">
             <div class="relative mb-4 md:mb-0 animate-fade-in-left animate-delay-200">
                 <img [src]="user.avatar || '/assets/avatar.png'" alt="Avatar"

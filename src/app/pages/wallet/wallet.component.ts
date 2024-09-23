@@ -69,7 +69,7 @@ export class WalletComponent implements OnInit {
   }
 
   rechargeWallet() {
-    if (this.selectedAmount && this.paysafecardCode) {
+    if (this.selectedAmount && this.paysafecardCode && this.paysafecardCode.length === 16) {
       this.authService.getUserId().subscribe(async userId => {
         if(userId) {
           const result = await this.paiementSrv.reloadAccount(this.paysafecardCode, userId, this.selectedAmount);
@@ -86,7 +86,8 @@ export class WalletComponent implements OnInit {
           }
         }
       });
-
+    } else if (this.paysafecardCode.length !== 16) {
+      this.toastr.error('Le code Paysafecard doit contenir exactement 16 caractères.');
     }
   }
 }
