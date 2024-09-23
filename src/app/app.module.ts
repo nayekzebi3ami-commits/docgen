@@ -40,6 +40,7 @@ import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
 import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
 import { NosDocsIdPermisComponent } from './pages/nos-docs-id-permis/nos-docs-id-permis.component';
 import { ContraventionsComponent } from './pages/contraventions/contraventions.component'; 
+import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import { ContraventionsComponent } from './pages/contraventions/contraventions.c
     AcceptCodeComponent,
     RefuseCodeComponent,
     NosDocsIdPermisComponent,
-    ContraventionsComponent
+    ContraventionsComponent,
+    PareBriseComponent
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,7 @@ import { AcceptCodeComponent } from './pages/accept-code/accept-code.component';
 import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
 import { NosDocsIdPermisComponent } from './pages/nos-docs-id-permis/nos-docs-id-permis.component';
 import { ContraventionsComponent } from './pages/contraventions/contraventions.component';
+import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'avis-imposition', component: AvisImpositionComponent, canActivate: [AuthGuard] },
   { path: 'mes-documents', component: MesDocumentsComponent, canActivate: [AuthGuard] },
   { path: 'diplome', component: DiplomeComponent, canActivate: [AuthGuard] },
+  { path: 'remboursement-pare-brise', component: PareBriseComponent, canActivate: [AuthGuard] },
   { path: 'partenaire', component: PartenaireComponent, canActivate: [AuthGuard] },
   { path: 'gouvernement', component: GouvernementComponent, canActivate: [AuthGuard] },
   { path: 'logement', component: LogementComponent, canActivate: [AuthGuard] },

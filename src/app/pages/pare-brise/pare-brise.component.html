@@ -1,16 +1,13 @@
 <div class="min-h-screen bg-gray-900 text-white p-6">
     <div class="flex items-center justify-center mb-8">
-        <i class="fas fa-file-alt text-3xl text-blue-400 mr-2"></i>
-        <h1 class="text-4xl font-bold text-blue-400">Justificatif de domicile</h1>
+        <i class="fas fa-car-crash text-3xl text-blue-400 mr-2"></i>
+        <h1 class="text-4xl font-bold text-blue-400">Remboursement pare brise</h1>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <div *ngFor="let product of products"
-            class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 relative">
+            class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
             <img [src]="product.image" [alt]="product.title" class="w-full h-48 object-cover">
-            <div *ngIf="!product.enabled" class="absolute top-2 right-2 bg-red-500 text-black text-xs font-bold px-2 py-1 rounded-full">
-                Bientôt disponible
-            </div>
             <div class="p-4">
                 <h2 class="text-xl font-semibold mb-2">{{ product.title }}</h2>
                 <p class="text-blue-400 text-2xl font-bold mb-4">{{ product.price | currency:'EUR' }}</p>

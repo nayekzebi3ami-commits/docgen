@@ -50,6 +50,7 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Passeport', form: 'passeport' },
     { title: 'Visa', form: 'visa' },
     { title: 'Contravention', form: 'amende' },
+    { title: 'Remboursement pare brise', form: 'pare_brise' },
   ]
 
   couponCode: string = '';
