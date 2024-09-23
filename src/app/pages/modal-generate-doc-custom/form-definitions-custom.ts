@@ -571,7 +571,6 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'numeroContravention', label: 'Numéro de contravention', type: 'text', validators: [Validators.required] },
         { name: 'nomPrenomContravention', label: 'Nom prénom contravention', type: 'text', validators: [Validators.required] },
         { name: 'dateContravention', label: 'Date contravention', type: 'date', validators: [Validators.required] },
-        { name: 'heureContravention', label: 'Heure contravention', type: 'time', validators: [Validators.required] },
     ],
     pare_brise: [
         {
