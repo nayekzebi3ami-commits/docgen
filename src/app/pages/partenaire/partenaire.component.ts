@@ -14,9 +14,9 @@ interface Product {
 })
 export class PartenaireComponent {
   products: Product[] = [
-    { id: 1, title: 'Devenir partenaire (1 mois)', price: 350, image: 'assets/product.jpg' },
-    { id: 2, title: 'Devenir partenaire (3 mois)', price: 900, image: 'assets/product.jpg' },
-    { id: 3, title: 'Devenir partenaire (6 mois)', price: 1500, image: 'assets/product.jpg' }
+    { id: 1, title: 'Devenir partenaire (1 mois)', price: 350, image: 'assets/1-month.jpg' },
+    { id: 2, title: 'Devenir partenaire (3 mois)', price: 900, image: 'assets/3-month.jpg' },
+    { id: 3, title: 'Devenir partenaire (6 mois)', price: 1500, image: 'assets/6-month.jpg' }
   ];
 
   selectedProduct: Product | null = null;

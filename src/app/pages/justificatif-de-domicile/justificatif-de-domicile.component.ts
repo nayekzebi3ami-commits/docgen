@@ -16,10 +16,10 @@ interface Product {
 })
 export class JustificatifDeDomicileComponent {
   products: Product[] = [
-    { id: 1, title: 'Facture SFR', price: 100, image: 'assets/product.jpg', enabled: true },
-    { id: 2, title: 'Facture EDF', price: 100, image: 'assets/product.jpg', enabled: false },
-    { id: 3, title: 'Facture ORANGE', price: 100, image: 'assets/product.jpg', enabled: false },
-    { id: 4, title: 'Quittance de loyer', price: 100, image: 'assets/product.jpg', enabled: false },
+    { id: 1, title: 'Facture SFR', price: 100, image: 'assets/sfr.jpg', enabled: true },
+    { id: 2, title: 'Facture EDF', price: 100, image: 'assets/edf.jpg', enabled: false },
+    { id: 3, title: 'Facture ORANGE', price: 100, image: 'assets/orange.jpg', enabled: false },
+    { id: 4, title: 'Quittance de loyer', price: 100, image: 'assets/loyer.jpg', enabled: false },
   ];
 
   selectedProduct: Product | null = null;

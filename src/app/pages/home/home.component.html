@@ -1,52 +1,116 @@
 <div class="w-full min-h-screen bg-gray-900 text-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <div class="flex flex-col sm:flex-row justify-between sm:justify-center items-center mb-4 text-lg">
-            <div class="text-center animate-fade-in w-full sm:w-1/2 mb-4 sm:mb-0">
-                <p
-                    class="text-2xl font-semibold mb-2 text-blue-400 hover:text-blue-300 transition-colors duration-300 ease-in-out flex items-center justify-center">
-                    <i class="fas fa-user-astronaut mr-2"></i>
-                    Bienvenue <span class="animate-pulse">&nbsp;{{pseudo}} </span> !
-                    <span class="px-3 py-1 text-sm font-semibold rounded-full ml-2 flex items-center" [ngClass]="{
-                        'bg-gray-600 text-gray-200': accountLevel === 'basic',
-                        'bg-purple-600 text-purple-100': accountLevel === 'premium',
-                        'bg-red-600 text-red-100': accountLevel === 'admin'
-                    }">
-                        {{accountLevel | titlecase}}
-                    </span>
-                </p>
+        <div class="flex flex-col sm:flex-row justify-between sm:justify-center items-center mb-4 text-lg gap-4">
+            <div class="text-center animate-fade-in w-full sm:w-1/2 transform hover:scale-105 transition-all duration-300"
+                style="height: 140px;">
+                <div
+                    class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 shadow-lg hover:shadow-blue-500/20 h-full flex flex-col justify-center">
+                    <p
+                        class="text-2xl font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300 ease-in-out flex items-center justify-center">
+                        <i class="fas fa-user-astronaut mr-2"></i>
+                        Bienvenue <span class="animate-pulse">   {{  pseudo}} </span> !
+                        <span class="px-3 py-1 text-sm font-semibold rounded-full ml-2 flex items-center" [ngClass]="{
+                            'bg-gray-600 text-gray-200': accountLevel === 'basic',
+                            'bg-purple-600 text-purple-100': accountLevel === 'premium',
+                            'bg-red-600 text-red-100': accountLevel === 'admin'
+                        }">
+                            {{accountLevel | titlecase}}
+                        </span>
+                    </p>
+                </div>
             </div>
-            <div class="text-center animate-fade-in w-full sm:w-1/2">
-                <p class="text-2xl text-green-400 hover:text-green-300 transition-colors duration-300 ease-in-out">
-                    <i class="fas fa-wallet mr-2"></i>
-                    Solde disponible : <span class="animate-bounce">{{balance}}€</span>
-                </p>
+            <div
+                class="text-center animate-fade-in w-full sm:w-1/2 transform hover:scale-105 transition-all duration-300">
+                <div
+                    class="bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-6 rounded-xl backdrop-blur-sm border border-green-500/20 shadow-lg hover:shadow-green-500/20">
+                    <p
+                        class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-400 hover:from-green-300 hover:to-emerald-300 transition-all duration-300">
+                        <i class="fas fa-wallet mr-3 animate-pulse"></i>
+                        <span class="tracking-wide">Solde disponible :</span>
+                    </p>
+                    <div class="mt-3 text-4xl font-extrabold">
+                        <span
+                            class="animate-float bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">{{balance}}€</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="w-full mb-8">
-            <img src="assets/petit-filou.png" alt="Petit Filou Mobile App" class="w-full object-cover rounded-lg"
-                style="height: 300px;">
+        <div class="w-full mb-8 grid grid-cols-4 gap-4" style="height: 200px;">
+            <div
+                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-blue-500 mb-3 flex items-center justify-center"
+                    style="transform: scale(2); height: 40px; width: 40px;">description</mat-icon>
+                <h3 class="text-xl font-bold text-white mb-2">+2000</h3>
+                <p class="text-gray-300 text-center">Documents générés</p>
+            </div>
+            <div
+                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-green-500 mb-3 flex items-center justify-center"
+                    style="transform: scale(2); height: 40px; width: 40px;">home</mat-icon>
+                <h3 class="text-xl font-bold text-white mb-2">100%</h3>
+                <p class="text-gray-300 text-center">Dossiers logements acceptés</p>
+            </div>
+            <div
+                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-yellow-500 mb-3 flex items-center justify-center"
+                    style="transform: scale(2); height: 40px; width: 40px;">support_agent</mat-icon>
+                <h3 class="text-xl font-bold text-white mb-2">20min</h3>
+                <p class="text-gray-300 text-center">SAV réactif</p>
+            </div>
+            <div
+                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-purple-500 mb-3 flex items-center justify-center"
+                    style="transform: scale(2); height: 40px; width: 40px;">verified</mat-icon>
+                <h3 class="text-xl font-bold text-white mb-2">99.9%</h3>
+                <p class="text-gray-300 text-center">Taux de satisfaction</p>
+            </div>
         </div>
-
-        <div class="bg-gray-800 rounded-lg shadow-md p-6 mb-12">
-            <p class="text-gray-300 text-md sm:text-xl">
-                Découvrez notre application révolutionnaire, conçue spécialement pour vous, nos astucieux petits
-                filous🦊!<br>
-                Générez en un instant des documents administratifs 📄 100% valides ✅ et antidatés 📅, 24h/24 et
-                7j/7!<br>
-                🕒 Simplifiez votre vie et gagnez un temps précieux grâce à nos services ultra performants et
-                entièrement automatisés 🤖.<br>
-                Ne laissez plus la paperasse vous freiner, optez pour la solution
-                intelligente qui va booster votre productivité!<br>
-                🚀 Commencez dès maintenant et découvrez la liberté
-                administrative à portée de clic! 💼✨
-            </p>
+        <div class="flex flex-row gap-4 justify-between items-stretch w-full">
+            <div
+                class="bg-gray-800 rounded-lg p-8 mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700 w-1/2">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <mat-icon class="mr-2">payments</mat-icon>
+                    Moyens de paiement acceptés
+                </h3>
+                <div class="flex flex-col space-y-4">
+                    <div class="flex items-center text-gray-300">
+                        <mat-icon class="text-blue-500 mr-2">currency_bitcoin</mat-icon>
+                        <span>Cryptomonnaies</span>
+                    </div>
+                    <div class="flex items-center text-gray-300">
+                        <mat-icon class="text-green-500 mr-2">credit_card</mat-icon>
+                        <span>Paysafecard</span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-gray-800 rounded-lg p-8 mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700 w-1/2">
+                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
+                    <mat-icon class="mr-2">warning</mat-icon>
+                    Pour info, 2% des bénéfices sont reversés aux frères enfermés
+                </h3>
+                <div class="flex flex-col space-y-4">
+                    <div class="flex items-center text-gray-300">
+                        <mat-icon class="text-blue-500 mr-2">euro</mat-icon>
+                        <span>Pécule accumulé :</span>
+                    </div>
+                    <div class="flex items-center text-gray-300">
+                        <mat-icon class="text-green-500 mr-2">credit_card</mat-icon>
+                        <span>1250€</span>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-400 text-right mt-4">
+                    <mat-icon class="text-yellow-500 mt-2"
+                        style="font-size: 16px; height: 16px; width: 16px;">star</mat-icon>
+                    Le pécule est distibué sur nos réseaux sociaux tous les mois
+                </div>
+            </div>
         </div>
-
         <h2 class="text-3xl font-semibold mb-6 text-center">Nos Services 📁</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div *ngFor="let service of services"
-                class="bg-gray-800 hover:bg-gray-700 duration-200 rounded-lg shadow-md overflow-hidden relative">
+                class="bg-gray-800 hover:bg-gray-700 duration-200 rounded-lg shadow-md overflow-hidden relative border border-gray-700">
                 <img [src]="service.image" [alt]="service.name" class="w-full h-48 object-cover">
                 <div *ngIf="!service.enabled"
                     class="absolute top-2 right-2 bg-red-500 text-black text-xs font-bold px-2 py-1 rounded-full">

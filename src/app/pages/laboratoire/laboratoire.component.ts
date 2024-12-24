@@ -14,10 +14,10 @@ interface Product {
 })
 export class LaboratoireComponent {
   products: Product[] = [
-    { id: 1, title: 'Test alcolémie', price: 100, image: 'assets/product.jpg' },
-    { id: 2, title: 'Test stupéfiant urinaire', price: 100, image: 'assets/product.jpg' },
-    { id: 3, title: 'Test stupéfiant sanguin', price: 100, image: 'assets/product.jpg' },
-    { id: 4, title: 'Tests psychotechniques', price: 100, image: 'assets/product.jpg' },
+    { id: 1, title: 'Test alcolémie', price: 100, image: 'assets/alco.jpg' },
+    { id: 2, title: 'Test stupéfiant urinaire', price: 100, image: 'assets/urine.jpg' },
+    { id: 3, title: 'Test stupéfiant sanguin', price: 100, image: 'assets/sanguin.jpg' },
+    { id: 4, title: 'Tests psychotechniques', price: 100, image: 'assets/psycho.jpg' },
   ];
 
   selectedProduct: Product | null = null;

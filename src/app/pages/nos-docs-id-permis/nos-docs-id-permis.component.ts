@@ -14,10 +14,10 @@ interface Product {
 })
 export class NosDocsIdPermisComponent {
   products: Product[] = [
-    { id: 1, title: 'Carte d\'identité', price: 1500, image: 'assets/product.jpg' },
-    { id: 2, title: 'Permis', price: 1500, image: 'assets/product.jpg' },
-    { id: 3, title: 'Passeport', price: 3500, image: 'assets/product.jpg' },
-    { id: 4, title: 'Visa', price: 3500, image: 'assets/product.jpg' },
+    { id: 1, title: 'Carte d\'identité', price: 1500, image: 'assets/id.jpg' },
+    { id: 2, title: 'Permis', price: 1500, image: 'assets/permis.jpg' },
+    { id: 3, title: 'Passeport', price: 3500, image: 'assets/passeport.jpg' },
+    { id: 4, title: 'Visa', price: 3500, image: 'assets/visa.jpg' },
   ];
 
   selectedProduct: Product | null = null;

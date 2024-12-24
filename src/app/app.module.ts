@@ -41,6 +41,7 @@ import { RefuseCodeComponent } from './pages/refuse-code/refuse-code.component';
 import { NosDocsIdPermisComponent } from './pages/nos-docs-id-permis/nos-docs-id-permis.component';
 import { ContraventionsComponent } from './pages/contraventions/contraventions.component'; 
 import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +80,7 @@ import { PareBriseComponent } from './pages/pare-brise/pare-brise.component';
     AppRoutingModule,
     MatCardModule,
     MatToolbarModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({

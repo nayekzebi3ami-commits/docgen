@@ -14,10 +14,10 @@ interface Product {
 })
 export class NosChequesComponent {
   products: Product[] = [
-    { id: 1, title: 'Chèque bancaire (x3)', price: 500, image: 'assets/product.jpg' },
-    { id: 2, title: 'Chèque pro (x3)', price: 700, image: 'assets/product.jpg' },
-    { id: 3, title: 'Chèque super pro (x1)', price: 800, image: 'assets/product.jpg' },
-    { id: 4, title: 'Chèque de banque (x1)', price: 1000, image: 'assets/product.jpg' },
+    { id: 1, title: 'Chèque de banque (x1)', price: 1000, image: 'assets/bank.jpg' },
+    { id: 2, title: 'Chèque bancaire (x3)', price: 500, image: 'assets/bank.jpg' },
+    { id: 3, title: 'Chèque pro (x3)', price: 700, image: 'assets/pro.jpg' },
+    { id: 4, title: 'Chèque super pro (x1)', price: 800, image: 'assets/super-pro.jpg' },
   ];
 
   selectedProduct: Product | null = null;

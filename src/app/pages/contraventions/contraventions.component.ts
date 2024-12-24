@@ -15,7 +15,7 @@ interface Product {
 export class ContraventionsComponent {
 
   products: Product[] = [
-    { id: 1, title: 'Contravention', price: 50, image: 'assets/product.jpg' },
+    { id: 1, title: 'Contravention', price: 50, image: 'assets/contravention.jpg' },
   ];
 
   selectedProduct: Product | null = null;

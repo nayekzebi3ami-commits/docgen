@@ -14,17 +14,17 @@ export class HomeComponent implements OnInit {
   pseudo: string = '';
   accountLevel: 'basic' | 'premium' | 'admin' | '' = '';
   services = [
-    { name: 'Laboratoire', description: 'Générer des résultats de tests de laboratoire', image: 'assets/labo.png', route: 'laboratoire', enabled: true },
-    { name: 'Devenir Partenaire', description: 'Générer des contrats de partenariat', image: 'assets/partenaire.png', route: 'partenaire', enabled: true },
-    { name: 'Gouvernement', description: 'Générer des documents administratifs officiels', image: 'assets/partenaire.png', route: 'gouvernement', enabled: true },
-    { name: 'Logement', description: 'Générer des contrats de location et documents immobiliers', image: 'assets/partenaire.png', route: 'logement', enabled: true },
-    { name: 'Justificatif de domicile ', description: 'Générer des justificatifs de domicile', image: 'assets/partenaire.png', route: 'justificatif-de-domicile', enabled: true },
-    { name: 'Nos chèques bancaires (Particulier, Professionnel)', description: 'Commander des chèques de banque', image: 'assets/partenaire.png', route: 'nos-cheques', enabled: true },
-    { name: 'Documents d\'identité et permis', description: 'Commander un document d\'identité ou un permis', image: 'assets/partenaire.png', route: 'nos-docs-id-permis', enabled: true },
-    { name: 'Contravention', description: 'Faire sauter une contravention', image: 'assets/partenaire.png', route: 'contraventions', enabled: true },
-    { name: 'Diplômes', description: 'Générer des diplômes et certificats académiques', image: 'assets/partenaire.png', route: 'diplome', enabled: false },
-    { name: 'Assurance', description: 'Générer des polices d\'assurance et attestations', image: 'assets/partenaire.png', route: 'assurance', enabled: false },
-    { name: 'Avis d\'imposition', description: 'Générer des avis d\'imposition et documents fiscaux', image: 'assets/partenaire.png', route: 'avis-imposition', enabled: false },
+    { name: 'Devenir Partenaire', description: 'Générer des contrats de partenariat', image: 'assets/partner.jpg', route: 'partenaire', enabled: true },
+    { name: 'Laboratoire', description: 'Générer des résultats de tests de laboratoire', image: 'assets/labo.jpg', route: 'laboratoire', enabled: true },
+    { name: 'Logement', description: 'Générer des contrats de location et documents immobiliers', image: 'assets/logement.jpg', route: 'logement', enabled: true },
+    { name: 'Contravention', description: 'Faire sauter une contravention', image: 'assets/contraventions.jpg', route: 'contraventions', enabled: true },
+    { name: 'Justificatif de domicile ', description: 'Générer des justificatifs de domicile', image: 'assets/jdd.jpg', route: 'justificatif-de-domicile', enabled: true },
+    { name: 'Documents d\'identité et permis', description: 'Commander un document d\'identité ou un permis', image: 'assets/cni.jpg', route: 'nos-docs-id-permis', enabled: true },
+    { name: 'Nos chèques bancaires (Particulier, Professionnel)', description: 'Commander des chèques de banque', image: 'assets/cheques.jpg', route: 'nos-cheques', enabled: true },
+    { name: 'Gouvernement', description: 'Générer des documents administratifs officiels', image: 'assets/gouv.jpg', route: 'gouvernement', enabled: true },
+    { name: 'Diplômes', description: 'Générer des diplômes et certificats académiques', image: 'assets/diplomes.jpg', route: 'diplome', enabled: false },
+    { name: 'Assurance', description: 'Générer des polices d\'assurance et attestations', image: 'assets/assu.jpg', route: 'assurance', enabled: false },
+    { name: 'Avis d\'imposition', description: 'Générer des avis d\'imposition et documents fiscaux', image: 'assets/impo.jpg', route: 'avis-imposition', enabled: false },
   ];
 
   constructor(private router: Router, private authService: AuthService, private walletSrv: WalletService, private profilSrv: ProfilService) { }

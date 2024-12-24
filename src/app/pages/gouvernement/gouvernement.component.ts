@@ -15,10 +15,10 @@ interface Product {
 })
 export class GouvernementComponent {
   products: Product[] = [
-    { id: 1, title: 'Journée d\'appel', price: 100, image: 'assets/product.jpg', enabled: true },
-    { id: 2, title: 'ASSR 2', price: 100, image: 'assets/product.jpg', enabled: true },
-    { id: 3, title: 'ASSR 1', price: 100, image: 'assets/product.jpg', enabled: false },
-    { id: 4, title: 'Attestation de recensement', price: 100, image: 'assets/product.jpg', enabled: false },
+    { id: 1, title: 'Journée d\'appel', price: 100, image: 'assets/japd.jpg', enabled: true },
+    { id: 2, title: 'ASSR 2', price: 100, image: 'assets/assr2.jpg', enabled: true },
+    { id: 3, title: 'ASSR 1', price: 100, image: 'assets/assr1.jpg', enabled: false },
+    { id: 4, title: 'Attestation de recensement', price: 100, image: 'assets/recensement.jpg', enabled: false },
   ];
 
   selectedProduct: Product | null = null;
