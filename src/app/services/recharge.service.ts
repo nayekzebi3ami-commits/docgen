@@ -24,7 +24,8 @@ export class RechargeService {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      return await response.json();
+      const result = await response.json();
+      return result.success;
     } catch (error: unknown) {
       console.error(error);
       return false;
