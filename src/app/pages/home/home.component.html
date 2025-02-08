@@ -1,19 +1,22 @@
 <div class="w-full min-h-screen bg-gray-900 text-gray-100">
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col sm:flex-row justify-between sm:justify-center items-center mb-4 text-lg gap-4">
-            <div class="text-center animate-fade-in w-full sm:w-1/2 transform hover:scale-105 transition-all duration-300"
-                style="height: 140px;">
+            <div
+                class="w-full md:w-4/5 lg:w-3/4 xl:w-1/2 mx-auto px-4 animate-fade-in transform hover:scale-105 transition-all duration-300">
                 <div
-                    class="bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 shadow-lg hover:shadow-blue-500/20 h-full flex flex-col justify-center">
+                    class="min-h-[140px] bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-4 sm:p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 shadow-lg hover:shadow-blue-500/20 flex flex-col justify-center">
                     <p
-                        class="text-2xl font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300 ease-in-out flex items-center justify-center">
-                        <i class="fas fa-user-astronaut mr-2"></i>
-                        Bienvenue <span class="animate-pulse">   {{  pseudo}} </span> !
-                        <span class="px-3 py-1 text-sm font-semibold rounded-full ml-2 flex items-center" [ngClass]="{
-                            'bg-gray-600 text-gray-200': accountLevel === 'basic',
-                            'bg-purple-600 text-purple-100': accountLevel === 'premium',
-                            'bg-red-600 text-red-100': accountLevel === 'admin'
-                        }">
+                        class="text-lg sm:text-xl md:text-2xl font-semibold text-blue-400 hover:text-blue-300 transition-colors duration-300 ease-in-out flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+                        <i class="fas fa-user-astronaut"></i>
+                        <span>Bienvenue</span>
+                        <span class="animate-pulse break-all">{{ pseudo }}</span>
+                        <span
+                            class="px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full flex items-center whitespace-nowrap"
+                            [ngClass]="{
+                                'bg-gray-600 text-gray-200': accountLevel === 'basic',
+                                'bg-purple-600 text-purple-100': accountLevel === 'premium',
+                                'bg-red-600 text-red-100': accountLevel === 'admin'
+                            }">
                             {{accountLevel | titlecase}}
                         </span>
                     </p>
@@ -35,74 +38,81 @@
                 </div>
             </div>
         </div>
-        <div class="w-full mb-8 grid grid-cols-4 gap-4" style="height: 200px;">
+        <div class="w-full mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div
-                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                <mat-icon class="text-blue-500 mb-3 flex items-center justify-center"
-                    style="transform: scale(2); height: 40px; width: 40px;">description</mat-icon>
-                <h3 class="text-xl font-bold text-white mb-2">+2000</h3>
-                <p class="text-gray-300 text-center">Documents générés</p>
+                class="min-h-[200px] bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-blue-500 mb-3 flex items-center justify-center text-4xl">
+                    description
+                </mat-icon>
+                <h3 class="text-lg sm:text-xl font-bold text-white mb-2">+2000</h3>
+                <p class="text-sm sm:text-base text-gray-300 text-center">Documents générés</p>
             </div>
+
             <div
-                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                <mat-icon class="text-green-500 mb-3 flex items-center justify-center"
-                    style="transform: scale(2); height: 40px; width: 40px;">home</mat-icon>
-                <h3 class="text-xl font-bold text-white mb-2">100%</h3>
-                <p class="text-gray-300 text-center">Dossiers logements acceptés</p>
+                class="min-h-[200px] bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-green-500 mb-3 flex items-center justify-center text-4xl">
+                    home
+                </mat-icon>
+                <h3 class="text-lg sm:text-xl font-bold text-white mb-2">100%</h3>
+                <p class="text-sm sm:text-base text-gray-300 text-center">Dossiers logements acceptés</p>
             </div>
+
             <div
-                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                <mat-icon class="text-yellow-500 mb-3 flex items-center justify-center"
-                    style="transform: scale(2); height: 40px; width: 40px;">support_agent</mat-icon>
-                <h3 class="text-xl font-bold text-white mb-2">20min</h3>
-                <p class="text-gray-300 text-center">SAV réactif</p>
+                class="min-h-[200px] bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-yellow-500 mb-3 flex items-center justify-center text-4xl">
+                    support_agent
+                </mat-icon>
+                <h3 class="text-lg sm:text-xl font-bold text-white mb-2">20min</h3>
+                <p class="text-sm sm:text-base text-gray-300 text-center">SAV réactif</p>
             </div>
+
             <div
-                class="bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
-                <mat-icon class="text-purple-500 mb-3 flex items-center justify-center"
-                    style="transform: scale(2); height: 40px; width: 40px;">verified</mat-icon>
-                <h3 class="text-xl font-bold text-white mb-2">99.9%</h3>
-                <p class="text-gray-300 text-center">Taux de satisfaction</p>
+                class="min-h-[200px] bg-gray-800 rounded-lg p-4 flex flex-col items-center justify-center hover:bg-gray-700 transition-all duration-300">
+                <mat-icon class="text-purple-500 mb-3 flex items-center justify-center text-4xl">
+                    verified
+                </mat-icon>
+                <h3 class="text-lg sm:text-xl font-bold text-white mb-2">99.9%</h3>
+                <p class="text-sm sm:text-base text-gray-300 text-center">Taux de satisfaction</p>
             </div>
         </div>
-        <div class="flex flex-row gap-4 justify-between items-stretch w-full">
+        <div class="flex flex-col lg:flex-row gap-4 w-full">
             <div
-                class="bg-gray-800 rounded-lg p-8 mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700 w-1/2">
-                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <mat-icon class="mr-2">payments</mat-icon>
-                    Moyens de paiement acceptés
+                class="w-full lg:w-1/2 bg-gray-800 rounded-lg p-4 sm:p-8 mb-4 lg:mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700">
+                <h3 class="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center flex-wrap gap-2">
+                    <mat-icon class="shrink-0">payments</mat-icon>
+                    <span>Moyens de paiement acceptés</span>
                 </h3>
                 <div class="flex flex-col space-y-4">
-                    <div class="flex items-center text-gray-300">
-                        <mat-icon class="text-blue-500 mr-2">currency_bitcoin</mat-icon>
+                    <div class="flex items-center text-gray-300 gap-2">
+                        <mat-icon class="text-blue-500 shrink-0">currency_bitcoin</mat-icon>
                         <span>Cryptomonnaies</span>
                     </div>
-                    <div class="flex items-center text-gray-300">
-                        <mat-icon class="text-green-500 mr-2">credit_card</mat-icon>
+                    <div class="flex items-center text-gray-300 gap-2">
+                        <mat-icon class="text-green-500 shrink-0">credit_card</mat-icon>
                         <span>Paysafecard</span>
                     </div>
                 </div>
             </div>
+
             <div
-                class="bg-gray-800 rounded-lg p-8 mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700 w-1/2">
-                <h3 class="text-xl font-semibold text-white mb-4 flex items-center">
-                    <mat-icon class="mr-2">warning</mat-icon>
-                    Pour info, 2% des bénéfices sont reversés aux frères enfermés
+                class="w-full lg:w-1/2 bg-gray-800 rounded-lg p-4 sm:p-8 mb-4 lg:mb-8 transform hover:scale-[1.01] transition-all duration-300 border border-gray-700">
+                <h3 class="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center flex-wrap gap-2">
+                    <mat-icon class="shrink-0">warning</mat-icon>
+                    <span>Pour info, 2% des bénéfices sont reversés aux frères enfermés</span>
                 </h3>
                 <div class="flex flex-col space-y-4">
-                    <div class="flex items-center text-gray-300">
-                        <mat-icon class="text-blue-500 mr-2">euro</mat-icon>
+                    <div class="flex items-center text-gray-300 gap-2">
+                        <mat-icon class="text-blue-500 shrink-0">euro</mat-icon>
                         <span>Pécule accumulé :</span>
                     </div>
-                    <div class="flex items-center text-gray-300">
-                        <mat-icon class="text-green-500 mr-2">credit_card</mat-icon>
+                    <div class="flex items-center text-gray-300 gap-2">
+                        <mat-icon class="text-green-500 shrink-0">credit_card</mat-icon>
                         <span>1250€</span>
                     </div>
                 </div>
-                <div class="text-xs text-gray-400 text-right mt-4">
-                    <mat-icon class="text-yellow-500 mt-2"
-                        style="font-size: 16px; height: 16px; width: 16px;">star</mat-icon>
-                    Le pécule est distibué sur nos réseaux sociaux tous les mois
+                <div class="text-xs text-gray-400 text-right mt-4 flex items-center justify-end gap-1">
+                    <mat-icon class="text-yellow-500 text-base">star</mat-icon>
+                    <span>Le pécule est distibué sur nos réseaux sociaux tous les mois</span>
                 </div>
             </div>
         </div>

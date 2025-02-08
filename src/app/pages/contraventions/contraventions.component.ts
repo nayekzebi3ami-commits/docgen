@@ -13,7 +13,7 @@ interface Product {
   styleUrl: './contraventions.component.scss'
 })
 export class ContraventionsComponent {
-
+  showInfoModal = false;
   products: Product[] = [
     { id: 1, title: 'Contravention', price: 50, image: 'assets/contravention.jpg' },
   ];

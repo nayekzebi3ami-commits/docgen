@@ -14,6 +14,7 @@ export class LoginComponent {
   password: string = '';
   username: string = ''; // Seulement utilisé pour l'inscription
   isLoginMode: boolean = true; // Mode login par défaut
+  isLoading: boolean = false; // Nouvelle variable pour l'état de chargement
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -26,28 +27,30 @@ export class LoginComponent {
 
   // Gérer la soumission du formulaire
   async onSubmit(form: NgForm) {
-    if (!form.valid) {
+
+    if (!form.valid || this.isLoading) { // Vérifier si déjà en chargement
       return;
     }
 
-    const email = this.email;
-    const password = this.password;
+    this.isLoading = true; // Activer l'état de chargement
 
-    if (this.isLoginMode) {
-      try {
-        await this.authService.login(email, password);
-        this.router.navigate(['/']); // Redirige après connexion réussie
-      } catch (error) {
-        console.error('Login error:', error);
+
+    try {
+      if (this.isLoginMode) {
+        await this.authService.login(this.email, this.password);
+        await this.router.navigate(['/']);
+      } else {
+        const success = await this.authService.register(this.email, this.password, this.username);
+        if (success) {
+          // L'utilisateur est déjà créé dans Firebase, on le connecte directement
+          await this.authService.login(this.email, this.password);
+          await this.router.navigate(['/']);
+        }
       }
-    } else {
-      const username = this.username;
-      try {
-        await this.authService.register(email, password, username);
-        this.router.navigate(['/login']); // Redirige après inscription réussie
-      } catch (error) {
-        console.error('Registration error:', error);
-      }
+    } catch (error) {
+      console.error('Auth error:', error);
+    } finally {
+      this.isLoading = false; // Désactiver l'état de chargement
     }
   }
 }

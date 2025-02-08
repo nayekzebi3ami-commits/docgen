@@ -11,9 +11,23 @@
                     class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
                     Annuler
                 </button>
-                <button (click)="confirmPurchase()"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
-                    Confirmer l'achat
+                <button (click)="confirmPurchase()" [disabled]="isConfirmingPurchase" [ngClass]="{
+                    'bg-blue-600 hover:bg-blue-700': !isConfirmingPurchase, 
+                    'bg-gray-500 cursor-not-allowed': isConfirmingPurchase
+                }"
+                    class="text-white font-bold py-2 px-4 rounded transition-colors duration-300 flex items-center justify-center">
+                    <span *ngIf="!isConfirmingPurchase">Confirmer l'achat</span>
+                    <span *ngIf="isConfirmingPurchase" class="flex items-center">
+                        <svg class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
+                        </svg>
+                        Chargement...
+                    </span>
                 </button>
             </div>
         </ng-container>
@@ -51,10 +65,24 @@
                     Annuler
                 </button>
                 <button (click)="confirmPurchase()"
-                    [disabled]="(discountedPrice !== null ? discountedPrice : product.price) > walletBalance"
-                    [ngClass]="{'bg-blue-600 hover:bg-blue-700': (discountedPrice !== null ? discountedPrice : product.price) <= walletBalance, 'bg-gray-500 cursor-not-allowed': (discountedPrice !== null ? discountedPrice : product.price) > walletBalance}"
-                    class="text-white font-bold py-2 px-4 rounded transition-colors duration-300">
-                    Confirmer l'achat
+                    [disabled]="isConfirmingPurchase || (discountedPrice !== null ? discountedPrice : product.price) > walletBalance"
+                    [ngClass]="{
+                    'bg-blue-600 hover:bg-blue-700': !isConfirmingPurchase && (discountedPrice !== null ? discountedPrice : product.price) <= walletBalance, 
+                    'bg-gray-500 cursor-not-allowed': isConfirmingPurchase || (discountedPrice !== null ? discountedPrice : product.price) > walletBalance
+                }"
+                    class="text-white font-bold py-2 px-4 rounded transition-colors duration-300 flex items-center justify-center">
+                    <span *ngIf="!isConfirmingPurchase">Confirmer l'achat</span>
+                    <span *ngIf="isConfirmingPurchase" class="flex items-center">
+                        <svg class="animate-spin h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                            </circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
+                        </svg>
+                        Chargement...
+                    </span>
                 </button>
             </div>
         </ng-template>
@@ -67,6 +95,7 @@
 </app-modal-generate-doc>
 
 <app-modal-generate-doc-custom *ngIf="showDataInputCustomModal" [formType]="formType" [formTitle]="product.title"
-    (formSubmit)="onFormSubmit($event)" (documentGenerated)="onDocumentGenerated()" [price]="product.price" (close)="onModalClose()">
+    (formSubmit)="onFormSubmit($event)" (documentGenerated)="onDocumentGenerated()" [price]="product.price"
+    (close)="onModalClose()">
     <!-- Capture de l'événement close -->
 </app-modal-generate-doc-custom>

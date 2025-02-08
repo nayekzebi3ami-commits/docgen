@@ -24,6 +24,9 @@ interface CouponMessage {
   styleUrl: './modal-paiement.component.scss'
 })
 export class ModalPaiementComponent implements OnInit {
+
+  isConfirmingPurchase: boolean = false;
+
   @Input() product!: Product;
   walletBalance: number = 0;
   @Output() close = new EventEmitter<void>();
@@ -83,6 +86,11 @@ export class ModalPaiementComponent implements OnInit {
   }
 
   confirmPurchase() {
+
+    if (this.isConfirmingPurchase) return;
+
+    this.isConfirmingPurchase = true
+
     const finalPrice = this.discountedPrice !== null ? this.discountedPrice : this.product.price;
     this.authService.getUserId().subscribe(async userId => {
       if (userId) {

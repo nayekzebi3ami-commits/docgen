@@ -3,8 +3,9 @@
         <i class="fas fa-ticket-alt text-3xl text-blue-400 mr-2"></i>
         <h1 class="text-4xl font-bold text-blue-400">Faites sauter une contravention</h1>
     </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Carte d'information -->
+
         <div *ngFor="let product of products"
             class="bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
             <img [src]="product.image" [alt]="product.title" class="w-full h-48 object-cover">
@@ -17,8 +18,24 @@
                 </button>
             </div>
         </div>
-    </div>
 
-    <app-modal-paiement *ngIf="showPaymentModal && selectedProduct" [product]="selectedProduct" (close)="closePaymentModal()" (purchase)="purchaseProduct()">
+        <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden h-full">
+            <div class="h-48 bg-blue-400 flex items-center justify-center">
+                <i class="fas fa-info-circle text-6xl text-white"></i>
+            </div>
+            <div class="p-4">
+                <div class="space-y-4">
+                    <p><span class="text-blue-400 font-bold">Important :</span> 50€ est un acompte, le prix sera régulé
+                        selon votre contravention (-50% + 10€ par point)</p>
+                    <p class="text-red-500 font-semibold">Il est préférable d'envoyer la contravention en photo à ce
+                        numéro sur Whatsapp : </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal de paiement -->
+    <app-modal-paiement *ngIf="showPaymentModal && selectedProduct" [product]="selectedProduct"
+        (close)="closePaymentModal()" (purchase)="purchaseProduct()">
     </app-modal-paiement>
 </div>
