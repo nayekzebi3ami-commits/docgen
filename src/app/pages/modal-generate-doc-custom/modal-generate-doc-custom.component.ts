@@ -37,6 +37,9 @@ export class ModalGenerateDocCustomComponent implements OnInit {
   ngOnInit() {
     this.loadFormFields();
     this.initForm();
+    this.dataForm.statusChanges.subscribe(status => {
+      console.log("Form Status:", status);
+    });
   }
 
   loadFormFields() {

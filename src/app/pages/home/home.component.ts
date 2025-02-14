@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
   balance: number = 0;
   pseudo: string = '';
   accountLevel: 'basic' | 'premium' | 'admin' | '' = '';
+  subscriptionEndDate: Date | null = null;
+
   services = [
-    { name: 'Devenir Partenaire', description: 'Générer des contrats de partenariat', image: 'assets/partner.jpg', route: 'partenaire', enabled: true },
+    { name: 'Devenir Partenaire', description: 'Cette fonction vous permet de générer des documents en illimité', image: 'assets/partner.jpg', route: 'partenaire', enabled: true },
     { name: 'Laboratoire', description: 'Générer des résultats de tests de laboratoire', image: 'assets/labo.jpg', route: 'laboratoire', enabled: true },
     { name: 'Logement', description: 'Générer des contrats de location et documents immobiliers', image: 'assets/logement.jpg', route: 'logement', enabled: true },
     { name: 'Contravention', description: 'Faire sauter une contravention', image: 'assets/contraventions.jpg', route: 'contraventions', enabled: true },
@@ -34,9 +36,16 @@ export class HomeComponent implements OnInit {
       if (userId) {
         this.balance = await this.walletSrv.getMyWalletAmount(userId);
         this.accountLevel = await this.walletSrv.getAccountLevel(userId);
+        this.subscriptionEndDate = await this.walletSrv.getSubscriptionEndDate(userId);
         const profil = await this.profilSrv.getMyInfo(userId);
         this.pseudo = profil.pseudo;
       }
     });
   }
+
+  getFormattedEndDate(): string {
+    if (!this.subscriptionEndDate) return "Aucune date d'abonnement trouvée.";
+    return `Votre abonnement se termine le ${this.subscriptionEndDate.toLocaleDateString()}`;
+  }
+
 }

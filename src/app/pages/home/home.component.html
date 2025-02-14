@@ -20,6 +20,9 @@
                             {{accountLevel | titlecase}}
                         </span>
                     </p>
+                    <p *ngIf="subscriptionEndDate" class="text-sm text-gray-400 text-center">
+                        {{ getFormattedEndDate() }}
+                    </p>
                 </div>
             </div>
             <div

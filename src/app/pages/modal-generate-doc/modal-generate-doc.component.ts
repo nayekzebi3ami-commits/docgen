@@ -31,20 +31,48 @@ export class ModalGenerateDocComponent implements OnInit {
   documentDownloaded = false;
   documentUrl: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private documentsService: DocumentsService) { }
-
-  ngOnInit() {
-    this.loadFormFields();
-    this.initForm();
+  constructor(private fb: FormBuilder, private authService: AuthService, private documentsService: DocumentsService) {
+    console.log("🛠️ Constructeur exécuté !");
   }
 
+  ngOnInit() {
+    console.log("🔎 Début de ngOnInit...");
+    this.loadFormFields();
+    this.initForm();  // Initialise le formulaire
+    Object.keys(this.dataForm.controls).forEach(field => {
+      const control = this.dataForm.get(field);
+      control?.statusChanges.subscribe(status => {
+        console.log(`🧐 Statut du champ '${field}' :`, status);
+        console.log(`🛑 Erreurs du champ '${field}' :`, control?.errors);
+      });
+    });
+    setTimeout(() => {
+      this.dataForm.updateValueAndValidity();
+      console.log("🔄 Formulaire forcé à se mettre à jour !");
+    });
+
+
+    // 🛠️ Ajout du debug pour voir les mises à jour du formulaire
+    this.dataForm.valueChanges.subscribe(values => {
+      console.log("🆕 Valeurs du formulaire mises à jour :", values);
+      console.log("🔄 Statut du formulaire :", this.dataForm.status);
+    });
+
+    this.dataForm.statusChanges.subscribe(status => {
+      console.log("Form Status Changed:", status);
+    });
+  }
+
+
+
   loadFormFields() {
-    if (this.formType in FORM_DEFINITIONS) {
-      this.formFields = FORM_DEFINITIONS[this.formType as keyof typeof FORM_DEFINITIONS] as FormField[];
-    } else {
+    if (!FORM_DEFINITIONS || !(this.formType in FORM_DEFINITIONS)) {
       console.error(`Form type "${this.formType}" not found in FORM_DEFINITIONS`);
       this.formFields = [];
+      return;
     }
+
+    this.formFields = FORM_DEFINITIONS[this.formType as keyof typeof FORM_DEFINITIONS] as FormField[];
   }
 
   initForm() {
@@ -112,10 +140,21 @@ export class ModalGenerateDocComponent implements OnInit {
   }
 
   downloadFile() {
+    console.log('Document URL:', this.documentUrl);
     if (this.documentUrl) {
       const link = document.createElement('a');
-      link.href = this.documentUrl;
-      link.target = '_blank';
+      fetch(this.documentUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'generated_document.pdf';  // Nom du fichier téléchargé
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        })
+        .catch(error => console.error('❌ Erreur lors du téléchargement du fichier :', error)); link.target = '_blank';
       link.download = 'generated_document.pdf';  // Nom du fichier téléchargé
       link.click();
 

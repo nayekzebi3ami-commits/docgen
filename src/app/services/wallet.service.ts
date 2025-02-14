@@ -131,4 +131,32 @@ export class WalletService {
       return false;
     }
   }
+
+  async getSubscriptionEndDate(userId: string): Promise<Date | null> {
+    try {
+      const payload = { userId };
+      const response = await fetch(`${this.backendUrl}/Wallet-getSubscriptionEndDate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const dateString = await response.json();
+
+      // Convertir la date en objet Date
+      const dateFin = new Date(dateString);
+      return isNaN(dateFin.getTime()) ? null : dateFin;
+    } catch (error: unknown) {
+      console.error(error);
+      return null;
+    }
+  }
+
+
 }

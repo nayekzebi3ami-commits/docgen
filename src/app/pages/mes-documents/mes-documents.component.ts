@@ -14,7 +14,7 @@ export class MesDocumentsComponent {
 
   ngOnInit(): void {
     this.authService.getUserId().subscribe(async userId => {
-      if(userId) {
+      if (userId) {
         this.documents = await this.documentsSrv.getMyDocuments(userId);
       }
     });
@@ -22,7 +22,7 @@ export class MesDocumentsComponent {
 
   downloadDocument(url: string): void {
     console.log(`Downloading document: ${url}`);
-  
+
     fetch(url)
       .then(response => {
         if (!response.ok) {
@@ -44,5 +44,5 @@ export class MesDocumentsComponent {
         console.error('Erreur lors du téléchargement :', error);
       });
   }
-  
+
 }

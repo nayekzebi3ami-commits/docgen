@@ -243,7 +243,7 @@ export const FORM_DEFINITIONS = {
         { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         { name: 'numeroLigne', label: 'Numéro de téléphone', type: 'text', validators: [Validators.required, Validators.pattern(/^\d{10}$/)] },
         { name: 'email', label: 'Adresse mail', type: 'text', validators: [Validators.required] },
-        { name: 'dateFacture', label: 'Date de la facture', type: 'date', validators: [Validators.required, Validators.pattern(/^\d{2}\/\d{2}\/\d{4}$/)] },
+        { name: 'dateFacture', label: 'Date de la facture', type: 'date', validators: [Validators.required] },
         { name: 'rueNum', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
         { name: 'rue', label: 'Nom de la rue', type: 'text', validators: [Validators.required] },
         { name: 'departement', label: 'Code postal', type: 'text', validators: [Validators.required] },
