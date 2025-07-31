@@ -33,6 +33,7 @@
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -44,6 +45,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -94,6 +96,7 @@
 .stack span:nth-child(odd) {
     --glitch-translate: 8px;
 }
+
 .stack span:nth-child(even) {
     --glitch-translate: -8px;
 }
@@ -106,10 +109,12 @@
             -2px 3px 0 #ff00de,
             2px -3px 0 #00e1ff;
     }
+
     60% {
         opacity: 0.5;
         transform: translateX(50%);
     }
+
     80% {
         transform: none;
         opacity: 1;
@@ -117,6 +122,7 @@
             2px -3px 0 #ff00de,
             -2px 3px 0 #00e1ff;
     }
+
     100% {
         text-shadow: none;
     }
@@ -129,14 +135,30 @@
             2px -3px 0 #00e1ff;
         transform: translate(var(--glitch-translate));
     }
+
     2% {
         text-shadow:
             2px -3px 0 #ff00de,
             -2px 3px 0 #00e1ff;
     }
+
     4%,
     100% {
         text-shadow: none;
         transform: none;
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }

@@ -27,6 +27,14 @@ export class HomeComponent implements OnInit {
     { name: 'Diplômes', description: 'Générer des diplômes et certificats académiques', image: 'assets/diplomes.jpg', route: 'diplome', enabled: false },
     { name: 'Assurance', description: 'Générer des polices d\'assurance et attestations', image: 'assets/assu.jpg', route: 'assurance', enabled: false },
     { name: 'Avis d\'imposition', description: 'Générer des avis d\'imposition et documents fiscaux', image: 'assets/impo.jpg', route: 'avis-imposition', enabled: false },
+    { name: 'CV', description: 'Générer un CV professionnel pour votre recherche d\'emploi', image: 'assets/1-month.jpg', route: 'cv', enabled: false },
+    { name: 'Lettre de motivation', description: 'Créer une lettre de motivation personnalisée', image: 'assets/1-month.jpg', route: 'lettre-motivation', enabled: false },
+    { name: 'RIB', description: 'Générer un Relevé d\'Identité Bancaire', image: 'assets/1-month.jpg', route: 'rib', enabled: false },
+    { name: 'Certificat médical', description: 'Obtenir un certificat médical pour vos besoins administratifs', image: 'assets/1-month.jpg', route: 'certificat-medical', enabled: false },
+    { name: 'Ordonnance médicale', description: 'Générer une ordonnance médicale', image: 'assets/1-month.jpg', route: 'ordonnance', enabled: false },
+    { name: 'Document de divorce', description: 'Obtenir un document de divorce pour vos démarches', image: 'assets/1-month.jpg', route: 'divorce', enabled: false },
+    { name: 'Acte de mariage', description: 'Générer un acte de mariage', image: 'assets/1-month.jpg', route: 'mariage', enabled: false },
+    { name: 'Permis étranger', description: 'Service de permis étranger (50€ pour les contraventions)', image: 'assets/1-month.jpg', route: 'permis-etranger', enabled: false },
   ];
 
   constructor(private router: Router, private authService: AuthService, private walletSrv: WalletService, private profilSrv: ProfilService) { }
@@ -44,8 +52,19 @@ export class HomeComponent implements OnInit {
   }
 
   getFormattedEndDate(): string {
-    if (!this.subscriptionEndDate) return "Aucune date d'abonnement trouvée.";
-    return `Votre abonnement se termine le ${this.subscriptionEndDate.toLocaleDateString()}`;
-  }
+    // Vérifie si l'utilisateur est abonné (premium ou admin)
+    if (!this.subscriptionEndDate || !['premium', 'admin'].includes(this.accountLevel)) {
+      return '';
+    }
 
+    // Calcul du temps restant
+    const now = new Date();
+    const timeLeft = this.subscriptionEndDate.getTime() - now.getTime();
+    const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+
+    // Emoji sablier
+    const hourglassEmoji = '⌛';
+
+    return `${hourglassEmoji} Votre abonnement se termine le ${this.subscriptionEndDate.toLocaleDateString()} (${daysLeft} jours restants)`;
+  }
 }

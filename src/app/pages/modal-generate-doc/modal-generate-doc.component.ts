@@ -5,11 +5,15 @@ import { AuthService } from '../../services/auth.service';
 import { DocumentsService } from '../../services/documents.service';
 
 interface FormField {
-  name: string;
+  name?: string;
   label: string;
-  type: 'text' | 'date' | 'select' | 'textarea' | 'number';
-  options?: { value: string; label: string }[];
-  validators: any[];
+  type: 'text' | 'date' | 'select' | 'textarea' | 'section-header';
+  options?: Array<{ value: string, label: string, template?: string }>;
+  validators?: Validators[];
+  uppercase?: boolean;
+  capitalize?: boolean;
+  getTemplate?: (value: string) => string;
+  transformValue?: (value: string) => string; // Ajout de cette propriété
 }
 
 @Component({
@@ -31,8 +35,19 @@ export class ModalGenerateDocComponent implements OnInit {
   documentDownloaded = false;
   documentUrl: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private documentsService: DocumentsService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private documentsService: DocumentsService
+  ) {
     console.log("🛠️ Constructeur exécuté !");
+  }
+
+  onInputChange(event: any, field: FormField) {
+    if (field.transformValue) {
+      const transformedValue = field.transformValue(event.target.value);
+      this.dataForm.get(field.name!)?.setValue(transformedValue, { emitEvent: false });
+    }
   }
 
   ngOnInit() {
@@ -76,9 +91,11 @@ export class ModalGenerateDocComponent implements OnInit {
   }
 
   initForm() {
-    const formGroup: { [key: string]: any } = {};
+    const formGroup: any = {};
     this.formFields.forEach(field => {
-      formGroup[field.name] = ['', field.validators];
+      if (field.type !== 'section-header' && field.name) {
+        formGroup[field.name] = ['', field.validators];
+      }
     });
     this.dataForm = this.fb.group(formGroup);
   }
@@ -117,6 +134,15 @@ export class ModalGenerateDocComponent implements OnInit {
                 break;
               case 'cdi_sncf':
                 generatedDocumentUrl = await this.documentsService.generateCdiSNCF(formData, userId);
+                break;
+              case 'cdi_developpeur':
+                generatedDocumentUrl = await this.documentsService.generateCDIDeveloppeurWeb(formData, userId);
+                break;
+              case 'cdi_livreur':
+                generatedDocumentUrl = await this.documentsService.generateCDILivreur(formData, userId);
+                break;
+              case 'cdi_plombier':
+                generatedDocumentUrl = await this.documentsService.generateCDIPlombier(formData, userId);
                 break;
               default:
                 console.error(`Form type "${this.formType}" is not supported`);

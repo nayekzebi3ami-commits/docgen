@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ProfilService } from '../../services/profil.service';
 import { TelegramService } from '../../services/telegram.service';
@@ -7,11 +7,13 @@ import { WalletService } from '../../services/wallet.service';
 import { FORM_DEFINITIONS_CUSTOM } from './form-definitions-custom';
 
 interface FormField {
-  name: string;
+  name?: string;
   label: string;
-  type: 'text' | 'date' | 'select' | 'textarea';
-  options?: { value: string; label: string }[];
-  validators: any[];
+  type: 'text' | 'date' | 'select' | 'textarea' | 'section-header'; // Ajout de 'section-header'
+  options?: Array<{ value: string, label: string, template?: string }>;
+  validators?: Validators[];
+  uppercase?: boolean;
+  getTemplate?: (value: string) => string;
 }
 
 @Component({
@@ -52,9 +54,11 @@ export class ModalGenerateDocCustomComponent implements OnInit {
   }
 
   initForm() {
-    const formGroup: { [key: string]: any } = {};
+    const formGroup: any = {};
     this.formFields.forEach(field => {
-      formGroup[field.name] = ['', field.validators];
+      if (field.type !== 'section-header' && field.name) {
+        formGroup[field.name] = ['', field.validators];
+      }
     });
     this.dataForm = this.fb.group(formGroup);
   }

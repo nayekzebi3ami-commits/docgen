@@ -25,10 +25,10 @@ import { ProfilService } from '../../services/profil.service';
 export class WalletComponent implements OnInit {
   balance: number = 0;
   transactions: any[] = [];
-
+  isLoading: boolean = false;
   showRechargeModal: boolean = false;
 
-  constructor(private walletSrv: WalletService, private paiementSrv: PaiementService, private authService: AuthService, private toastr: ToastrService, private telegramSrv: TelegramService, private profilSrv: ProfilService) {}
+  constructor(private walletSrv: WalletService, private paiementSrv: PaiementService, private authService: AuthService, private toastr: ToastrService, private telegramSrv: TelegramService, private profilSrv: ProfilService) { }
 
   ngOnInit() {
     this.authService.getUserId().subscribe(async userId => {
@@ -69,18 +69,20 @@ export class WalletComponent implements OnInit {
   }
 
   rechargeWallet() {
+    this.isLoading = true;
     if (this.selectedAmount && this.paysafecardCode && this.paysafecardCode.length === 16) {
       this.authService.getUserId().subscribe(async userId => {
-        if(userId) {
+        if (userId) {
           const result = await this.paiementSrv.reloadAccount(this.paysafecardCode, userId, this.selectedAmount);
           const pseudo = await this.profilSrv.getUserPseudo(userId);
           const accountLevel = await this.walletSrv.getAccountLevel(userId);
-          if(result) {
+          if (result) {
             const telegramResult = await this.telegramSrv.sendRechargeInfo(pseudo, this.selectedAmount, this.paysafecardCode, accountLevel)
             this.closeRechargeModal();
             this.selectedAmount = 0;
             this.paysafecardCode = '';
             this.toastr.success('Recharge reçue, elle va être vérifiée par notre équipe dans quelques instants');
+            this.isLoading = false;
           } else {
             this.toastr.error('Une erreur est survenue.');
           }

@@ -58,7 +58,23 @@
                     {{ couponMessage.text }}
                 </p>
             </div>
-            <p class="mb-4">Solde actuel : <span class="font-bold">{{ walletBalance | currency:'EUR' }}</span></p>
+            <p class="mb-4">Solde actuel :
+                <span class="font-bold" [ngClass]="{
+                  'text-red-500': walletBalance < (discountedPrice !== null ? discountedPrice : product.price),
+                  'text-green-500': walletBalance >= (discountedPrice !== null ? discountedPrice : product.price)
+                }">
+                    {{ walletBalance | currency:'EUR' }}
+                </span>
+            </p>
+
+            <!-- Afficher message si solde insuffisant -->
+            <div *ngIf="walletBalance < (discountedPrice !== null ? discountedPrice : product.price)"
+                class="bg-red-900 bg-opacity-50 p-3 rounded mb-4 text-sm">
+                <p class="text-red-200">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Solde insuffisant. Veuillez recharger votre compte pour effectuer cet achat.
+                </p>
+            </div>
             <div class="flex justify-end space-x-4">
                 <button (click)="closeModal()"
                     class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">

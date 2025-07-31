@@ -41,6 +41,9 @@ export class ModalPaiementComponent implements OnInit {
     { title: 'Journée d\'appel', form: 'journee_appel' },
     { title: 'Facture SFR', form: 'facture_sfr' },
     { title: 'CDI SNCF', form: 'cdi_sncf' },
+    { title: 'CDI DÉVELOPPEUR WEB', form: 'cdi_developpeur' },
+    { title: 'CDI LIVREUR', form: 'cdi_livreur' },
+    { title: 'CDI PLOMBIER', form: 'cdi_plombier' },
   ];
 
   customTitles: any[] = [
@@ -86,12 +89,17 @@ export class ModalPaiementComponent implements OnInit {
   }
 
   confirmPurchase() {
+    const finalPrice = this.discountedPrice !== null ? this.discountedPrice : this.product.price;
+
+    if (finalPrice > this.walletBalance) {
+      this.toastr.error('Solde insuffisant. Veuillez recharger votre compte.', 'Erreur');
+      return;
+    }
 
     if (this.isConfirmingPurchase) return;
 
-    this.isConfirmingPurchase = true
+    this.isConfirmingPurchase = true;
 
-    const finalPrice = this.discountedPrice !== null ? this.discountedPrice : this.product.price;
     this.authService.getUserId().subscribe(async userId => {
       if (userId) {
         const result = await this.paiementSrv.buyProduct(finalPrice, this.product.title, this.isSubscribed, userId);

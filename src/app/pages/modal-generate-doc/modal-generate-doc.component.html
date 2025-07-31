@@ -8,21 +8,28 @@
                 class="space-y-6 bg-gray-900 p-4 rounded-lg shadow-lg">
 
                 <ng-container *ngFor="let field of formFields">
-                    <div class="flex flex-col gap-2">
+                    <!-- En-tête de section -->
+                    <div *ngIf="field.type === 'section-header'"
+                        class="mt-6 mb-4 pt-4 border-t border-gray-700 first:border-t-0 first:pt-0 first:mt-0">
+                        <h3 class="text-lg font-semibold text-white">{{ field.label }}</h3>
+                    </div>
+
+                    <!-- Champs du formulaire -->
+                    <div *ngIf="field.type !== 'section-header'" class="flex flex-col gap-2">
                         <label [for]="field.name" class="text-sm font-medium text-gray-300">{{ field.label }}</label>
                         <ng-container [ngSwitch]="field.type">
                             <input *ngSwitchCase="'text'" [type]="field.type" [id]="field.name"
-                                [formControlName]="field.name"
+                                [formControlName]="field.name!" (input)="onInputChange($event, field)"
                                 class="w-full bg-gray-700 text-white rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <input *ngSwitchCase="'date'" type="date" [id]="field.name" [formControlName]="field.name"
+                            <input *ngSwitchCase="'date'" type="date" [id]="field.name" [formControlName]="field.name!"
                                 class="w-full bg-gray-700 text-white rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <select *ngSwitchCase="'select'" [id]="field.name" [formControlName]="field.name"
+                            <select *ngSwitchCase="'select'" [id]="field.name" [formControlName]="field.name!"
                                 class="w-full bg-gray-700 text-white rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Sélectionnez</option>
                                 <option *ngFor="let option of field.options" [value]="option.value">{{ option.label }}
                                 </option>
                             </select>
-                            <textarea *ngSwitchCase="'textarea'" [id]="field.name" [formControlName]="field.name"
+                            <textarea *ngSwitchCase="'textarea'" [id]="field.name" [formControlName]="field.name!"
                                 rows="3"
                                 class="w-full bg-gray-700 text-white rounded-md border border-gray-600 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </ng-container>

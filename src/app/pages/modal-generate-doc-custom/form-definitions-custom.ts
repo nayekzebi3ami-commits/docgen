@@ -1,5 +1,16 @@
 import { Validators } from "@angular/forms";
 
+
+interface FormField {
+    name?: string;
+    label: string;
+    type: 'text' | 'date' | 'select' | 'textarea' | 'section-header'; // Ajout de 'section-header'
+    options?: Array<{ value: string, label: string, template?: string }>;
+    validators?: Validators[];
+    uppercase?: boolean;
+    getTemplate?: (value: string) => string;
+}
+
 export const FORM_DEFINITIONS_CUSTOM = {
     cheque_bancaire: [
         {
@@ -271,25 +282,21 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'villeLiv', label: 'Ville (Livraison)', type: 'text', validators: [Validators.required] },
         { name: 'numeroLiv', label: 'Numéro de téléphone de la livraison', type: 'text', validators: [Validators.required] }
     ],
-
     carte_identite: [
+        { type: 'section-header', label: '1. Informations (voulu sur le document)' } as FormField,
+
+        { name: 'nom', label: 'Veuillez saisir le nom voulu', type: 'text', validators: [Validators.required] },
+        { name: 'prenom', label: 'Indiquez le prénom voulu', type: 'text', validators: [Validators.required] },
+        { name: 'dateNaissance', label: 'Indiquez votre date de naissance voulu', type: 'date', validators: [Validators.required] },
         {
-            name: 'reseau',
-            label: 'Réseau social pour vous contacter',
-            type: 'select',
-            options: [
-                { value: 'Snapchat', label: 'Snapchat' },
-                { value: 'Whatsapp', label: 'Whatsapp' },
-                { value: 'Telegram', label: 'Telegram' },
-            ],
-            validators: [Validators.required]
+            name: 'sexe', label: 'Sélectionnez le sexe voulu', type: 'select', options: [
+                { value: 'Homme', label: 'Homme' },
+                { value: 'Femme', label: 'Femme' }
+            ], validators: [Validators.required]
         },
-        { name: 'pseudoReseau', label: 'Pseudonyme sur le réseau', type: 'text', validators: [Validators.required] },
-        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
-        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         {
             name: 'nationalite',
-            label: 'Nationalité du permis souhaité',
+            label: 'Sélectionnez la nationalité du document que vous souhaitez obtenir',
             type: 'select',
             options: [
                 { value: '🇫🇷 Française', label: '🇫🇷 Française' },
@@ -303,11 +310,14 @@ export const FORM_DEFINITIONS_CUSTOM = {
             ],
             validators: [Validators.required]
         },
-        { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Lieu de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'numeroRuePostale', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        { name: 'lieuNaissance', label: 'Indiquez la ville de naissance voulu', type: 'text', validators: [Validators.required] },
+        { name: 'taille', label: 'Veuillez indiquer la taille en centimètres voulu', type: 'text', validators: [Validators.required] },
+
+        { type: 'section-header', label: '2. Coordonnées et adresse (voulu sur le document)' } as FormField,
+
+        { name: 'numeroRuePostale', label: 'Indiquez le numéro de l\'adresse', type: 'text', validators: [Validators.required] },
         {
-            name: 'typeRuePostale', label: 'Type de rue', type: 'select', options: [
+            name: 'typeRuePostale', label: 'Choisissez le type de voie', type: 'select', options: [
                 { value: 'Rue', label: 'Rue' },
                 { value: 'Avenue', label: 'Avenue' },
                 { value: 'Boulevard', label: 'Boulevard' },
@@ -317,35 +327,29 @@ export const FORM_DEFINITIONS_CUSTOM = {
                 { value: 'Allée', label: 'Allée' }
             ], validators: [Validators.required]
         },
-        { name: 'nomRuePostale', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
-        { name: 'codePostalPostale', label: 'Code postal', type: 'text', validators: [Validators.required] },
-        { name: 'villePostale', label: 'Ville', type: 'text', validators: [Validators.required] },
-        {
-            name: 'sexe', label: 'Sexe', type: 'select', options: [
-                { value: 'Homme', label: 'Homme' },
-                { value: 'Femme', label: 'Femme' },
-            ], validators: [Validators.required]
-        },
-        { name: 'taille', label: 'Taille (en cm)', type: 'text', validators: [Validators.required] },
+        { name: 'nomRuePostale', label: 'Indiquez le nom de la rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostalPostale', label: 'Saisissez le code postal de l\'adresse', type: 'text', validators: [Validators.required] },
+        { name: 'villePostale', label: 'Indiquez la ville ou la commune de l\'adresse', type: 'text', validators: [Validators.required] },
+
+        { type: 'section-header', label: '3. Informations de contact' } as FormField,
+
+        { name: 'pseudoReseau', label: 'Numéro Whatsapp (Le suivie du dossier se fera sur whatsapp veuillez saisir votre numero associé)', type: 'text', validators: [Validators.required] },
     ],
     permis: [
+        { type: 'section-header', label: '1. Informations (voulu sur le document)' } as FormField,
+
+        { name: 'nom', label: 'Veuillez saisir le nom voulu', type: 'text', validators: [Validators.required] },
+        { name: 'prenom', label: 'Indiquez le prénom voulu', type: 'text', validators: [Validators.required] },
+        { name: 'dateNaissance', label: 'Indiquez votre date de naissance voulu', type: 'date', validators: [Validators.required] },
         {
-            name: 'reseau',
-            label: 'Réseau social pour vous contacter',
-            type: 'select',
-            options: [
-                { value: 'Snapchat', label: 'Snapchat' },
-                { value: 'Whatsapp', label: 'Whatsapp' },
-                { value: 'Telegram', label: 'Telegram' },
-            ],
-            validators: [Validators.required]
+            name: 'sexe', label: 'Sélectionnez le sexe voulu', type: 'select', options: [
+                { value: 'Homme', label: 'Homme' },
+                { value: 'Femme', label: 'Femme' }
+            ], validators: [Validators.required]
         },
-        { name: 'pseudoReseau', label: 'Pseudonyme sur le réseau', type: 'text', validators: [Validators.required] },
-        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
-        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
         {
             name: 'nationalite',
-            label: 'Nationalité',
+            label: 'Sélectionnez la nationalité du permis que vous souhaitez obtenir',
             type: 'select',
             options: [
                 { value: '🇫🇷 Française', label: '🇫🇷 Française' },
@@ -359,11 +363,14 @@ export const FORM_DEFINITIONS_CUSTOM = {
             ],
             validators: [Validators.required]
         },
-        { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Lieu de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'numeroRuePostale', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        { name: 'lieuNaissance', label: 'Indiquez la ville de naissance voulu', type: 'text', validators: [Validators.required] },
+        { name: 'taille', label: 'Veuillez indiquer la taille en centimètres voulu', type: 'text', validators: [Validators.required] },
+
+        { type: 'section-header', label: '2. Coordonnées et adresse (voulu sur le document)' } as FormField,
+
+        { name: 'numeroRuePostale', label: 'Indiquez le numéro de l\'adresse', type: 'text', validators: [Validators.required] },
         {
-            name: 'typeRuePostale', label: 'Type de rue', type: 'select', options: [
+            name: 'typeRuePostale', label: 'Choisissez le type de voie', type: 'select', options: [
                 { value: 'Rue', label: 'Rue' },
                 { value: 'Avenue', label: 'Avenue' },
                 { value: 'Boulevard', label: 'Boulevard' },
@@ -373,16 +380,9 @@ export const FORM_DEFINITIONS_CUSTOM = {
                 { value: 'Allée', label: 'Allée' }
             ], validators: [Validators.required]
         },
-        { name: 'nomRuePostale', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
-        { name: 'codePostalPostale', label: 'Code postal', type: 'text', validators: [Validators.required] },
-        { name: 'villePostale', label: 'Ville', type: 'text', validators: [Validators.required] },
-        {
-            name: 'sexe', label: 'Sexe', type: 'select', options: [
-                { value: 'Homme', label: 'Homme' },
-                { value: 'Femme', label: 'Femme' },
-            ], validators: [Validators.required]
-        },
-        { name: 'taille', label: 'Taille (en cm)', type: 'text', validators: [Validators.required] },
+        { name: 'nomRuePostale', label: 'Indiquez le nom de la rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostalPostale', label: 'Saisissez le code postal de l\'adresse', type: 'text', validators: [Validators.required] },
+        { name: 'villePostale', label: 'Indiquez la ville ou la commune de l\'adresse', type: 'text', validators: [Validators.required] },
         { name: 'prefectureSouhaitee', label: 'Préfecture de délivrance du permis souhaité', type: 'text', validators: [Validators.required] },
         {
             name: 'permisSouhaite',
@@ -406,7 +406,12 @@ export const FORM_DEFINITIONS_CUSTOM = {
                 { value: 'De', label: 'De' }
             ],
             validators: [Validators.required]
-        },],
+        },
+
+        { type: 'section-header', label: '3. Informations de contact' } as FormField,
+
+        { name: 'pseudoReseau', label: 'Le suivie du dossier ce fera sur whatsapp veuillez saisir votre numéro whatsapp', type: 'text', validators: [Validators.required] }
+    ],
     passeport: [
         {
             name: 'reseau',
@@ -520,23 +525,16 @@ export const FORM_DEFINITIONS_CUSTOM = {
         { name: 'taille', label: 'Taille (en cm)', type: 'text', validators: [Validators.required] },
     ],
     amende: [
-        {
-            name: 'reseau',
-            label: 'Réseau social pour vous contacter',
-            type: 'select',
-            options: [
-                { value: 'Snapchat', label: 'Snapchat' },
-                { value: 'Whatsapp', label: 'Whatsapp' },
-                { value: 'Telegram', label: 'Telegram' },
-            ],
-            validators: [Validators.required]
-        },
-        { name: 'pseudoReseau', label: 'Pseudonyme sur le réseau', type: 'text', validators: [Validators.required] },
-        { name: 'nom', label: 'Nom', type: 'text', validators: [Validators.required] },
-        { name: 'prenom', label: 'Prénom', type: 'text', validators: [Validators.required] },
+        { type: 'section-header', label: '1. Informations personnelles (qui sont présent sur la contravention)' } as FormField,
+
+        { name: 'pseudoReseau', label: 'Numéro Whatsapp (Le suivie du dossier se fera sur whatsapp veuillez saisir votre numero associé)', type: 'text', validators: [Validators.required] },
+
+        { name: 'nom', label: 'Veuillez saisir le nom figurant sur la contravention', type: 'text', validators: [Validators.required] },
+
+        { name: 'prenom', label: 'Indiquez le prénom figurant sur la contravention', type: 'text', validators: [Validators.required] },
         {
             name: 'nationalite',
-            label: 'Nationalité',
+            label: 'Sélectionnez la nationalité',
             type: 'select',
             options: [
                 { value: '🇫🇷 Française', label: '🇫🇷 Française' },
@@ -550,11 +548,15 @@ export const FORM_DEFINITIONS_CUSTOM = {
             ],
             validators: [Validators.required]
         },
-        { name: 'dateNaissance', label: 'Date de naissance', type: 'date', validators: [Validators.required] },
-        { name: 'lieuNaissance', label: 'Lieu de naissance', type: 'text', validators: [Validators.required] },
-        { name: 'numeroRuePostale', label: 'Numéro de rue', type: 'text', validators: [Validators.required] },
+        { name: 'dateNaissance', label: 'Indiquez la date de naissance', type: 'date', validators: [Validators.required] },
+        { name: 'lieuNaissance', label: 'Indiquez la ville où vous êtes né(e)', type: 'text', validators: [Validators.required] },
+
+        { type: 'section-header', label: '2. Coordonnées et adresse (qui sont présent sur la contravention)' } as FormField,
+
+
+        { name: 'numeroRuePostale', label: 'Indiquez le numéro de l\'adresse', type: 'text', validators: [Validators.required] },
         {
-            name: 'typeRuePostale', label: 'Type de rue', type: 'select', options: [
+            name: 'typeRuePostale', label: 'Indiquez le type de voie', type: 'select', options: [
                 { value: 'Rue', label: 'Rue' },
                 { value: 'Avenue', label: 'Avenue' },
                 { value: 'Boulevard', label: 'Boulevard' },
@@ -564,13 +566,15 @@ export const FORM_DEFINITIONS_CUSTOM = {
                 { value: 'Allée', label: 'Allée' }
             ], validators: [Validators.required]
         },
-        { name: 'nomRuePostale', label: 'Nom de rue', type: 'text', validators: [Validators.required] },
-        { name: 'codePostalPostale', label: 'Code postal', type: 'text', validators: [Validators.required] },
-        { name: 'villePostale', label: 'Ville', type: 'text', validators: [Validators.required] },
-        { name: 'numeroPermis', label: 'Numéro de votre permis de conduire', type: 'text', validators: [Validators.required] },
-        { name: 'numeroContravention', label: 'Numéro de contravention', type: 'text', validators: [Validators.required] },
-        { name: 'nomPrenomContravention', label: 'Nom et prénom présent sur la contravention', type: 'text', validators: [Validators.required] },
-        { name: 'dateContravention', label: 'Date de la contravention', type: 'date', validators: [Validators.required] },
+        { name: 'nomRuePostale', label: 'Indiquez le nom de la rue', type: 'text', validators: [Validators.required] },
+        { name: 'codePostalPostale', label: 'Saisissez le code postal de l\'adresse', type: 'text', validators: [Validators.required] },
+        { name: 'villePostale', label: 'Saisissez la ville de l\'adresse', type: 'text', validators: [Validators.required] },
+
+        { type: 'section-header', label: '3. Informations liées à la contravention et permis de conduire' } as FormField,
+
+        { name: 'numeroPermis', label: 'Veuillez saisir le numéro de votre permis de conduire', type: 'text', validators: [Validators.required] },
+        { name: 'numeroContravention', label: 'Indiquez le numéro de la contravention', type: 'text', validators: [Validators.required] },
+        { name: 'dateContravention', label: 'Indiquez la date de la contravention', type: 'date', validators: [Validators.required] }
     ],
     pare_brise: [
         {
