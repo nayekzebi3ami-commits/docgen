@@ -2,17 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+// Variables CSS pour le thème 3D/DEV/HACKING
+:root {
+  --primary-color: #00DDEB;
+  --secondary-color: #9B00FF;
+  --background-color: #1A1A1A;
+  --background-secondary: #0F0F0F;
+  --text-color: #E6E6FA;
+  --text-secondary: #B0E0E6;
+  --accent-blue: #00BFFF;
+  --accent-purple: #8A2BE2;
+  --neon-glow: 0 0 10px, 0 0 20px, 0 0 30px;
+  --border-glow: 0 0 5px;
+}
+
 body {
-  background-color: #111827;
+  background: linear-gradient(135deg, var(--background-color) 0%, var(--background-secondary) 100%);
+  color: var(--text-color);
+  font-family: 'Courier New', 'Roboto', monospace;
+  min-height: 100vh;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 221, 235, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(155, 0, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(0, 191, 255, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
 }
 
 @keyframes fadeInUp {
@@ -183,4 +217,182 @@ body {
   50% {
     opacity: 0.5;
   }
+}
+
+// Classes utilitaires pour le thème 3D/DEV/HACKING
+.neon-glow {
+  box-shadow: 
+    0 0 5px var(--primary-color),
+    0 0 10px var(--primary-color),
+    0 0 15px var(--primary-color);
+}
+
+.neon-glow-purple {
+  box-shadow: 
+    0 0 5px var(--secondary-color),
+    0 0 10px var(--secondary-color),
+    0 0 15px var(--secondary-color);
+}
+
+.neon-glow-blue {
+  box-shadow: 
+    0 0 5px var(--accent-blue),
+    0 0 10px var(--accent-blue),
+    0 0 15px var(--accent-blue);
+}
+
+.neon-border {
+  border: 1px solid var(--primary-color);
+  box-shadow: 
+    inset 0 0 5px var(--primary-color),
+    0 0 5px var(--primary-color);
+}
+
+.neon-border-purple {
+  border: 1px solid var(--secondary-color);
+  box-shadow: 
+    inset 0 0 5px var(--secondary-color),
+    0 0 5px var(--secondary-color);
+}
+
+.cyber-card {
+  background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(15, 15, 15, 0.9));
+  border: 1px solid rgba(0, 221, 235, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(0, 221, 235, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  opacity: 0.6;
+}
+
+.cyber-button {
+  background: linear-gradient(145deg, var(--primary-color), var(--accent-blue));
+  border: none;
+  color: var(--background-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cyber-button:hover::before {
+  left: 100%;
+}
+
+.cyber-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 5px 15px rgba(0, 221, 235, 0.4),
+    0 0 20px var(--primary-color);
+}
+
+.text-neon {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+.text-neon-blue {
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 5px var(--primary-color),
+    0 0 10px var(--primary-color),
+    0 0 15px var(--primary-color);
+}
+
+.text-neon-purple {
+  color: var(--secondary-color);
+  text-shadow: 
+    0 0 5px var(--secondary-color),
+    0 0 10px var(--secondary-color),
+    0 0 15px var(--secondary-color);
+}
+
+.hover-neon:hover {
+  box-shadow: 
+    0 0 10px var(--primary-color),
+    0 0 20px var(--primary-color),
+    0 0 30px var(--primary-color);
+  transition: box-shadow 0.3s ease;
+}
+
+// Animations spécifiques au thème
+@keyframes neon-pulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 
+      0 0 5px currentColor,
+      0 0 10px currentColor,
+      0 0 15px currentColor,
+      0 0 20px currentColor;
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 
+      0 0 2px currentColor,
+      0 0 5px currentColor,
+      0 0 8px currentColor,
+      0 0 12px currentColor;
+  }
+}
+
+@keyframes cyber-glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--primary-color),
+      0 0 10px var(--primary-color),
+      0 0 15px var(--primary-color);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--primary-color),
+      0 0 20px var(--primary-color),
+      0 0 30px var(--primary-color);
+  }
+}
+
+@keyframes float-cyber {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+.cyber-glow {
+  animation: cyber-glow 3s ease-in-out infinite;
+}
+
+.float-cyber {
+  animation: float-cyber 3s ease-in-out infinite;
 }

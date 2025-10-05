@@ -1,73 +1,73 @@
-<div class="min-h-screen bg-gray-900 text-white p-6">
+<div class="min-h-screen bg-cyber-background text-cyber-text p-6">
     <div class="flex items-center justify-center mb-8 animate-fade-in-down">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400 mr-4 animate-bounce" fill="none"
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-cyber-primary mr-4 animate-bounce" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
         </svg>
-        <span class="text-4xl font-bold animate-pulse text-blue-400">Wallet</span>
+        <span class="text-4xl font-bold animate-pulse text-neon-blue">Wallet</span>
     </div>
 
-    <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8 hover:bg-gray-700 transform transition-all duration-300 animate-fade-in-up animate-delay-100"
+    <div class="cyber-card p-6 mb-8 hover:shadow-cyber-glow transform transition-all duration-300 animate-fade-in-up animate-delay-100"
         @fadeInOut>
-        <h2 class="text-xl font-semibold mb-2">Solde actuel</h2>
-        <p class="text-4xl font-bold text-blue-300 mb-4 animate-count-up" [attr.data-value]="balance">{{balance |
+        <h2 class="text-xl font-semibold mb-2 text-cyber-text">Solde actuel</h2>
+        <p class="text-4xl font-bold text-neon-blue mb-4 animate-count-up" [attr.data-value]="balance">{{balance |
             currency:'EUR'}}</p>
         <button (click)="openRechargeModal()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
+            class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110">
             Recharger
         </button>
     </div>
 
-    <h3 class="text-2xl font-semibold mb-4 animate-fade-in-left animate-delay-200">Dernières transactions</h3>
+    <h3 class="text-2xl font-semibold mb-4 animate-fade-in-left animate-delay-200 text-neon-blue">Dernières transactions</h3>
     <ul class="space-y-4" *ngIf="transactions.length > 0; else noTransactions">
         <li *ngFor="let transaction of transactions; let i = index"
-            class="bg-gray-800 rounded-lg p-4 flex justify-between items-center hover:bg-gray-700 transition-all duration-300 animate-fade-in-right"
+            class="cyber-card p-4 flex justify-between items-center hover:shadow-cyber-glow transition-all duration-300 animate-fade-in-right"
             [ngStyle]="{'animation-delay': 300 + i * 100 + 'ms'}" @fadeInOut>
             <div>
-                <h4 class="font-semibold">{{transaction.product}}</h4>
-                <p class="text-sm text-gray-400">{{transaction.date | date:'dd/MM/yyyy'}}</p>
+                <h4 class="font-semibold text-cyber-text">{{transaction.product}}</h4>
+                <p class="text-sm text-cyber-text-secondary">{{transaction.date | date:'dd/MM/yyyy'}}</p>
             </div>
-            <span [ngClass]="{'text-blue-300': transaction.price > 0, 'text-red-400': transaction.price < 0}"
+            <span [ngClass]="{'text-neon-blue': transaction.price > 0, 'text-red-400': transaction.price < 0}"
                 class="font-bold animate-scale-in">
                 {{transaction.price | currency:'EUR'}}
             </span>
         </li>
     </ul>
     <ng-template #noTransactions>
-        <p class="text-gray-400 text-center animate-fade-in">Aucune transaction</p>
+        <p class="text-cyber-text-secondary text-center animate-fade-in">Aucune transaction</p>
     </ng-template>
 
     <div *ngIf="showRechargeModal"
-        class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center animate-fade-in" @fadeInOut>
-        <div class="bg-gray-800 p-6 rounded-lg text-center animate-zoom-in">
-            <h2 class="text-2xl font-bold mb-4">Recharger via Paysafecard</h2>
-            <p class="mb-4">Choisissez le montant à recharger :</p>
+        class="fixed inset-0 bg-cyber-background-secondary bg-opacity-75 flex items-center justify-center animate-fade-in" @fadeInOut>
+        <div class="cyber-card p-6 rounded-lg text-center animate-zoom-in">
+            <h2 class="text-2xl font-bold mb-4 text-cyber-text">Recharger via Paysafecard</h2>
+            <p class="mb-4 text-cyber-text-secondary">Choisissez le montant à recharger :</p>
             <div class="flex justify-center space-x-4 mb-6">
                 <button (click)="selectAmount(50)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 100ms">50€</button>
                 <button (click)="selectAmount(100)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 100ms">100€</button>
                 <button (click)="selectAmount(150)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 200ms">150€</button>
                 <button (click)="selectAmount(200)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 300ms">200€</button>
                 <button (click)="selectAmount(2500)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 animate-bounce-in"
                     style="animation-delay: 300ms">2500€</button>
             </div>
             <div *ngIf="selectedAmount" class="mb-6 animate-fade-in">
-                <p class="mb-2">Montant sélectionné : {{selectedAmount}}€</p>
+                <p class="mb-2 text-cyber-text-secondary">Montant sélectionné : {{selectedAmount}}€</p>
                 <input type="text" [(ngModel)]="paysafecardCode" placeholder="Entrez le code Paysafecard" maxlength="16"
-                    class="bg-gray-700 text-white px-4 py-2 rounded-lg w-full mb-4 focus:outline-none">
+                    class="bg-cyber-background-secondary text-cyber-text px-4 py-2 rounded-lg w-full mb-4 focus:outline-none border border-cyber-primary/30 focus:border-cyber-primary">
                 <p *ngIf="paysafecardCode && paysafecardCode.length !== 16" class="text-red-500 text-sm mb-2">Le code
                     doit faire exactement 16 caractères.</p>
                 <button (click)="rechargeWallet()"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 relative"
+                    class="cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform hover:scale-110 relative"
                     [disabled]="!paysafecardCode || isLoading">
                     <span [class.opacity-0]="isLoading">Valider</span>
                     <span *ngIf="isLoading" class="absolute inset-0 flex items-center justify-center">
@@ -83,7 +83,7 @@
                 </button>
             </div>
             <button (click)="closeRechargeModal()"
-                class="text-gray-400 hover:text-white transition-colors duration-300 animate-fade-in"
+                class="text-cyber-text-secondary hover:text-cyber-text transition-colors duration-300 animate-fade-in"
                 style="animation-delay: 400ms">Annuler</button>
         </div>
     </div>

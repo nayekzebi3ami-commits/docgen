@@ -1,28 +1,40 @@
 <nav *ngIf="isLoggedIn"
-    class="fixed top-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 flex items-center justify-between">
+    class="fixed top-0 left-0 right-0 bg-cyber-background-secondary text-cyber-text p-4 z-50 flex items-center justify-between border-b border-cyber-primary/20">
     <div class="flex items-center">
         <img src="assets/logo.png" alt="Logo" class="w-10 h-10 rounded-full mr-3">
         <div class="title-container">
             <div class="stack" style="--stacks: 3;">
-                <span style="--index: 0;">PETIT FILOU</span>
-                <span style="--index: 1;">PETIT FILOU</span>
-                <span style="--index: 2;">PETIT FILOU</span>
+                <span style="--index: 0;">
+                    GEN SCAN
+                </span>
+                <span style="--index: 1;">
+                    GEN SCAN
+                </span>
+                <span style="--index: 2;">
+                    GEN SCAN
+                </span>
             </div>
         </div>
     </div>
     <div class="flex items-center">
-        <a href="snapchat://add/petitfilou" (click)="openExternalLink('https://snapchat.com/add/petitfilou')" class="text-yellow-400 hover:text-yellow-300 mx-2">
+        <a href="snapchat://add/petitfilou" (click)="openExternalLink('https://snapchat.com/add/petitfilou')"
+            class="text-cyber-primary hover:text-neon-blue mx-2">
             <i class="fab fa-snapchat-ghost text-2xl"></i>
         </a>
-        <a href="whatsapp://send?phone=33615727216" (click)="openExternalLink('https://wa.me/+33615727216')" class="text-green-400 hover:text-green-300 mx-2">
+        <a href="whatsapp://send?phone=33615727216" (click)="openExternalLink('https://wa.me/+33615727216')"
+            class="text-neon-blue hover:text-cyber-primary mx-2">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
-        <a href="tg://resolve?domain=petitfilou13" (click)="openExternalLink('https://t.me/petitfilou13')" class="text-blue-400 hover:text-blue-300 mx-2">
+        <a href="tg://resolve?domain=petitfilou13" (click)="openExternalLink('https://t.me/petitfilou13')"
+            class="text-neon-purple hover:text-cyber-secondary mx-2">
             <i class="fab fa-telegram text-2xl"></i>
         </a>
-        <button (click)="logout()" class="text-gray-300 hover:text-white focus:outline-none transition duration-150 ease-in-out ml-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+        <button (click)="logout()"
+            class="text-cyber-text-secondary hover:text-cyber-text focus:outline-none transition duration-150 ease-in-out ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
             <span class="sr-only">Logout</span>
         </button>
@@ -30,19 +42,19 @@
 </nav>
 
 <button (click)="goBack()"
-    class="fixed left-0 top-[90px] bg-gray-200 bg-opacity-50 text-gray-600 rounded-r-full p-2 shadow-sm hover:bg-opacity-100 focus:bg-opacity-100 hover:shadow-md focus:shadow-md focus:outline-none transition duration-300 ease-in-out z-40 flex items-center">
+    class="fixed left-0 top-[90px] cyber-card text-cyber-text rounded-r-full p-2 hover:shadow-cyber-glow focus:shadow-cyber-glow focus:outline-none transition duration-300 ease-in-out z-40 flex items-center">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
     </svg>
     <span>Retour</span>
 </button>
 
-<nav *ngIf="isLoggedIn" class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white z-50">
+<nav *ngIf="isLoggedIn" class="fixed bottom-0 left-0 right-0 bg-cyber-background-secondary text-cyber-text z-50 border-t border-cyber-primary/20">
     <ul class="flex justify-around items-center h-16 max-w-screen-lg mx-auto">
         <li *ngFor="let item of navItems" class="w-1/5 mx-2">
             <button (click)="setActiveItem(item.id)" routerLink="{{item.route}}"
                 class="w-full flex items-center justify-center py-2 px-1 transition-all duration-300 ease-in-out rounded-lg"
-                [ngClass]="{'bg-white text-blue-400': activeItem === item.id, 'text-gray-400 hover:text-gray-200': activeItem !== item.id}">
+                [ngClass]="{'bg-cyber-primary text-cyber-background': activeItem === item.id, 'text-cyber-text-secondary hover:text-cyber-text': activeItem !== item.id}">
                 <i class="fa fa-{{item.icon}} text-xl sm:text-2xl mr-2"></i>
                 <span class="text-xs transition-all duration-300"
                     [ngClass]="{'opacity-100': activeItem === item.id, 'opacity-0 w-0 overflow-hidden': activeItem !== item.id}">

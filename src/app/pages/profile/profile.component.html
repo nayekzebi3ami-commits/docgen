@@ -1,18 +1,18 @@
-<div class="min-h-screen bg-gray-900 text-white p-6">
+<div class="min-h-screen bg-cyber-background text-cyber-text p-6">
     <div class="flex items-center justify-center mb-8 animate-fade-in-down">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400 animate-pulse" fill="none"
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-cyber-primary animate-pulse" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
         </svg>
-        <h1 class="text-4xl font-bold text-blue-400 ml-4 animate-fade-in-right">Profil Utilisateur</h1>
+        <h1 class="text-4xl font-bold text-neon-blue ml-4 animate-fade-in-right">Profil Utilisateur</h1>
     </div>
 
-    <div class="max-w-2xl mx-auto bg-gray-800 rounded-lg shadow-xl p-8 animate-fade-in-up animate-delay-100">
+    <div class="max-w-2xl mx-auto cyber-card p-8 animate-fade-in-up animate-delay-100">
         <div class="flex justify-center mb-4 animate-fade-in-down">
             <span class="px-3 py-1 text-sm font-semibold rounded-full" [ngClass]="{
-                'bg-gray-600 text-gray-200': accountLevel === 'basic',
-                'bg-purple-600 text-purple-100': accountLevel === 'premium',
+                'bg-cyber-background-secondary text-cyber-text-secondary': accountLevel === 'basic',
+                'bg-neon-purple text-white': accountLevel === 'premium',
                 'bg-red-600 text-red-100': accountLevel === 'admin'
             }">
                 {{accountLevel | titlecase}}
@@ -23,7 +23,7 @@
                 <img [src]="user.avatar || '/assets/avatar.png'" alt="Avatar"
                     class="w-32 h-32 rounded-full object-cover">
                 <label for="avatar-upload"
-                    class="absolute bottom-0 right-0 bg-blue-600 rounded-full p-2 cursor-pointer hover:bg-blue-700 transition-all duration-300 transform hover:scale-110">
+                    class="absolute bottom-0 right-0 cyber-button rounded-full p-2 cursor-pointer transition-all duration-300 transform hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,56 +35,56 @@
                 <input id="avatar-upload" type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*">
             </div>
             <div class="text-center md:text-left animate-fade-in-right animate-delay-300">
-                <h2 class="text-2xl font-semibold">{{user.name}}</h2>
-                <p class="text-gray-400">{{user.email}}</p>
+                <h2 class="text-2xl font-semibold text-cyber-text">{{user.name}}</h2>
+                <p class="text-cyber-text-secondary">{{user.email}}</p>
             </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="bg-gray-700 p-4 rounded-lg text-center animate-fade-in-up animate-delay-400">
-                <p class="text-lg font-semibold">Achats</p>
-                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.purchases">{{user.purchases}}</p>
+            <div class="cyber-card p-4 text-center animate-fade-in-up animate-delay-400">
+                <p class="text-lg font-semibold text-cyber-text-secondary">Achats</p>
+                <p class="text-3xl font-bold text-neon-blue animate-count-up" [attr.data-value]="user.purchases">{{user.purchases}}</p>
             </div>
-            <div class="bg-gray-700 p-4 rounded-lg text-center animate-fade-in-up animate-delay-500">
-                <p class="text-lg font-semibold">Solde</p>
-                <p class="text-3xl font-bold text-blue-400 animate-count-up" [attr.data-value]="user.balance">{{user.balance | currency: 'EUR'}}</p>
+            <div class="cyber-card p-4 text-center animate-fade-in-up animate-delay-500">
+                <p class="text-lg font-semibold text-cyber-text-secondary">Solde</p>
+                <p class="text-3xl font-bold text-neon-blue animate-count-up" [attr.data-value]="user.balance">{{user.balance | currency: 'EUR'}}</p>
             </div>
         </div>
 
         <div class="space-y-4">
             <button (click)="openEditProfileModal()"
-                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform animate-fade-in-up animate-delay-600">
+                class="w-full cyber-button font-bold py-2 px-4 rounded transition-all duration-300 transform animate-fade-in-up animate-delay-600">
                 Modifier mon profil
             </button>
             <button (click)="openChangePasswordModal()"
-                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-all duration-300 transform animate-fade-in-up animate-delay-700">
+                class="w-full bg-cyber-secondary hover:bg-neon-purple text-white font-bold py-2 px-4 rounded transition-all duration-300 transform animate-fade-in-up animate-delay-700">
                 Modifier mon mot de passe
             </button>
         </div>
     </div>
 
     <!-- Modal pour éditer le profil -->
-    <div *ngIf="showEditProfileModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
-        <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
-            <h2 class="text-2xl font-bold mb-4 text-blue-400">Modifier le profil</h2>
+    <div *ngIf="showEditProfileModal" class="fixed inset-0 bg-cyber-background-secondary bg-opacity-75 flex items-center justify-center">
+        <div class="cyber-card p-8 rounded-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4 text-neon-blue">Modifier le profil</h2>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400">Pseudo</label>
+                    <label class="block text-sm font-medium text-cyber-text-secondary">Pseudo</label>
                     <input type="text" [(ngModel)]="user.name"
-                        class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
+                        class="mt-1 block w-full bg-cyber-background-secondary border border-cyber-primary/30 rounded-md shadow-sm py-2 px-3 text-cyber-text focus:ring-cyber-primary focus:border-cyber-primary">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-400">Email</label>
+                    <label class="block text-sm font-medium text-cyber-text-secondary">Email</label>
                     <input type="email" [(ngModel)]="user.email"
-                        class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
+                        class="mt-1 block w-full bg-cyber-background-secondary border border-cyber-primary/30 rounded-md shadow-sm py-2 px-3 text-cyber-text focus:ring-cyber-primary focus:border-cyber-primary">
                 </div>
                 <div class="flex justify-end space-x-3">
                     <button (click)="closeEditProfileModal()"
-                        class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                        class="bg-cyber-background-secondary hover:bg-cyber-background text-cyber-text font-bold py-2 px-4 rounded transition-colors duration-300">
                         Annuler
                     </button>
                     <button (click)="openConfirmModal('name')"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                        class="cyber-button font-bold py-2 px-4 rounded transition-colors duration-300">
                         Enregistrer
                     </button>
                 </div>
@@ -94,27 +94,27 @@
 
     <!-- Modal pour changer le mot de passe -->
     <div *ngIf="showChangePasswordModal"
-        class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
-        <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
-            <h2 class="text-2xl font-bold mb-4 text-blue-400">Changer le mot de passe</h2>
+        class="fixed inset-0 bg-cyber-background-secondary bg-opacity-75 flex items-center justify-center">
+        <div class="cyber-card p-8 rounded-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4 text-neon-blue">Changer le mot de passe</h2>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium text-gray-400">Nouveau mot de passe</label>
+                    <label class="block text-sm font-medium text-cyber-text-secondary">Nouveau mot de passe</label>
                     <input [(ngModel)]="newPw" type="password"
-                        class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
+                        class="mt-1 block w-full bg-cyber-background-secondary border border-cyber-primary/30 rounded-md shadow-sm py-2 px-3 text-cyber-text focus:ring-cyber-primary focus:border-cyber-primary">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-400">Confirmer le nouveau mot de passe</label>
+                    <label class="block text-sm font-medium text-cyber-text-secondary">Confirmer le nouveau mot de passe</label>
                     <input [(ngModel)]="newPwConfirm" type="password"
-                        class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:ring-blue-500 focus:border-blue-500">
+                        class="mt-1 block w-full bg-cyber-background-secondary border border-cyber-primary/30 rounded-md shadow-sm py-2 px-3 text-cyber-text focus:ring-cyber-primary focus:border-cyber-primary">
                 </div>
                 <div class="flex justify-end space-x-3">
                     <button (click)="closeChangePasswordModal()"
-                        class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                        class="bg-cyber-background-secondary hover:bg-cyber-background text-cyber-text font-bold py-2 px-4 rounded transition-colors duration-300">
                         Annuler
                     </button>
                     <button (click)="changePassword(newPw)"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                        class="cyber-button font-bold py-2 px-4 rounded transition-colors duration-300">
                         Changer
                     </button>
                 </div>
@@ -123,20 +123,20 @@
     </div>
 
     <!-- Modal de confirmation pour les changements sensibles -->
-    <div *ngIf="showConfirmModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
-        <div class="bg-gray-800 p-8 rounded-lg w-full max-w-md">
-            <h2 class="text-2xl font-bold mb-4 text-blue-400">Confirmer les changements</h2>
-            <p class="mb-4">Veuillez entrer votre mot de passe pour confirmer les changements de {{editField === 'name'
+    <div *ngIf="showConfirmModal" class="fixed inset-0 bg-cyber-background-secondary bg-opacity-75 flex items-center justify-center">
+        <div class="cyber-card p-8 rounded-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4 text-neon-blue">Confirmer les changements</h2>
+            <p class="mb-4 text-cyber-text-secondary">Veuillez entrer votre mot de passe pour confirmer les changements de {{editField === 'name'
                 ? 'pseudo' : 'email'}}.</p>
             <input type="password" placeholder="Mot de passe"
-                class="block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white mb-4 focus:ring-blue-500 focus:border-blue-500">
+                class="block w-full bg-cyber-background-secondary border border-cyber-primary/30 rounded-md shadow-sm py-2 px-3 text-cyber-text mb-4 focus:ring-cyber-primary focus:border-cyber-primary">
             <div class="flex justify-end space-x-3">
                 <button (click)="closeConfirmModal()"
-                    class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                    class="bg-cyber-background-secondary hover:bg-cyber-background text-cyber-text font-bold py-2 px-4 rounded transition-colors duration-300">
                     Annuler
                 </button>
                 <button (click)="confirmEdit('password')"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors duration-300">
+                    class="cyber-button font-bold py-2 px-4 rounded transition-colors duration-300">
                     Confirmer
                 </button>
             </div>

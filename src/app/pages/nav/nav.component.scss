@@ -12,7 +12,8 @@
     font-weight: bold;
     grid-row-start: 1;
     grid-column-start: 1;
-    font-size: 1.5rem; // Taille réduite pour mieux s'adapter
+    font-size: 1.5rem;
+    color: var(--primary-color);
     --stack-height: calc(100% / var(--stacks) - 1px);
     --inverse-index: calc(calc(var(--stacks) - 1) - var(--index));
     --clip-top: calc(var(--stack-height) * var(--index));
@@ -35,8 +36,8 @@
         opacity: 0;
         transform: translateX(-50%);
         text-shadow:
-            -2px 3px 0 #ff00de,
-            2px -3px 0 #00e1ff;
+            -2px 3px 0 var(--secondary-color),
+            2px -3px 0 var(--primary-color);
     }
     60% {
         opacity: 0.5;
@@ -46,29 +47,35 @@
         transform: none;
         opacity: 1;
         text-shadow:
-            2px -3px 0 #ff00de,
-            -2px 3px 0 #00e1ff;
+            2px -3px 0 var(--secondary-color),
+            -2px 3px 0 var(--primary-color);
     }
     100% {
-        text-shadow: none;
+        text-shadow: 
+            0 0 5px var(--primary-color),
+            0 0 10px var(--primary-color),
+            0 0 15px var(--primary-color);
     }
 }
 
 @keyframes glitch {
     0% {
         text-shadow:
-            -2px 3px 0 #ff00de,
-            2px -3px 0 #00e1ff;
+            -2px 3px 0 var(--secondary-color),
+            2px -3px 0 var(--primary-color);
         transform: translate(var(--glitch-translate));
     }
     2% {
         text-shadow:
-            2px -3px 0 #ff00de,
-            -2px 3px 0 #00e1ff;
+            2px -3px 0 var(--secondary-color),
+            -2px 3px 0 var(--primary-color);
     }
     4%,
     100% {
-        text-shadow: none;
+        text-shadow: 
+            0 0 5px var(--primary-color),
+            0 0 10px var(--primary-color),
+            0 0 15px var(--primary-color);
         transform: none;
     }
 }
